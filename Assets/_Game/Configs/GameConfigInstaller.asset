@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: GameConfigInstaller
   m_EditorClassIdentifier: 
   defaultGameState: {fileID: 11400000, guid: d828a5b76b6c57f4b879793af7d81847, type: 2}
+  summonerService:
+    CommandBindings: {fileID: 11400000, guid: 29f7fed26524d5e43ae289267f948cd4, type: 2}

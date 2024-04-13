@@ -1,27 +1,29 @@
-﻿using System;
-using _Game.Scripts.Summon.Data;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace _Game.Scripts.Summon
 {
     public class SummonerService
     {
-        private SummonerCommandBindings _commandBindings;
-
         private Summoner.SummonParams _summonParams;
         private DungeonService _dungeonService;
-        private Config _config;
+        private Dictionary<string, Summoner> _summoners;
 
-        public SummonerService(Config config, DungeonService dungeonService)
+        public SummonerService(DungeonService dungeonService)
         {
-            _config = config;
-            _commandBindings = config.CommandBindings;
             _dungeonService = dungeonService;
+        }
+
+        public void Init(IEnumerable<Summoner> summoners)
+        {
+            Debug.Log("Summoners amount: " + summoners.Count());
+            _summoners = summoners.ToDictionary(it => it.Id);
         }
 
         public string Summon(string summonId)
         {
-            var summoner = _commandBindings.Get(summonId);
+            var summoner = _summoners[summonId];
             if (summoner == null)
             {
                 Debug.LogWarning($"No summoner found for command: {summonId}");
@@ -40,13 +42,6 @@ namespace _Game.Scripts.Summon
                 _summonParams = new Summoner.SummonParams(Camera.main, _dungeonService);
 
             return _summonParams;
-        }
-        
-        
-        [Serializable]
-        public class Config
-        {
-            public SummonerCommandBindings CommandBindings;
         }
     }
 }

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Game.Scripts.Summon.Data
+namespace _Game.Scripts.Summon
 {
+    [CreateAssetMenu(menuName = "Custom/Summon/SummonerCommandBindings")]
     public class SummonerCommandBindings: ScriptableObject
     {
         [SerializeField] private List<Binding> _bindings;

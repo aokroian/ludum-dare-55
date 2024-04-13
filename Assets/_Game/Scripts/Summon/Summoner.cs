@@ -1,13 +1,17 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using _Game.Scripts.Summon.View;
 using UnityEngine;
+using Zenject;
 
 namespace _Game.Scripts.Summon
 {
-    public abstract class Summoner: ScriptableObject
+    public abstract class Summoner: MonoBehaviour
     {
-        [SerializeField] protected SummonedObject prefab;
-
+        [field:SerializeField] public string Id { get; private set; }
+        [SerializeField] protected List<SummonedObject> prefabs;
+        
         public virtual string Validate(SummonParams summonParams)
         {
             return null;
