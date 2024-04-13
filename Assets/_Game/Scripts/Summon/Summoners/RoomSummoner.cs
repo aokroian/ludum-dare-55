@@ -12,7 +12,7 @@ namespace _Game.Scripts.Summon.Summoners
             SummonRoom(summonParams);
         }
 
-        public void SummonRoom(SummonParams summonParams)
+        private void SummonRoom(SummonParams summonParams)
         {
             var room = Instantiate(prefabs[0], roomParent);
             room.transform.position = Vector3.zero;

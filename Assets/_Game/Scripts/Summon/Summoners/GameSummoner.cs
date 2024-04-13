@@ -2,7 +2,7 @@
 
 namespace _Game.Scripts.Summon.Summoners
 {
-    public class PlayerSummoner: Summoner
+    public class GameSummoner: Summoner
     {
         public override async Task SummonAsync(SummonParams summonParams)
         {
