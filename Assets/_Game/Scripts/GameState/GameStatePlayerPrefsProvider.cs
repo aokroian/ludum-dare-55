@@ -28,12 +28,12 @@ namespace _Game.Scripts.GameState
             else
                 PermanentGameState = CreateNewPermanentState();
             
-            TransientGameState = _defaultGameState.TransientGameState;
+            TransientGameState = _defaultGameState.GetClonedTransientGameState();
         }
         
         private PermanentGameState CreateNewPermanentState()
         {
-            return _defaultGameState.PermanentGameState;
+            return _defaultGameState.GetClonedPermanentGameState();
         }
     }
 }
