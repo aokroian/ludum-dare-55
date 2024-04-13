@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,9 +16,9 @@ namespace _Game.Scripts.Console
         [SerializeField] private int maxOutputEntries = 100;
 
         private readonly List<ConsoleCommand> _executedCommands = new();
-        
-        [Inject]
-        private ConsoleCommandsHandler _commandsHandler;
+
+        [Inject] private ConsoleCommandsHandler _commandsHandler;
+        [Inject] private SoundManager _soundManager;
 
         private void Awake()
         {
@@ -31,17 +32,29 @@ namespace _Game.Scripts.Console
             inputField.onSubmit.AddListener(OnCommandSubmit);
             inputField.onEndEdit.RemoveAllListeners();
             inputField.onEndEdit.AddListener(FormatInputField);
+            inputField.onValueChanged.RemoveAllListeners();
+            inputField.onValueChanged.AddListener(OnInputValueChanged);
 
             outputScrollRect.verticalNormalizedPosition = 0;
             foreach (Transform c in outputContainer)
             {
                 Destroy(c.gameObject);
             }
+
+            StartCoroutine(GameInitAnimation());
+        }
+
+        private void OnInputValueChanged(string currentInputValue)
+        {
+            // if (currentInputValue.Length != _previousInputValue.Length)
+            // _soundManager.PlayTypeSound();
+            // _previousInputValue = currentInputValue;
         }
 
         private void OnCommandSubmit(string text)
         {
             inputField.interactable = false;
+            _soundManager.PlaySubmitKeySound();
             _commandsHandler.SubmitCommand(text, OnCommandSuccess, OnCommandFailed);
         }
 
@@ -70,7 +83,31 @@ namespace _Game.Scripts.Console
 
         private void FormatInputField(string inputText)
         {
-            // todo: implement input field text formatting later
+            // to lower case
+            inputField.text = inputText.ToLower();
+        }
+
+        private IEnumerator GameInitAnimation()
+        {
+            inputField.text = "";
+            const string initMessage = "summon game";
+            var delays = new[] { .25f, .25f, .1f, .35f, .3f, .7f, .15f, .25f, .28f, .2f, .2f };
+            inputField.ActivateInputField();
+            inputField.Select();
+            yield return new WaitForSeconds(2.5f);
+            for (var i = 0; i < initMessage.Length; i++)
+            {
+                inputField.text += initMessage[i];
+                _soundManager.PlayTypeSound();
+                inputField.caretPosition = inputField.text.Length;
+                yield return new WaitForSeconds(delays[i]);
+            }
+
+            inputField.caretPosition = inputField.text.Length;
+            inputField.ActivateInputField();
+            inputField.Select();
+            yield return new WaitForSeconds(2.5f);
+            OnCommandSubmit(inputField.text);
         }
     }
 }
