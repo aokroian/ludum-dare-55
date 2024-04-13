@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Game.Scripts.Console
 {
@@ -14,6 +15,8 @@ namespace _Game.Scripts.Console
         [SerializeField] private int maxOutputEntries = 100;
 
         private readonly List<ConsoleCommand> _executedCommands = new();
+        
+        [Inject]
         private ConsoleCommandsHandler _commandsHandler;
 
         private void Awake()
@@ -23,7 +26,6 @@ namespace _Game.Scripts.Console
 
         public void Init()
         {
-            _commandsHandler = new ConsoleCommandsHandler();
             _executedCommands.Clear();
             inputField.onSubmit.RemoveAllListeners();
             inputField.onSubmit.AddListener(OnCommandSubmit);
