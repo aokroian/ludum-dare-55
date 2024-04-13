@@ -1,4 +1,5 @@
 ﻿using _Game.Scripts.GameState.Data;
+using _Game.Scripts.Summon;
 using UnityEngine;
 using Zenject;
 
@@ -9,9 +10,12 @@ namespace _Game.Scripts.Installers
     {
         public DefaultGameState defaultGameState;
         
+        public SummonerService.Config summonerService;
+        
         public override void InstallBindings()
         {
             Container.BindInstance(defaultGameState).IfNotBound();
+            Container.BindInstance(summonerService).IfNotBound();
         }
     }
 }

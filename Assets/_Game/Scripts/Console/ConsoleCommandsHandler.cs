@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.Summon;
 using static UnityEngine.Object;
 
 namespace _Game.Scripts.Console
@@ -9,9 +10,12 @@ namespace _Game.Scripts.Console
     {
         private readonly ConsoleCommand[] _allCommands = ConsoleHelpers.GetAllCommands();
         private readonly List<ConsoleCommand> _knownCommands = new();
+        
+        private readonly SummonerService _summonerService;
 
-        public ConsoleCommandsHandler()
+        public ConsoleCommandsHandler(SummonerService summonerService)
         {
+            _summonerService = summonerService;
             LoadKnownCommands();
         }
 
@@ -63,7 +67,14 @@ namespace _Game.Scripts.Console
                 SaveKnownCommands();
             }
 
-            // todo: implement command execution later
+            var summonResponse = _summonerService.Summon(command.mainWord);
+            
+            // We could change response type, and get customized response from summoner service (different font color, etc)
+            if (summonResponse != null)
+            {
+                onFail?.Invoke(summonResponse);
+                return;
+            }
             onSuccess?.Invoke(command, $"summon {command.mainWord} command executed successfully");
         }
     }

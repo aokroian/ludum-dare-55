@@ -1,5 +1,6 @@
 ﻿using _Game.Scripts.Console;
 using _Game.Scripts.GameState;
+using _Game.Scripts.Summon;
 using Zenject;
 
 namespace _Game.Scripts.Installers
@@ -10,6 +11,8 @@ namespace _Game.Scripts.Installers
         {
             Container.BindInterfacesAndSelfTo<GameStatePlayerPrefsProvider>().AsSingle();
             Container.Bind<ConsoleCommandsHandler>().AsSingle();
+            Container.Bind<SummonerService>().AsSingle();
+            Container.Bind<DungeonService>().AsSingle();
         }
     }
 }

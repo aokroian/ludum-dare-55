@@ -1,6 +1,8 @@
-﻿namespace _Game.Scripts.GameLoop
+﻿using UnityEngine;
+
+namespace _Game.Scripts.GameLoop
 {
-    public class SceneEntryPoint
+    public class SceneEntryPoint: MonoBehaviour
     {
         
     }
