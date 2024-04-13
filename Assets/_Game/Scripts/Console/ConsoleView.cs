@@ -9,6 +9,7 @@ namespace _Game.Scripts.Console
 {
     public class ConsoleView : MonoBehaviour
     {
+        [SerializeField] private bool skipInitAnimation;
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private ScrollRect outputScrollRect;
         [SerializeField] private Transform outputContainer;
@@ -41,7 +42,16 @@ namespace _Game.Scripts.Console
                 Destroy(c.gameObject);
             }
 
-            StartCoroutine(GameInitAnimation());
+            if (skipInitAnimation)
+            {
+                inputField.interactable = true;
+                inputField.text = "summon game";
+                OnCommandSubmit(inputField.text);
+            }
+            else
+            {
+                StartCoroutine(GameInitAnimation());
+            }
         }
 
         private void OnInputValueChanged(string currentInputValue)
