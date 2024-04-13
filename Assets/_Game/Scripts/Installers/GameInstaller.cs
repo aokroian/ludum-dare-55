@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using _Game.Scripts.GameState;
+using Zenject;
 
 namespace _Game.Scripts.Installers
 {
@@ -6,7 +7,7 @@ namespace _Game.Scripts.Installers
     {
         public override void InstallBindings()
         {
-            
+            Container.BindInterfacesAndSelfTo<GameStatePlayerPrefsProvider>().AsSingle();
         }
     }
 }

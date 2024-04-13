@@ -1,6 +1,5 @@
 ﻿using _Game.Scripts.GameState.Data;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Game.Scripts.Installers

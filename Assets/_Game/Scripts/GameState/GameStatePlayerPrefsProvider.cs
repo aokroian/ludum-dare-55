@@ -8,12 +8,12 @@ namespace _Game.Scripts.GameState
         public PermanentGameState PermanentGameState { get; private set; }
         public TransientGameState TransientGameState { get; private set; }
         
+        private readonly DefaultGameState _defaultGameState;
         private const string Key = "PermanentGameState";
 
-        public GameStatePlayerPrefsProvider(PermanentGameState permanentGameState, TransientGameState transientGameState)
+        public GameStatePlayerPrefsProvider(DefaultGameState defaultGameState)
         {
-            PermanentGameState = permanentGameState;
-            TransientGameState = transientGameState;
+            _defaultGameState = defaultGameState;
         }
 
         public void Save()
@@ -24,18 +24,16 @@ namespace _Game.Scripts.GameState
         public void Load()
         {
             if (PlayerPrefs.HasKey(Key))
-            {
                 PermanentGameState = JsonUtility.FromJson<PermanentGameState>(PlayerPrefs.GetString(Key));
-            }
             else
-            {
-                PermanentGameState = CreateNewState();
-            }
+                PermanentGameState = CreateNewPermanentState();
+            
+            TransientGameState = _defaultGameState.TransientGameState;
         }
         
-        private PermanentGameState CreateNewState()
+        private PermanentGameState CreateNewPermanentState()
         {
-            return new PermanentGameState();
+            return _defaultGameState.PermanentGameState;
         }
     }
 }
