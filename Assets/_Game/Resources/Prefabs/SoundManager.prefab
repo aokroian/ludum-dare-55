@@ -48,11 +48,30 @@ MonoBehaviour:
   typingSounds:
   - {fileID: 8300000, guid: 0c855b8c5d4c34c94955df21553fbe81, type: 3}
   submitKeySound: {fileID: 8300000, guid: e9f6162fb9d0f4a6abb215d00cce48c9, type: 3}
+  universalSummonSound: {fileID: 0}
   consoleAudioSource: {fileID: 8436429634095837023}
   playerDamageSound: {fileID: 8300000, guid: 3f361b70621a24847b915f3cdabf0bd5, type: 3}
   playerDeathSound: {fileID: 8300000, guid: 3f361b70621a24847b915f3cdabf0bd5, type: 3}
   bulletShotSound: {fileID: 8300000, guid: 3f361b70621a24847b915f3cdabf0bd5, type: 3}
   bulletHitSound: {fileID: 8300000, guid: 3f361b70621a24847b915f3cdabf0bd5, type: 3}
+  enemyDeathSound: {fileID: 0}
+  princessDeathSound: {fileID: 0}
+  defaultMusic: {fileID: 0}
+  storeMusic: {fileID: 0}
+  happyEndSounds:
+  - {fileID: 8300000, guid: 0415a10c670514525b027470d02116cd, type: 3}
+  - {fileID: 8300000, guid: eccad0f0217d647fb87de1a36281f312, type: 3}
+  - {fileID: 8300000, guid: bfce131d4b4654de5802c19dadfaa477, type: 3}
+  - {fileID: 8300000, guid: 5b19771493eda466fa5eb8448b367965, type: 3}
+  - {fileID: 8300000, guid: c3063e373b38e48b48d86f41a7072884, type: 3}
+  - {fileID: 8300000, guid: e301bbaf733d74cd79beb69b2ac41443, type: 3}
+  sadEndSounds:
+  - {fileID: 8300000, guid: 9f7e345c213ac413885e1b912be31df1, type: 3}
+  - {fileID: 8300000, guid: 643e8c8088aae4dca90115fc4965be79, type: 3}
+  - {fileID: 8300000, guid: 69dab939b5ccb4ff4b3d319526908a95, type: 3}
+  - {fileID: 8300000, guid: 42b07d70565f249b78202975bf95587a, type: 3}
+  - {fileID: 8300000, guid: 61e9f8988e826496b8107da10cd2daeb, type: 3}
+  - {fileID: 8300000, guid: 8f62f3d5c2e894922813156291fb5f07, type: 3}
 --- !u!82 &8436429634095837023
 AudioSource:
   m_ObjectHideFlags: 0

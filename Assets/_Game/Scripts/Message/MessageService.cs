@@ -14,7 +14,7 @@ namespace _Game.Scripts.Message
         
         public void Speak(SummonedObject speaker, string message)
         {
-            _consoleView.ViewOutput(new ConsoleOutputData()
+            _consoleView.DisplayNewOutputEntry(new ConsoleOutputData()
             {
                 messageText = message,
                 senderText = speaker.Id,

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace _Game.Scripts
@@ -9,12 +8,23 @@ namespace _Game.Scripts
         [Header("Console")]
         [SerializeField] private AudioClip[] typingSounds;
         [SerializeField] private AudioClip submitKeySound;
+        [SerializeField] private AudioClip universalSummonSound;
         [SerializeField] private AudioSource consoleAudioSource;
         [Header("Characters")]
-        public AudioClip playerDamageSound;
-        public AudioClip playerDeathSound;
-        public AudioClip bulletShotSound;
-        public AudioClip bulletHitSound;
+        [SerializeField] private AudioClip playerDamageSound;
+        [SerializeField] private AudioClip playerDeathSound;
+        [SerializeField] private AudioClip bulletShotSound;
+        [SerializeField] private AudioClip bulletHitSound;
+        [Space]
+        [SerializeField] private AudioClip enemyDeathSound;
+        [SerializeField] private AudioClip princessDeathSound;
+        [Header("Music")]
+        [SerializeField] private AudioClip defaultMusic;
+        [SerializeField] private AudioClip storeMusic;
+        [Header("GameLoop")]
+        [SerializeField] private AudioClip[] happyEndSounds;
+        [SerializeField] private AudioClip[] sadEndSounds;
+
 
         private Camera _mainCam;
         private Vector3 CamPosition
@@ -28,6 +38,19 @@ namespace _Game.Scripts
         }
 
         private float _lastConsoleSoundTime;
+
+        public void PlayUniversalSummonSound()
+        {
+            consoleAudioSource.transform.position = CamPosition;
+            consoleAudioSource.PlayOneShot(universalSummonSound);
+        }
+
+        public void PlayGameEndingSound(bool isPositive)
+        {
+            var rand = Random.Range(0, isPositive ? happyEndSounds.Length : sadEndSounds.Length);
+            consoleAudioSource.transform.position = CamPosition;
+            consoleAudioSource.PlayOneShot(isPositive ? happyEndSounds[rand] : sadEndSounds[rand]);
+        }
 
         public void PlayBulletShotSound(Vector3 position)
         {

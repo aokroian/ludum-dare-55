@@ -74,13 +74,13 @@ namespace _Game.Scripts.Console
 
         private void OnCommandProcessed(ConsoleOutputData data, string originalInputText)
         {
-            ViewOutput(data);
+            DisplayNewOutputEntry(data);
             if (originalInputText != "")
                 _commandsHistory.Add(originalInputText);
             inputField.text = "";
         }
 
-        public void ViewOutput(ConsoleOutputData data)
+        public void DisplayNewOutputEntry(ConsoleOutputData data)
         {
             var spawnedOutputEntry = Instantiate(outputEntryPrefab, outputContainer);
             ((RectTransform)spawnedOutputEntry.transform).pivot = new Vector2(0, 1);
