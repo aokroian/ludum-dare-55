@@ -32,17 +32,23 @@ namespace _Game.Scripts.Summon
             _inputEnabledHandler.DisableAllInput();
             
             var task = summoner.Summon(GetSummonParams());
-            task.GetAwaiter().OnCompleted(() => SummonCompleted(task));
+            var startCameraPosition = GetSummonParams()._camera.transform.position;
+            task.GetAwaiter().OnCompleted(() => SummonCompleted(task, startCameraPosition));
 
             return result;
         }
 
-        private void SummonCompleted(Task task)
+        private void SummonCompleted(Task task, Vector3 cameraPosition)
         {
             if (task.IsFaulted)
+            {
                 Debug.LogError(task.Exception);
+                GetSummonParams()._camera.transform.position = cameraPosition;
+            }
             else if (task.IsCanceled)
+            {
                 Debug.LogWarning("Summon canceled");
+            }
             
             _inputEnabledHandler.EnableAllInput();
         }
