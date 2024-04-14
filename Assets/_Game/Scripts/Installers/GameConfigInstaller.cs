@@ -1,5 +1,5 @@
-﻿using _Game.Scripts.GameplayEvents.Ending;
-using _Game.Scripts.GameState.Data;
+﻿using _Game.Scripts.GameState.Data;
+using _Game.Scripts.Story.Ending;
 using UnityEngine;
 using Zenject;
 

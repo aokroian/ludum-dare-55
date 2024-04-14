@@ -38,6 +38,11 @@ namespace _Game.Scripts.Summon
             return result;
         }
 
+        private void OnSummonEffects()
+        {
+            
+        }
+
         private void SummonCompleted(Task task, Vector3 cameraPosition)
         {
             if (task.IsFaulted)

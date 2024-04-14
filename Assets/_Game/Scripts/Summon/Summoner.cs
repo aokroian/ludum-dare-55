@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using _Game.Scripts.GameLoop;
 using _Game.Scripts.Summon.Data;
 using _Game.Scripts.Summon.View;
 using UnityEngine;
@@ -11,11 +10,17 @@ namespace _Game.Scripts.Summon
 {
     public abstract class Summoner: MonoBehaviour
     {
+        public event Action<SummonedObject> OnSummoned = delegate { };
+        
         [field:SerializeField] public string Id { get; private set; }
         [SerializeField] protected List<SummonedObject> prefabs;
 
         [Inject]
         protected SummonedObjectsHolder _objectsHolder;
+        
+        // Very bad :(
+        [Inject]
+        protected DiContainer _diContainer;
         
         public virtual string Validate(SummonParams summonParams)
         {
@@ -49,6 +54,11 @@ namespace _Game.Scripts.Summon
             {
                 _camera = camera;
             }
+        }
+        
+        protected void Summoned(SummonedObject obj)
+        {
+            OnSummoned?.Invoke(obj);
         }
     }
 }

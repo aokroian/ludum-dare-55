@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using _Game.Scripts.Story;
 using _Game.Scripts.Summon.Enums;
 using UnityEngine;
 
@@ -10,8 +11,13 @@ namespace _Game.Scripts.Summon.View
         
         public IReadOnlyList<SummonedObject> Objects => _objects;
         
-        private List<SummonedObject> _objects;
-        
+        private readonly List<SummonedObject> _objects = new();
+
+        public override IGameplayEvent GetEventIfAny()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void AddObject(SummonedObject summonedObject)
         {
             _objects.Add(summonedObject);
