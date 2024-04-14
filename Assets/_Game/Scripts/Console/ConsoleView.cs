@@ -65,7 +65,7 @@ namespace _Game.Scripts.Console
                 return;
             _currentHistoryIndex = -1;
             _soundManager.PlaySubmitKeySound();
-            _commandsHandler.SubmitCommand(text, OnCommandProcessed);
+            _commandsHandler.SubmitCommand(text.ToLower(), OnCommandProcessed);
 
             inputField.caretPosition = inputField.text.Length;
             inputField.ActivateInputField();
@@ -123,39 +123,18 @@ namespace _Game.Scripts.Console
         {
             if (_animationInputText != null)
             {
-                inputField.SetTextWithoutNotify(_animationInputText);
-                inputField.caretPosition = inputField.text.Length;
-                inputField.ActivateInputField();
-                inputField.Select();
+                SetInputText(_animationInputText);
                 return;
             }
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                if (_currentHistoryIndex == -1)
-                {
-                    _inputBeforeUsingHistory = inputField.text;
-                    _currentHistoryIndex = _commandsHistory.Count - 1;
-                }
-                else if (_currentHistoryIndex > 0)
-                    _currentHistoryIndex--;
-            }
+                GoThroughHistory(-1);
             else if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                if (_currentHistoryIndex != -1)
-                    _currentHistoryIndex++;
-                if (_currentHistoryIndex >= _commandsHistory.Count)
-                    _currentHistoryIndex = -1;
-                if (_currentHistoryIndex == -1)
-                    inputField.text = _inputBeforeUsingHistory;
-            }
+                GoThroughHistory(1);
 
             if (_currentHistoryIndex != -1)
             {
-                inputField.SetTextWithoutNotify(_commandsHistory[_currentHistoryIndex]);
-                inputField.caretPosition = inputField.text.Length;
-                inputField.ActivateInputField();
-                inputField.Select();
+                SetInputText(_commandsHistory[_currentHistoryIndex]);
                 return;
             }
 
@@ -165,12 +144,43 @@ namespace _Game.Scripts.Console
             }
         }
 
+        private void GoThroughHistory(int direction)
+        {
+            if (direction == -1)
+            {
+                if (_currentHistoryIndex == -1)
+                {
+                    _inputBeforeUsingHistory = inputField.text;
+                    _currentHistoryIndex = _commandsHistory.Count - 1;
+                }
+                else if (_currentHistoryIndex > 0)
+                    _currentHistoryIndex--;
+            }
+            else
+            {
+                if (_currentHistoryIndex != -1)
+                    _currentHistoryIndex++;
+                if (_currentHistoryIndex >= _commandsHistory.Count)
+                    _currentHistoryIndex = -1;
+                if (_currentHistoryIndex == -1)
+                    SetInputText(_inputBeforeUsingHistory);
+            }
+        }
+
+        private void SetInputText(string text)
+        {
+            inputField.SetTextWithoutNotify(text);
+            inputField.caretPosition = inputField.text.Length;
+            inputField.ActivateInputField();
+            inputField.Select();
+        }
+
         private void AutoComplete()
         {
             var inputArray = inputField.text.Split(" ");
             if (inputArray.Length == 1)
             {
-                if ("summon".StartsWith(inputField.text))
+                if ("summon".StartsWith(inputField.text.ToLower()))
                 {
                     inputField.text = "summon ";
                     inputField.caretPosition = inputField.text.Length;
@@ -182,7 +192,7 @@ namespace _Game.Scripts.Console
                 foreach (var command in knownCommands)
                 {
                     var fullCommand = $"summon {command}";
-                    if (fullCommand.StartsWith(inputField.text))
+                    if (fullCommand.StartsWith(inputField.text.ToLower()))
                     {
                         inputField.text = fullCommand;
                         inputField.caretPosition = inputField.text.Length;
