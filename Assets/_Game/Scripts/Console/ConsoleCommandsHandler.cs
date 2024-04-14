@@ -52,7 +52,7 @@ namespace _Game.Scripts.Console
             }
         }
 
-        public void SubmitCommand(string inputText, Action<ConsoleOutputData> onProcessed)
+        public void SubmitCommand(string inputText, Action<ConsoleOutputData, string> onProcessed)
         {
             var command = GenerateCommandFromInput(inputText);
             if (command == null)
@@ -62,7 +62,7 @@ namespace _Game.Scripts.Console
                     senderText = "game@ld-55:$ ",
                     messageText = "Invalid command format. Try summoning help",
                     type = ConsoleOutputType.Info
-                });
+                }, inputText);
                 return;
             }
 
@@ -72,7 +72,7 @@ namespace _Game.Scripts.Console
                 SaveKnownCommands();
             }
 
-            var summonResponse = _summonerService.Summon(command.mainWord);
+            // var summonResponse = _summonerService.Summon(command.mainWord);
             var outputData = new ConsoleOutputData
             {
                 senderText = "game@ld-55:$ ",
@@ -80,13 +80,13 @@ namespace _Game.Scripts.Console
                 type = ConsoleOutputType.Info
             };
 
-            if (summonResponse != null)
-            {
-                outputData.messageText = summonResponse;
-                return;
-            }
+            // if (summonResponse != null)
+            // {
+                // outputData.messageText = summonResponse;
+                // return;
+            // }
 
-            onProcessed?.Invoke(outputData);
+            onProcessed?.Invoke(outputData, inputText);
         }
     }
 }

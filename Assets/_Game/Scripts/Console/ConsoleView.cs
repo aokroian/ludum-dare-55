@@ -17,14 +17,16 @@ namespace _Game.Scripts.Console
         [SerializeField] private ConsoleOutputEntry outputEntryPrefab;
         [SerializeField] private int maxOutputEntries = 100;
 
-        private readonly List<ConsoleCommand> _commandsHistory = new();
         [Inject] private ConsoleCommandsHandler _commandsHandler;
         [Inject] private SoundManager _soundManager;
 
-        private void Awake()
-        {
-            Init();
-        }
+        private readonly List<string> _commandsHistory = new();
+        private int _currentHistoryIndex = -1;
+
+        // private void Awake()
+        // {
+            // Init();
+        // }
 
         public void Init()
         {
@@ -32,7 +34,7 @@ namespace _Game.Scripts.Console
             inputField.onSubmit.RemoveAllListeners();
             inputField.onSubmit.AddListener(OnCommandSubmit);
             inputField.onEndEdit.RemoveAllListeners();
-            inputField.onEndEdit.AddListener(FormatInputField);
+            inputField.onEndEdit.AddListener(OnEditEnd);
             inputField.onValueChanged.RemoveAllListeners();
             inputField.onValueChanged.AddListener(OnInputValueChanged);
 
@@ -57,22 +59,27 @@ namespace _Game.Scripts.Console
         private void OnInputValueChanged(string currentInputValue)
         {
             outputScrollRect.verticalNormalizedPosition = 0;
+            _currentHistoryIndex = -1;
         }
 
         private void OnCommandSubmit(string text)
         {
+            if (_animationInputText != null)
+                return;
             inputField.interactable = false;
             _soundManager.PlaySubmitKeySound();
             _commandsHandler.SubmitCommand(text, OnCommandProcessed);
+            _currentHistoryIndex = -1;
 
             inputField.caretPosition = inputField.text.Length;
             inputField.ActivateInputField();
             inputField.Select();
         }
 
-        private void OnCommandProcessed(ConsoleOutputData data)
+        private void OnCommandProcessed(ConsoleOutputData data, string originalInputText)
         {
             SpawnOutputEntry(data);
+            _commandsHistory.Add(originalInputText);
             inputField.text = "";
             inputField.interactable = true;
         }
@@ -87,24 +94,47 @@ namespace _Game.Scripts.Console
             outputScrollRect.verticalNormalizedPosition = 0;
         }
 
-        private void FormatInputField(string inputText)
+        private void OnEditEnd(string inputText)
         {
             // to lower case
             inputField.text = inputText.ToLower();
+            _currentHistoryIndex = -1;
         }
 
         private void Update()
         {
-            if (_forcedInputText != null)
+            if (_animationInputText != null)
             {
-                inputField.text = _forcedInputText;
+                inputField.text = _animationInputText;
+                inputField.caretPosition = inputField.text.Length;
+                inputField.ActivateInputField();
+                inputField.Select();
+                return;
+            }
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                _currentHistoryIndex++;
+                if (_currentHistoryIndex >= _commandsHistory.Count)
+                    _currentHistoryIndex = _commandsHistory.Count - 1;
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                _currentHistoryIndex--;
+                if (_currentHistoryIndex <= -1)
+                    _currentHistoryIndex = -1;
+            }
+
+            if (_currentHistoryIndex > -1)
+            {
+                inputField.text = _commandsHistory[_currentHistoryIndex];
                 inputField.caretPosition = inputField.text.Length;
                 inputField.ActivateInputField();
                 inputField.Select();
             }
         }
 
-        private string _forcedInputText;
+        private string _animationInputText;
 
         private IEnumerator GameInitAnimation()
         {
@@ -112,17 +142,17 @@ namespace _Game.Scripts.Console
             var delays = new[] { .25f, .25f, .1f, .35f, .3f, .7f, .15f, .25f, .28f, .2f, .2f };
             inputField.ActivateInputField();
             inputField.Select();
-            _forcedInputText = "";
+            _animationInputText = "";
             yield return new WaitForSeconds(2.5f);
             for (var i = 0; i < initMessage.Length; i++)
             {
                 _soundManager.PlayTypeSound();
-                _forcedInputText = initMessage.Take(i + 1).Aggregate("", (current, c) => current + c);
+                _animationInputText = initMessage.Take(i + 1).Aggregate("", (current, c) => current + c);
                 yield return new WaitForSeconds(delays[i]);
             }
 
             yield return new WaitForSeconds(2.5f);
-            _forcedInputText = null;
+            _animationInputText = null;
             OnCommandSubmit(initMessage);
         }
     }
