@@ -48,13 +48,13 @@ MonoBehaviour:
   typingSounds:
   - {fileID: 8300000, guid: 0c855b8c5d4c34c94955df21553fbe81, type: 3}
   submitKeySound: {fileID: 8300000, guid: e9f6162fb9d0f4a6abb215d00cce48c9, type: 3}
-  universalSummonSound: {fileID: 0}
+  universalSummonSound: {fileID: 8300000, guid: 50e23fdb7f91e466db3678e69eaa9767, type: 3}
   consoleAudioSource: {fileID: 8436429634095837023}
-  playerDamageSound: {fileID: 8300000, guid: 3f361b70621a24847b915f3cdabf0bd5, type: 3}
-  playerDeathSound: {fileID: 8300000, guid: 3f361b70621a24847b915f3cdabf0bd5, type: 3}
+  playerDamageSound: {fileID: 8300000, guid: ddeb40e07fbbe4aec9aad446be337c3f, type: 3}
+  playerDeathSound: {fileID: 8300000, guid: 95734c7aea2804992ac4612bb0d8f464, type: 3}
   bulletShotSound: {fileID: 8300000, guid: 3f361b70621a24847b915f3cdabf0bd5, type: 3}
-  bulletHitSound: {fileID: 8300000, guid: 3f361b70621a24847b915f3cdabf0bd5, type: 3}
-  enemyDeathSound: {fileID: 0}
+  bulletHitSound: {fileID: 8300000, guid: a858999b300d144028411d98d3e87168, type: 3}
+  enemyDeathSound: {fileID: 8300000, guid: baa3435b2878646a19a6ebc7fcb6fe3e, type: 3}
   princessDeathSound: {fileID: 0}
   defaultMusic: {fileID: 0}
   storeMusic: {fileID: 0}

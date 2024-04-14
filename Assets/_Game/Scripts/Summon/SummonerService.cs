@@ -2,7 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using _Game.Scripts.GameLoop;
+using _Game.Scripts.Summon.View;
 using UnityEngine;
+using Zenject;
 
 namespace _Game.Scripts.Summon
 {
@@ -11,12 +13,18 @@ namespace _Game.Scripts.Summon
         private Summoner.SummonParams _summonParams;
         private InputEnabledHandler _inputEnabledHandler;
         private Dictionary<string, Summoner> _summoners;
+        
+        [Inject] private SoundManager _soundManager;
 
         public void Init(IEnumerable<Summoner> summoners, InputEnabledHandler inputEnabledHandler)
         {
             _inputEnabledHandler = inputEnabledHandler;
             Debug.Log("Summoners amount: " + summoners.Count());
             _summoners = summoners.ToDictionary(it => it.Id);
+            foreach (var summoner in summoners)
+            {
+                summoner.OnSummoned += OnSummonEffects;
+            }
         }
 
         public string Summon(string summonId)
@@ -28,9 +36,9 @@ namespace _Game.Scripts.Summon
             }
 
             var result = summoner.Validate(GetSummonParams());
-            
+
             _inputEnabledHandler.DisableAllInput();
-            
+
             var task = summoner.Summon(GetSummonParams());
             var startCameraPosition = GetSummonParams()._camera.transform.position;
             task.GetAwaiter().OnCompleted(() => SummonCompleted(task, startCameraPosition));
@@ -38,9 +46,9 @@ namespace _Game.Scripts.Summon
             return result;
         }
 
-        private void OnSummonEffects()
+        private void OnSummonEffects(SummonedObject summonedObject)
         {
-            
+            _soundManager.PlayUniversalSummonSound();
         }
 
         private void SummonCompleted(Task task, Vector3 cameraPosition)
@@ -54,10 +62,10 @@ namespace _Game.Scripts.Summon
             {
                 Debug.LogWarning("Summon canceled");
             }
-            
+
             _inputEnabledHandler.EnableAllInput();
         }
-        
+
         private Summoner.SummonParams GetSummonParams()
         {
             if (_summonParams._camera == null)
