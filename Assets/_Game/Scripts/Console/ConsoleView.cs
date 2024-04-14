@@ -23,7 +23,7 @@ namespace _Game.Scripts.Console
 
         private readonly List<string> _commandsHistory = new();
         private int _currentHistoryIndex = -1;
-        private bool _playerInputInProcessFlag;
+        private string _inputBeforeUsingHistory;
         private string _animationInputText;
 
         public void Init()
@@ -57,7 +57,6 @@ namespace _Game.Scripts.Console
         private void OnInputValueChanged(string currentInputValue)
         {
             outputScrollRect.verticalNormalizedPosition = 0;
-            _playerInputInProcessFlag = true;
             _currentHistoryIndex = -1;
         }
 
@@ -66,7 +65,6 @@ namespace _Game.Scripts.Console
             if (_animationInputText != null)
                 return;
             _currentHistoryIndex = -1;
-            _playerInputInProcessFlag = false;
             inputField.interactable = false;
             _soundManager.PlaySubmitKeySound();
             _commandsHandler.SubmitCommand(text, OnCommandProcessed);
@@ -115,7 +113,10 @@ namespace _Game.Scripts.Console
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 if (_currentHistoryIndex == -1)
+                {
+                    _inputBeforeUsingHistory = inputField.text;
                     _currentHistoryIndex = _commandsHistory.Count - 1;
+                }
                 else if (_currentHistoryIndex > 0)
                     _currentHistoryIndex--;
             }
@@ -125,8 +126,8 @@ namespace _Game.Scripts.Console
                     _currentHistoryIndex++;
                 if (_currentHistoryIndex >= _commandsHistory.Count)
                     _currentHistoryIndex = -1;
-                if (_currentHistoryIndex == -1 && !_playerInputInProcessFlag)
-                    inputField.text = "";
+                if (_currentHistoryIndex == -1)
+                    inputField.text = _inputBeforeUsingHistory;
             }
 
             if (_currentHistoryIndex != -1)
@@ -135,7 +136,6 @@ namespace _Game.Scripts.Console
                 inputField.caretPosition = inputField.text.Length;
                 inputField.ActivateInputField();
                 inputField.Select();
-                _playerInputInProcessFlag = false;
                 return;
             }
         }
