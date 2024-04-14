@@ -1,4 +1,5 @@
-﻿using _Game.Scripts.GameState;
+﻿using System;
+using _Game.Scripts.GameState;
 using _Game.Scripts.Summon;
 using UnityEngine;
 using Zenject;
@@ -23,10 +24,15 @@ namespace _Game.Scripts.GameLoop
         
         private void InitSummonerService()
         {
+            // Init dungeon with default data
             _dungeon.Init(_gameStateProvider.TransientGameState.DungeonData);
             var summoners = FindObjectsByType<Summoner>(FindObjectsSortMode.None);
             _summonerService.Init(summoners);
-            
+        }
+
+        private void OnDestroy()
+        {
+            _gameStateProvider.Save();
         }
     }
 }
