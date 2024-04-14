@@ -16,14 +16,16 @@ namespace _Game.Scripts.GameLoop
         private SummonerService _summonerService;
         [Inject]
         private InputEnabledHandler _inputEnabledHandler;
+        [Inject]
+        private ConsoleCommandsHandler _consoleCommmandsHandler;
         
         private void Start()
         {
             _gameStateProvider.Load();
             _inputEnabledHandler.Init(consoleView);
             
+            _consoleCommmandsHandler.InjectKnownCommands(_gameStateProvider.PermanentGameState);
             InitSummonerService();
-
             InitViews();
         }
         

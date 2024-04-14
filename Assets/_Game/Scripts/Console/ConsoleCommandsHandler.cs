@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.GameState.Data;
 using _Game.Scripts.Summon;
 using UnityEngine;
 using static UnityEngine.Object;
@@ -10,14 +11,12 @@ namespace _Game.Scripts.Console
     public class ConsoleCommandsHandler
     {
         private readonly ConsoleCommand[] _allCommands = ConsoleHelpers.GetAllCommands();
-        private readonly List<ConsoleCommand> _knownCommands = new();
-
         private readonly SummonerService _summonerService;
+        private PermanentGameState _permanentGameState;
 
         public ConsoleCommandsHandler(SummonerService summonerService)
         {
             _summonerService = summonerService;
-            LoadKnownCommands();
         }
 
         private ConsoleCommand GenerateCommandFromInput(string input)
@@ -42,16 +41,12 @@ namespace _Game.Scripts.Console
             // todo: save known commands to player prefs later
         }
 
-        private void LoadKnownCommands()
+
+        public void InjectKnownCommands(PermanentGameState permanentGameState)
         {
-            // todo: load known commands from player prefs later
-            _knownCommands.Clear();
-            foreach (var command in _allCommands)
-            {
-                var knownCommand = Instantiate(command);
-                _knownCommands.Add(knownCommand);
-            }
+            _permanentGameState = permanentGameState;
         }
+
 
         public void SubmitCommand(string inputText, Action<ConsoleOutputData, string> onProcessed)
         {
@@ -93,9 +88,9 @@ namespace _Game.Scripts.Console
             }
 
             var isHelpCommand = command.mainWord == "help";
-            if (!_knownCommands.IsContainsCommand(command))
+            if (!_permanentGameState.knownCommands.IsContainsCommand(command))
             {
-                _knownCommands.Add(Instantiate(command));
+                _permanentGameState.knownCommands.Add(command.mainWord);
                 SaveKnownCommands();
             }
 
@@ -108,10 +103,11 @@ namespace _Game.Scripts.Console
 
             if (isHelpCommand)
             {
-                outputData.messageText = "Available commands:\n";
-                foreach (var knownCommand in _knownCommands)
+                outputData.messageText = "Known commands:\n";
+                for (var i = 0; i < _permanentGameState.knownCommands.Count; i++)
                 {
-                    outputData.messageText += $"summon {knownCommand.mainWord}\n";
+                    var knownCommand = _permanentGameState.knownCommands[i];
+                    outputData.messageText += $"\nsummon {knownCommand}";
                 }
             }
             else

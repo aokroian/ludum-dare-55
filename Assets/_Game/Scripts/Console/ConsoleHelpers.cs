@@ -11,10 +11,10 @@ namespace _Game.Scripts.Console
             return Resources.LoadAll<ConsoleCommand>("ConsoleCommands");
         }
 
-        public static bool IsContainsCommand(this IEnumerable<ConsoleCommand> commands, ConsoleCommand commandObj)
+        public static bool IsContainsCommand(this List<string> commands, ConsoleCommand commandObj)
         {
             return commands.Where(command => command is not null)
-                .Any(command => command.mainWord == commandObj.mainWord);
+                .Any(command => command == commandObj.mainWord);
         }
     }
 }
