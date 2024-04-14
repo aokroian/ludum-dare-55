@@ -1,35 +1,42 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Game.Scripts.Console
 {
-    public enum ConsoleOutputType
-    {
-        Info,
-        Warning,
-        Error
-    }
-
     public class ConsoleOutputEntry : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI messageText;
+        [SerializeField] private TextMeshProUGUI senderText;
+        [SerializeField] private TMP_InputField messageText;
+        [SerializeField] private TextMeshProUGUI messageTmp;
+        [SerializeField] private LayoutGroup layoutGroup;
         [Space]
         [SerializeField] private Color infoColor;
         [SerializeField] private Color warningColor;
         [SerializeField] private Color errorColor;
-        public ConsoleCommand Command { get; private set; }
 
-        public void Init(string message, ConsoleOutputType type, ConsoleCommand command = null)
+        public void Init(ConsoleOutputData data)
         {
-            Command = command;
-            messageText.text = message;
-            messageText.color = type switch
+            senderText.text = data.senderText;
+            messageText.text = data.messageText;
+
+            messageTmp.color = data.type switch
             {
                 ConsoleOutputType.Info => infoColor,
                 ConsoleOutputType.Warning => warningColor,
                 ConsoleOutputType.Error => errorColor,
-                _ => messageText.color
+                _ => messageTmp.color
             };
+            senderText.color = data.type switch
+            {
+                ConsoleOutputType.Info => infoColor,
+                ConsoleOutputType.Warning => warningColor,
+                ConsoleOutputType.Error => errorColor,
+                _ => senderText.color
+            };
+
+            layoutGroup.enabled = false;
+            layoutGroup.enabled = true;
         }
     }
 }

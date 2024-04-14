@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,8 +17,7 @@ namespace _Game.Scripts.Console
         [SerializeField] private ConsoleOutputEntry outputEntryPrefab;
         [SerializeField] private int maxOutputEntries = 100;
 
-        private readonly List<ConsoleCommand> _executedCommands = new();
-
+        private readonly List<ConsoleCommand> _commandsHistory = new();
         [Inject] private ConsoleCommandsHandler _commandsHandler;
         [Inject] private SoundManager _soundManager;
 
@@ -28,7 +28,7 @@ namespace _Game.Scripts.Console
 
         public void Init()
         {
-            _executedCommands.Clear();
+            _commandsHistory.Clear();
             inputField.onSubmit.RemoveAllListeners();
             inputField.onSubmit.AddListener(OnCommandSubmit);
             inputField.onEndEdit.RemoveAllListeners();
@@ -56,36 +56,32 @@ namespace _Game.Scripts.Console
 
         private void OnInputValueChanged(string currentInputValue)
         {
-            // if (currentInputValue.Length != _previousInputValue.Length)
-            // _soundManager.PlayTypeSound();
-            // _previousInputValue = currentInputValue;
+            outputScrollRect.verticalNormalizedPosition = 0;
         }
 
         private void OnCommandSubmit(string text)
         {
             inputField.interactable = false;
             _soundManager.PlaySubmitKeySound();
-            _commandsHandler.SubmitCommand(text, OnCommandSuccess, OnCommandFailed);
+            _commandsHandler.SubmitCommand(text, OnCommandProcessed);
+
+            inputField.caretPosition = inputField.text.Length;
+            inputField.ActivateInputField();
+            inputField.Select();
         }
 
-        private void OnCommandSuccess(ConsoleCommand command, string message)
+        private void OnCommandProcessed(ConsoleOutputData data)
         {
-            _executedCommands.Add(Instantiate(command));
-            SpawnOutputEntry(message, ConsoleOutputType.Info);
+            SpawnOutputEntry(data);
             inputField.text = "";
             inputField.interactable = true;
         }
 
-        private void OnCommandFailed(string message)
-        {
-            SpawnOutputEntry(message, ConsoleOutputType.Error);
-            inputField.interactable = true;
-        }
-
-        private void SpawnOutputEntry(string message, ConsoleOutputType type)
+        private void SpawnOutputEntry(ConsoleOutputData data)
         {
             var spawnedOutputEntry = Instantiate(outputEntryPrefab, outputContainer);
-            spawnedOutputEntry.Init(message, type);
+            ((RectTransform)spawnedOutputEntry.transform).pivot = new Vector2(0, 1);
+            spawnedOutputEntry.Init(data);
             if (outputContainer.childCount > maxOutputEntries)
                 Destroy(outputContainer.GetChild(0).gameObject);
             outputScrollRect.verticalNormalizedPosition = 0;
@@ -97,27 +93,37 @@ namespace _Game.Scripts.Console
             inputField.text = inputText.ToLower();
         }
 
+        private void Update()
+        {
+            if (_forcedInputText != null)
+            {
+                inputField.text = _forcedInputText;
+                inputField.caretPosition = inputField.text.Length;
+                inputField.ActivateInputField();
+                inputField.Select();
+            }
+        }
+
+        private string _forcedInputText;
+
         private IEnumerator GameInitAnimation()
         {
-            inputField.text = "";
             const string initMessage = "summon game";
             var delays = new[] { .25f, .25f, .1f, .35f, .3f, .7f, .15f, .25f, .28f, .2f, .2f };
             inputField.ActivateInputField();
             inputField.Select();
+            _forcedInputText = "";
             yield return new WaitForSeconds(2.5f);
             for (var i = 0; i < initMessage.Length; i++)
             {
-                inputField.text += initMessage[i];
                 _soundManager.PlayTypeSound();
-                inputField.caretPosition = inputField.text.Length;
+                _forcedInputText = initMessage.Take(i + 1).Aggregate("", (current, c) => current + c);
                 yield return new WaitForSeconds(delays[i]);
             }
 
-            inputField.caretPosition = inputField.text.Length;
-            inputField.ActivateInputField();
-            inputField.Select();
             yield return new WaitForSeconds(2.5f);
-            OnCommandSubmit(inputField.text);
+            _forcedInputText = null;
+            OnCommandSubmit(initMessage);
         }
     }
 }

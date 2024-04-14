@@ -10,7 +10,7 @@ namespace _Game.Scripts.Console
     {
         private readonly ConsoleCommand[] _allCommands = ConsoleHelpers.GetAllCommands();
         private readonly List<ConsoleCommand> _knownCommands = new();
-        
+
         private readonly SummonerService _summonerService;
 
         public ConsoleCommandsHandler(SummonerService summonerService)
@@ -52,12 +52,17 @@ namespace _Game.Scripts.Console
             }
         }
 
-        public void SubmitCommand(string inputText, Action<ConsoleCommand, string> onSuccess, Action<string> onFail)
+        public void SubmitCommand(string inputText, Action<ConsoleOutputData> onProcessed)
         {
             var command = GenerateCommandFromInput(inputText);
             if (command == null)
             {
-                onFail?.Invoke("Unknown command");
+                onProcessed?.Invoke(new ConsoleOutputData
+                {
+                    senderText = "game@ld-55:$ ",
+                    messageText = "Invalid command format. Try summoning help",
+                    type = ConsoleOutputType.Info
+                });
                 return;
             }
 
@@ -68,14 +73,20 @@ namespace _Game.Scripts.Console
             }
 
             var summonResponse = _summonerService.Summon(command.mainWord);
-            
-            // We could change response type, and get customized response from summoner service (different font color, etc)
+            var outputData = new ConsoleOutputData
+            {
+                senderText = "game@ld-55:$ ",
+                messageText = $"summon {command.mainWord} command executed successfully",
+                type = ConsoleOutputType.Info
+            };
+
             if (summonResponse != null)
             {
-                onFail?.Invoke(summonResponse);
+                outputData.messageText = summonResponse;
                 return;
             }
-            onSuccess?.Invoke(command, $"summon {command.mainWord} command executed successfully");
+
+            onProcessed?.Invoke(outputData);
         }
     }
 }
