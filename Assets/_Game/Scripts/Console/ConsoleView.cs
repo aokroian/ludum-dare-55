@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor.iOS.Xcode;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -65,7 +64,6 @@ namespace _Game.Scripts.Console
             if (_animationInputText != null)
                 return;
             _currentHistoryIndex = -1;
-            inputField.interactable = false;
             _soundManager.PlaySubmitKeySound();
             _commandsHandler.SubmitCommand(text, OnCommandProcessed);
 
@@ -79,7 +77,6 @@ namespace _Game.Scripts.Console
             SpawnOutputEntry(data);
             _commandsHistory.Add(originalInputText);
             inputField.text = "";
-            inputField.interactable = true;
         }
 
         private void SpawnOutputEntry(ConsoleOutputData data)
@@ -90,6 +87,16 @@ namespace _Game.Scripts.Console
             if (outputContainer.childCount > maxOutputEntries)
                 Destroy(outputContainer.GetChild(0).gameObject);
             outputScrollRect.verticalNormalizedPosition = 0;
+        }
+        
+        public void EnableInput()
+        {
+            _animationInputText = null;
+        }
+
+        public void DisableInput()
+        {
+            _animationInputText = "";
         }
 
         private void OnEditEnd(string inputText)

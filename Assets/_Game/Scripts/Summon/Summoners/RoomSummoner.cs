@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using _Game.Scripts.Summon.View;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -10,16 +11,29 @@ namespace _Game.Scripts.Summon.Summoners
         [SerializeField] private Transform roomParent;
         [SerializeField] private float roomMargin;
         
-        public override void SummonAsync(SummonParams summonParams)
+        // public override async Task SummonAsync(SummonParams summonParams)
+        // {
+        //     var startPosition = summonParams._camera.transform.position;
+        //     var position = CalcRoomPosition();
+        //     await MoveCameraToAsync(summonParams._camera, position);
+        //     SummonRoom(position);
+        //     await MoveCameraToAsync(summonParams._camera, startPosition);
+        // }
+        
+        public override async Task Summon(SummonParams summonParams)
         {
-            SummonRoom(summonParams);
+            // TODO: try..catch. We need to enable input even if something goes wrong
+            var startPosition = summonParams._camera.transform.position;
+            var position = CalcRoomPosition();
+            await MoveCameraToAsync(summonParams._camera, position);
+            SummonRoom(position);
+            await MoveCameraToAsync(summonParams._camera, startPosition);
         }
 
-        private void SummonRoom(SummonParams summonParams)
+        private void SummonRoom(Vector3 position)
         {
             var prefabIndex = Mathf.Min(_objectsHolder.rooms.Count, prefabs.Count - 1);
 
-            var position = CalcRoomPosition();
             var room = Instantiate(prefabs[prefabIndex], position, Quaternion.identity, roomParent);
             _objectsHolder.AddRoom(room as SummonedRoom);
         }

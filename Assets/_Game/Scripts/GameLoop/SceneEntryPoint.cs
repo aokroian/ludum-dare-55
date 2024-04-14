@@ -14,10 +14,13 @@ namespace _Game.Scripts.GameLoop
         private IGameStateProvider _gameStateProvider;
         [Inject]
         private SummonerService _summonerService;
+        [Inject]
+        private InputEnabledHandler _inputEnabledHandler;
         
         private void Start()
         {
             _gameStateProvider.Load();
+            _inputEnabledHandler.Init(consoleView);
             
             InitSummonerService();
 
@@ -28,7 +31,7 @@ namespace _Game.Scripts.GameLoop
         {
             // Init dungeon with default data
             var summoners = FindObjectsByType<Summoner>(FindObjectsSortMode.None);
-            _summonerService.Init(summoners);
+            _summonerService.Init(summoners, _inputEnabledHandler);
         }
         
         private void InitViews()

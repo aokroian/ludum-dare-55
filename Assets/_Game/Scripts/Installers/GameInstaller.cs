@@ -1,4 +1,5 @@
 ﻿using _Game.Scripts.Console;
+using _Game.Scripts.GameLoop;
 using _Game.Scripts.GameState;
 using _Game.Scripts.Summon;
 using _Game.Scripts.Summon.Data;
@@ -15,6 +16,8 @@ namespace _Game.Scripts.Installers
             Container.Bind<SummonerService>().AsSingle();
             Container.Bind<SummonedObjectsHolder>().AsSingle();
             Container.Bind<SoundManager>().FromComponentInNewPrefabResource("Prefabs/SoundManager").AsSingle();
+
+            Container.Bind<InputEnabledHandler>().AsSingle();
         }
     }
 }

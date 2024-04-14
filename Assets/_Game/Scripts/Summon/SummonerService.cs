@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using _Game.Scripts.GameLoop;
 using UnityEngine;
 
 namespace _Game.Scripts.Summon
@@ -7,10 +9,12 @@ namespace _Game.Scripts.Summon
     public class SummonerService
     {
         private Summoner.SummonParams _summonParams;
+        private InputEnabledHandler _inputEnabledHandler;
         private Dictionary<string, Summoner> _summoners;
 
-        public void Init(IEnumerable<Summoner> summoners)
+        public void Init(IEnumerable<Summoner> summoners, InputEnabledHandler inputEnabledHandler)
         {
+            _inputEnabledHandler = inputEnabledHandler;
             Debug.Log("Summoners amount: " + summoners.Count());
             _summoners = summoners.ToDictionary(it => it.Id);
         }
@@ -24,9 +28,23 @@ namespace _Game.Scripts.Summon
             }
 
             var result = summoner.Validate(GetSummonParams());
-            summoner.SummonAsync(GetSummonParams());
+            
+            _inputEnabledHandler.DisableAllInput();
+            
+            var task = summoner.Summon(GetSummonParams());
+            task.GetAwaiter().OnCompleted(() => SummonCompleted(task));
 
             return result;
+        }
+
+        private void SummonCompleted(Task task)
+        {
+            if (task.IsFaulted)
+                Debug.LogError(task.Exception);
+            else if (task.IsCanceled)
+                Debug.LogWarning("Summon canceled");
+            
+            _inputEnabledHandler.EnableAllInput();
         }
         
         private Summoner.SummonParams GetSummonParams()
