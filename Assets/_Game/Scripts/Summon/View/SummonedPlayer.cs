@@ -15,6 +15,7 @@ namespace _Game.Scripts.Summon.View
 
             if (ObjectsHolder.GetCurrentPlayerRoom().Objects.Count(it => it is SummonedPlayer) > 1)
             {
+                return new ManyPlayersGameplayEvent(this, MessageService);
             }
 
             return null;

@@ -21,6 +21,7 @@ namespace _Game.Scripts.Story.GameplayEvents
         public async Task<string> StartEvent(DiContainer diContainer)
         {
             _messageService.Speak(_player, "Woah what the hell!");
+            _messageService.Speak(_player, "Woah what the hell!");
             await Task.Delay(500);
 
             return "manyPlayers";

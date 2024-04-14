@@ -1,6 +1,7 @@
 ﻿using _Game.Scripts.Console;
 using _Game.Scripts.GameLoop;
 using _Game.Scripts.GameState;
+using _Game.Scripts.Message;
 using _Game.Scripts.Story;
 using _Game.Scripts.Story.Ending;
 using _Game.Scripts.Summon;
@@ -13,6 +14,9 @@ namespace _Game.Scripts.Installers
     {
         public override void InstallBindings()
         {
+            GameSignalsInstaller.Install(Container);
+
+            Container.Bind<GameLoopController>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameStatePlayerPrefsProvider>().AsSingle();
             Container.Bind<ConsoleCommandsHandler>().AsSingle();
             Container.Bind<SummonerService>().AsSingle();
@@ -23,6 +27,7 @@ namespace _Game.Scripts.Installers
             Container.Bind<InputEnabledHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameplayEventsChecker>().AsSingle().NonLazy();
             Container.Bind<EndingService>().AsSingle();
+            Container.Bind<MessageService>().AsSingle();
         }
     }
 }

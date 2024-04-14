@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using _Game.Scripts.GameLoop.Events;
 using _Game.Scripts.Story.Ending;
 using _Game.Scripts.Summon.Data;
 using _Game.Scripts.Summon.View;
@@ -11,34 +12,52 @@ namespace _Game.Scripts.Story
         private DiContainer _diContainer;
         private EndingService _endingService;
         private SummonedObjectsHolder _objectsHolder;
+        
+        private bool _isEventInProgress = false;
 
-        public GameplayEventsChecker(DiContainer diContainer, EndingService endingService, SummonedObjectsHolder objectsHolder)
+        public bool CheckingEnabled = true;
+        private SignalBus _signalBus;
+
+        public GameplayEventsChecker(DiContainer diContainer, SignalBus signalBus, EndingService endingService, SummonedObjectsHolder objectsHolder)
         {
+            _signalBus = signalBus;
             _diContainer = diContainer;
             _endingService = endingService;
             _objectsHolder = objectsHolder;
+            
+            _signalBus.Subscribe<GameEndEvent>(() => CheckingEnabled = false);
         }
 
         
         // TODO: disable with input
         public async void Tick()
         {
-            // foreach (var obj in _objectsHolder.objectsOutOfRoom)
-            // {
-            //     var isEnding = await CheckAndStartEvent(obj);
-            //     if (isEnding)
-            //         return;
-            // }
-            //
-            // var currentRoom = _objectsHolder.GetCurrentPlayerRoom();
-            // if (currentRoom == null)
-            //     return;
-            // foreach (var obj in currentRoom.Objects)
-            // {
-            //     var isEnding = await CheckAndStartEvent(obj);
-            //     if (isEnding)
-            //         return;
-            // }
+            if (!CheckingEnabled || _isEventInProgress)
+                return;
+            
+            _isEventInProgress = true;
+            foreach (var obj in _objectsHolder.objectsOutOfRoom)
+            {
+                var isEnding = await CheckAndStartEvent(obj);
+                if (isEnding)
+                    break;
+            }
+            
+            var currentRoom = _objectsHolder.GetCurrentPlayerRoom();
+            if (currentRoom == null)
+            {
+                _isEventInProgress = false;
+                return;
+            }
+                
+            foreach (var obj in currentRoom.Objects)
+            {
+                var isEnding = await CheckAndStartEvent(obj);
+                if (isEnding)
+                    break;
+            }
+
+            _isEventInProgress = false;
         }
         
         private async Task<bool> CheckAndStartEvent(SummonedObject obj)

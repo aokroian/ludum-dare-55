@@ -23,7 +23,7 @@ namespace _Game.Scripts.Story.GameplayEvents
         public async Task<string> StartEvent(DiContainer diContainer)
         {
             _messageService.Speak(_player, "Where am I?");
-            await _player.transform.DORotate(new Vector3(1, 0), 1f).AsyncWaitForCompletion();
+            await _player.transform.DORotate(new Vector3(0, 0, Random.Range(45, 120)), 1f).AsyncWaitForCompletion();
             
             return "space";
         }

@@ -25,7 +25,10 @@ namespace _Game.Scripts.Summon.Summoners
         {
             var prefabIndex = Mathf.Min(_objectsHolder.rooms.Count, prefabs.Count - 1);
 
-            var room = Instantiate(prefabs[prefabIndex], position, Quaternion.identity, roomParent) as SummonedRoom;
+            var room = _diContainer.InstantiatePrefabForComponent<SummonedRoom>(prefabs[prefabIndex],
+                position,
+                Quaternion.identity,
+                roomParent);
             _objectsHolder.AddRoom(room);
             return room;
         }
