@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using _Game.Scripts.Summon.Data;
 using _Game.Scripts.Summon.View;
 using UnityEngine;
 using Zenject;
@@ -11,6 +12,9 @@ namespace _Game.Scripts.Summon
     {
         [field:SerializeField] public string Id { get; private set; }
         [SerializeField] protected List<SummonedObject> prefabs;
+
+        [Inject]
+        protected SummonedObjectsHolder _objectsHolder;
         
         public virtual string Validate(SummonParams summonParams)
         {
@@ -23,12 +27,10 @@ namespace _Game.Scripts.Summon
         public struct SummonParams
         {
             public readonly Camera _camera;
-            public readonly Dungeon Dungeon;
 
-            public SummonParams(Camera camera, Dungeon dungeon)
+            public SummonParams(Camera camera)
             {
                 _camera = camera;
-                Dungeon = dungeon;
             }
         }
     }

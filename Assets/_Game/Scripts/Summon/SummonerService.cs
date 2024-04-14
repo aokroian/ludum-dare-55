@@ -39,7 +39,7 @@ namespace _Game.Scripts.Summon
         private Summoner.SummonParams GetSummonParams()
         {
             if (_summonParams._camera == null)
-                _summonParams = new Summoner.SummonParams(Camera.main, _dungeon);
+                _summonParams = new Summoner.SummonParams(Camera.main);
 
             return _summonParams;
         }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using _Game.Scripts.Summon.Data;
+using UnityEngine;
+using Zenject;
 
 namespace _Game.Scripts.Summon.View
 {

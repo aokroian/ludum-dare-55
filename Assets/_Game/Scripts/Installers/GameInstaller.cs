@@ -1,6 +1,7 @@
 ﻿using _Game.Scripts.Console;
 using _Game.Scripts.GameState;
 using _Game.Scripts.Summon;
+using _Game.Scripts.Summon.Data;
 using Zenject;
 
 namespace _Game.Scripts.Installers
@@ -13,6 +14,7 @@ namespace _Game.Scripts.Installers
             Container.Bind<ConsoleCommandsHandler>().AsSingle();
             Container.Bind<SummonerService>().AsSingle();
             Container.Bind<Dungeon>().AsSingle();
+            Container.Bind<SummonedObjectsHolder>().AsSingle();
             Container.Bind<SoundManager>().FromComponentInNewPrefabResource("Prefabs/SoundManager").AsSingle();
         }
     }

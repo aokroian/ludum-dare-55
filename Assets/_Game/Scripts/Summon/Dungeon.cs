@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using _Game.Scripts.Summon.Data;
+using _Game.Scripts.Summon.Enums;
 
 namespace _Game.Scripts.Summon
 {
@@ -9,14 +11,18 @@ namespace _Game.Scripts.Summon
         private DungeonData _dungeonData;
         
         private List<Room> _rooms;
-
-        public Dungeon()
-        {
-        }
+        
+        public IReadOnlyList<Room> Rooms => _rooms;
 
         public void Init(DungeonData dungeonData)
         {
             _dungeonData = dungeonData;
+            _rooms = dungeonData.Rooms.Select(it => new Room(it)).ToList();
+        }
+
+        public void AddRoom(RoomType roomType)
+        {
+            _rooms.Add(new Room(roomType, new()));
         }
     }
 }
