@@ -68,7 +68,7 @@ namespace _Game.Scripts.Console
                     messageText = $"Unknown error: {e.Message}",
                     type = ConsoleOutputType.Error
                 };
-                
+
                 Debug.LogError(e);
             }
 
@@ -77,7 +77,11 @@ namespace _Game.Scripts.Console
 
         private ConsoleOutputData SubmitCommandUnSafe(string inputText, Action<ConsoleOutputData, string> onProcessed)
         {
+            if (inputText is "help" or "?")
+                inputText = "summon help";
+
             var command = GenerateCommandFromInput(inputText);
+
             if (command == null)
             {
                 return new ConsoleOutputData
@@ -88,13 +92,13 @@ namespace _Game.Scripts.Console
                 };
             }
 
+            var isHelpCommand = command.mainWord == "help";
             if (!_knownCommands.IsContainsCommand(command))
             {
                 _knownCommands.Add(Instantiate(command));
                 SaveKnownCommands();
             }
 
-            var summonResponse = _summonerService.Summon(command.mainWord);
             var outputData = new ConsoleOutputData
             {
                 senderText = "game@ld-55:$ ",
@@ -102,10 +106,21 @@ namespace _Game.Scripts.Console
                 type = ConsoleOutputType.Info
             };
 
-            if (summonResponse != null)
+            if (isHelpCommand)
             {
-                outputData.messageText = summonResponse;
+                outputData.messageText = "Available commands:\n";
+                foreach (var knownCommand in _knownCommands)
+                {
+                    outputData.messageText += $"summon {knownCommand.mainWord}\n";
+                }
             }
+            else
+            {
+                var summonResponse = _summonerService.Summon(command.mainWord);
+                if (summonResponse != null)
+                    outputData.messageText = summonResponse;
+            }
+
 
             return outputData;
         }

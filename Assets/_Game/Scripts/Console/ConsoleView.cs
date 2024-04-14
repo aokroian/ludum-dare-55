@@ -14,6 +14,7 @@ namespace _Game.Scripts.Console
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private ScrollRect outputScrollRect;
         [SerializeField] private Transform outputContainer;
+        [SerializeField] private ContentSizeFitter[] contentSizeFitters;
         [SerializeField] private ConsoleOutputEntry outputEntryPrefab;
         [SerializeField] private int maxOutputEntries = 100;
 
@@ -73,12 +74,12 @@ namespace _Game.Scripts.Console
 
         private void OnCommandProcessed(ConsoleOutputData data, string originalInputText)
         {
-            SpawnOutputEntry(data);
+            ViewOutput(data);
             _commandsHistory.Add(originalInputText);
             inputField.text = "";
         }
 
-        private void SpawnOutputEntry(ConsoleOutputData data)
+        public void ViewOutput(ConsoleOutputData data)
         {
             var spawnedOutputEntry = Instantiate(outputEntryPrefab, outputContainer);
             ((RectTransform)spawnedOutputEntry.transform).pivot = new Vector2(0, 1);
@@ -86,8 +87,20 @@ namespace _Game.Scripts.Console
             if (outputContainer.childCount > maxOutputEntries)
                 Destroy(outputContainer.GetChild(0).gameObject);
             outputScrollRect.verticalNormalizedPosition = 0;
+            Invoke(nameof(ToggleUI), .05f);
         }
-        
+
+        private void ToggleUI()
+        {
+            foreach (var c in contentSizeFitters)
+            {
+                c.enabled = false;
+                c.enabled = true;
+            }
+
+            Canvas.ForceUpdateCanvases();
+        }
+
         public void EnableInput()
         {
             _animationInputText = null;
