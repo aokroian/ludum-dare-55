@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb14d386cb0549d3b86a7549fb0d08d6, type: 3}
+  m_Name: GunsConfig
+  m_EditorClassIdentifier: 
+  gunBindings:
+  - gunType: 0
+    gunPrefab: {fileID: 5685811395722452794, guid: da0efb232a0064f2c9431d86fe9ca3e5, type: 3}
+    scopePrefab: {fileID: 4503803084617128272, guid: b233f83b168a648fbb5257de060b4807, type: 3}
+  - gunType: 1
+    gunPrefab: {fileID: 5685811395722452794, guid: 724e259158dffa44380678d422cf0982, type: 3}
+    scopePrefab: {fileID: 1186929123044114519, guid: 2746d086ff9784f22953ec0e1085d737, type: 3}
+  - gunType: 2
+    gunPrefab: {fileID: 5685811395722452794, guid: fdd762e65d3d0ba4a8d7febb1aa565bd, type: 3}
+    scopePrefab: {fileID: 6224954752013038033, guid: 0fb7d969ae73a48adbaf79242aa39f45, type: 3}
+  - gunType: 3
+    gunPrefab: {fileID: 5685811395722452794, guid: a37efe3f989ba4db5810a40490abcaa1, type: 3}
+    scopePrefab: {fileID: 6224954752013038033, guid: 0fb7d969ae73a48adbaf79242aa39f45, type: 3}

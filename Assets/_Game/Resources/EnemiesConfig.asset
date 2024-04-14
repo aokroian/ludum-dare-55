@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3f0d7784964b4faf4f8a0ad12af294, type: 3}
+  m_Name: EnemiesConfig
+  m_EditorClassIdentifier: 
+  <Enemies>k__BackingField:
+  - enemyType: 0
+    enemyPrefab: {fileID: 1338577563855930194, guid: c1719c427e4784bcd910c0cdc52dc1d0, type: 3}
+    difficultyWeight: 1
+  - enemyType: 1
+    enemyPrefab: {fileID: 3618191280411072265, guid: 92599a4a275324e8489ef77818a255fc, type: 3}
+    difficultyWeight: 2
+  - enemyType: 2
+    enemyPrefab: {fileID: 3158851545522084415, guid: 636dddcdaea0d4525bb3e59ac19c27ba, type: 3}
+    difficultyWeight: 3
