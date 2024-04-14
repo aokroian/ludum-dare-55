@@ -9,7 +9,9 @@ namespace _Game.Scripts.Summon.Data
         public List<SummonedRoom> rooms = new();
 
         public List<SummonedObject> objectsOutOfRoom = new();
-        
+
+        private SummonedPlayer _summonedPlayer;
+
         public void AddRoom(SummonedRoom room)
         {
             rooms.Add(room);
@@ -26,6 +28,16 @@ namespace _Game.Scripts.Summon.Data
             }
 
             return null;
+        }
+
+        public void SetPlayerRef(SummonedPlayer player)
+        {
+            _summonedPlayer = player;
+        }
+
+        public SummonedPlayer GetPlayer()
+        {
+            return _summonedPlayer;
         }
     }
 }

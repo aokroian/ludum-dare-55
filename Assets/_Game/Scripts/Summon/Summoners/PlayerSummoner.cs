@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using _Game.Scripts.Summon.View;
-using Zenject;
 
 namespace _Game.Scripts.Summon.Summoners
 {
@@ -15,6 +14,8 @@ namespace _Game.Scripts.Summon.Summoners
                 _objectsHolder.rooms[0].AddObject(player);
             else
                 _objectsHolder.objectsOutOfRoom.Add(player);
+            
+            _objectsHolder.SetPlayerRef(player);
             
             Summoned(player);
         }

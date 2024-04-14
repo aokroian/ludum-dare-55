@@ -18,6 +18,7 @@ namespace _Game.Scripts.Installers
             Container.Bind<SummonerService>().AsSingle();
             Container.Bind<SummonedObjectsHolder>().AsSingle();
             Container.Bind<SoundManager>().FromComponentInNewPrefabResource("Prefabs/SoundManager").AsSingle();
+            Container.BindInterfacesAndSelfTo<GlobalInputSwitcher>().AsSingle();
 
             Container.Bind<InputEnabledHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameplayEventsChecker>().AsSingle().NonLazy();

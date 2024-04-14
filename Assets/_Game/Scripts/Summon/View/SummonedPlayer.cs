@@ -6,8 +6,6 @@ namespace _Game.Scripts.Summon.View
 {
     public class SummonedPlayer : SummonedObject
     {
-        
-        
         public override IGameplayEvent GetEventIfAny()
         {
             if (ObjectsHolder.rooms.Count == 0)
@@ -17,7 +15,6 @@ namespace _Game.Scripts.Summon.View
 
             if (ObjectsHolder.GetCurrentPlayerRoom().Objects.Count(it => it is SummonedPlayer) > 1)
             {
-                
             }
 
             return null;

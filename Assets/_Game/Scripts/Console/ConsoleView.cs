@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
 namespace _Game.Scripts.Console
 {
-    public class ConsoleView : MonoBehaviour
+    public class ConsoleView : MonoBehaviour, IPointerDownHandler
     {
         [SerializeField] private bool skipInitAnimation;
         [SerializeField] private TMP_InputField inputField;
@@ -20,11 +21,31 @@ namespace _Game.Scripts.Console
 
         [Inject] private ConsoleCommandsHandler _commandsHandler;
         [Inject] private SoundManager _soundManager;
+        [Inject] private GlobalInputSwitcher _globalInputSwitcher;
 
         private readonly List<string> _commandsHistory = new();
         private int _currentHistoryIndex = -1;
         private string _inputBeforeUsingHistory;
         private string _animationInputText;
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            _globalInputSwitcher.SwitchToConsole();
+        }
+
+        public void ToggleConsoleInput(bool isOn)
+        {
+            if (isOn)
+            {
+                inputField.interactable = true;
+                inputField.ActivateInputField();
+                inputField.Select();
+            }
+            else
+            {
+                inputField.interactable = false;
+            }
+        }
 
         public void Init()
         {
