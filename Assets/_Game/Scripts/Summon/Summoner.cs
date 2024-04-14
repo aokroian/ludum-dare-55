@@ -21,7 +21,7 @@ namespace _Game.Scripts.Summon
             return null;
         }
         
-        public abstract Task SummonAsync(SummonParams summonParams);
+        public abstract void SummonAsync(SummonParams summonParams);
 
         
         public struct SummonParams

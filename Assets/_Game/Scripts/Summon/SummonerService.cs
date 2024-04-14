@@ -17,8 +17,7 @@ namespace _Game.Scripts.Summon
 
         public string Summon(string summonId)
         {
-            var summoner = _summoners[summonId];
-            if (summoner == null)
+            if (!_summoners.TryGetValue(summonId, out var summoner))
             {
                 Debug.LogWarning($"No summoner found for command: {summonId}");
                 return "No summoner found for command.";

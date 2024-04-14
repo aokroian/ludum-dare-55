@@ -10,7 +10,7 @@ namespace _Game.Scripts.Summon.Summoners
         [SerializeField] private Transform roomParent;
         [SerializeField] private float roomMargin;
         
-        public override async Task SummonAsync(SummonParams summonParams)
+        public override void SummonAsync(SummonParams summonParams)
         {
             SummonRoom(summonParams);
         }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using _Game.Scripts.Summon;
+using UnityEngine;
 using static UnityEngine.Object;
 
 namespace _Game.Scripts.Console
@@ -54,16 +55,37 @@ namespace _Game.Scripts.Console
 
         public void SubmitCommand(string inputText, Action<ConsoleOutputData, string> onProcessed)
         {
+            ConsoleOutputData outputData;
+            try
+            {
+                outputData = SubmitCommandUnSafe(inputText, onProcessed);
+            }
+            catch (Exception e)
+            {
+                outputData = new ConsoleOutputData
+                {
+                    senderText = "game@ld-55:$ ",
+                    messageText = $"Unknown error: {e.Message}",
+                    type = ConsoleOutputType.Error
+                };
+                
+                Debug.LogError(e);
+            }
+
+            onProcessed?.Invoke(outputData, inputText);
+        }
+
+        private ConsoleOutputData SubmitCommandUnSafe(string inputText, Action<ConsoleOutputData, string> onProcessed)
+        {
             var command = GenerateCommandFromInput(inputText);
             if (command == null)
             {
-                onProcessed?.Invoke(new ConsoleOutputData
+                return new ConsoleOutputData
                 {
                     senderText = "game@ld-55:$ ",
                     messageText = "Invalid command format. Try summoning help",
                     type = ConsoleOutputType.Info
-                }, inputText);
-                return;
+                };
             }
 
             if (!_knownCommands.IsContainsCommand(command))
@@ -83,10 +105,9 @@ namespace _Game.Scripts.Console
             if (summonResponse != null)
             {
                 outputData.messageText = summonResponse;
-                return;
             }
 
-            onProcessed?.Invoke(outputData, inputText);
+            return outputData;
         }
     }
 }
