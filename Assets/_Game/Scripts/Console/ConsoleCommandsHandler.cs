@@ -72,7 +72,7 @@ namespace _Game.Scripts.Console
                 SaveKnownCommands();
             }
 
-            // var summonResponse = _summonerService.Summon(command.mainWord);
+            var summonResponse = _summonerService.Summon(command.mainWord);
             var outputData = new ConsoleOutputData
             {
                 senderText = "game@ld-55:$ ",
@@ -80,11 +80,11 @@ namespace _Game.Scripts.Console
                 type = ConsoleOutputType.Info
             };
 
-            // if (summonResponse != null)
-            // {
-                // outputData.messageText = summonResponse;
-                // return;
-            // }
+            if (summonResponse != null)
+            {
+                outputData.messageText = summonResponse;
+                return;
+            }
 
             onProcessed?.Invoke(outputData, inputText);
         }
