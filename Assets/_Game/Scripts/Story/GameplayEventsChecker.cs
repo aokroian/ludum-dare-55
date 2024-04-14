@@ -16,16 +16,13 @@ namespace _Game.Scripts.Story
         private bool _isEventInProgress = false;
 
         public bool CheckingEnabled = true;
-        private SignalBus _signalBus;
 
-        public GameplayEventsChecker(DiContainer diContainer, SignalBus signalBus, EndingService endingService, SummonedObjectsHolder objectsHolder)
+        public GameplayEventsChecker(DiContainer diContainer, EndingService endingService, SummonedObjectsHolder objectsHolder)
         {
-            _signalBus = signalBus;
             _diContainer = diContainer;
             _endingService = endingService;
             _objectsHolder = objectsHolder;
             
-            _signalBus.Subscribe<GameEndEvent>(() => CheckingEnabled = false);
         }
 
         

@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using _Game.Scripts.GameLoop;
 using _Game.Scripts.Message;
 using _Game.Scripts.Summon.View;
-using Unity.VisualScripting;
 using Zenject;
 
 namespace _Game.Scripts.Story.GameplayEvents
@@ -24,7 +22,7 @@ namespace _Game.Scripts.Story.GameplayEvents
         public async Task<string> StartEvent(DiContainer diContainer)
         {
             var messageService = diContainer.Resolve<MessageService>();
-            var inputHandler = diContainer.Resolve<InputEnabledHandler>();
+            var inputHandler = diContainer.Resolve<GlobalInputSwitcher>();
             
             foreach (var line in _lines)
             {

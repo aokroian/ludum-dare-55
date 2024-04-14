@@ -64,6 +64,19 @@ namespace _Game.Scripts
             _isPlayerInputActive = false;
         }
 
+        public void EnableAllInput()
+        {
+            _consoleView.EnableInput();
+            if (_isPlayerInputActive)
+                TogglePlayerInput(true);
+        }
+
+        public void DisableAllInput()
+        {
+            _consoleView.DisableInput();
+            TogglePlayerInput(false);
+        }
+
         private void TogglePlayerInput(bool isOn)
         {
             var player = _objectsHolder.GetPlayer();

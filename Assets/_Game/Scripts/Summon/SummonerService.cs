@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using _Game.Scripts.GameLoop;
 using _Game.Scripts.Summon.View;
 using UnityEngine;
 using Zenject;
@@ -11,12 +10,12 @@ namespace _Game.Scripts.Summon
     public class SummonerService
     {
         private Summoner.SummonParams _summonParams;
-        private InputEnabledHandler _inputEnabledHandler;
+        private GlobalInputSwitcher _inputEnabledHandler;
         private Dictionary<string, Summoner> _summoners;
         
         [Inject] private SoundManager _soundManager;
 
-        public void Init(IEnumerable<Summoner> summoners, InputEnabledHandler inputEnabledHandler)
+        public void Init(IEnumerable<Summoner> summoners, GlobalInputSwitcher inputEnabledHandler)
         {
             _inputEnabledHandler = inputEnabledHandler;
             Debug.Log("Summoners amount: " + summoners.Count());

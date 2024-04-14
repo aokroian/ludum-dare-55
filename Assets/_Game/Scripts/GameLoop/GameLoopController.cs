@@ -8,11 +8,13 @@ namespace _Game.Scripts.GameLoop
     {
         private SignalBus _signalBus;
         private GameplayEventsChecker _eventsChecker;
+        private GlobalInputSwitcher _inputSwitcher;
 
-        public GameLoopController(SignalBus signalBus, GameplayEventsChecker eventsChecker)
+        public GameLoopController(SignalBus signalBus, GameplayEventsChecker eventsChecker, GlobalInputSwitcher inputSwitcher)
         {
             _signalBus = signalBus;
             _eventsChecker = eventsChecker;
+            _inputSwitcher = inputSwitcher;
             
             _signalBus.Subscribe<GameEndEvent>(OnEndGame);
         }
@@ -23,6 +25,7 @@ namespace _Game.Scripts.GameLoop
         {
             IsGameEnded = true;
             _eventsChecker.CheckingEnabled = false;
+            _inputSwitcher.ToggleLockToConsole(true);
         }
 
         public void RestartGame()
@@ -31,6 +34,7 @@ namespace _Game.Scripts.GameLoop
             // TODO: Restart everything
             
             _eventsChecker.CheckingEnabled = true;
+            _inputSwitcher.ToggleLockToConsole(false);
         }
     }
 }

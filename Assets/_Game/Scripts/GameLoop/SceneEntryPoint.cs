@@ -15,8 +15,6 @@ namespace _Game.Scripts.GameLoop
         [Inject]
         private SummonerService _summonerService;
         [Inject]
-        private InputEnabledHandler _inputEnabledHandler;
-        [Inject]
         private ConsoleCommandsHandler _consoleCommmandsHandler;
         [Inject]
         private GlobalInputSwitcher _globalInputSwitcher;
@@ -24,7 +22,6 @@ namespace _Game.Scripts.GameLoop
         private void Start()
         {
             _gameStateProvider.Load();
-            _inputEnabledHandler.Init(consoleView);
             _globalInputSwitcher.Init(consoleView);
 
             _consoleCommmandsHandler.InjectKnownCommands(_gameStateProvider.PermanentGameState);
@@ -36,7 +33,7 @@ namespace _Game.Scripts.GameLoop
         {
             // Init dungeon with default data
             var summoners = FindObjectsByType<Summoner>(FindObjectsSortMode.None);
-            _summonerService.Init(summoners, _inputEnabledHandler);
+            _summonerService.Init(summoners, _globalInputSwitcher);
         }
 
         private void InitViews()

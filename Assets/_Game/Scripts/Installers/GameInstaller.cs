@@ -24,7 +24,6 @@ namespace _Game.Scripts.Installers
             Container.Bind<SoundManager>().FromComponentInNewPrefabResource("Prefabs/SoundManager").AsSingle();
             Container.BindInterfacesAndSelfTo<GlobalInputSwitcher>().AsSingle();
 
-            Container.Bind<InputEnabledHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameplayEventsChecker>().AsSingle().NonLazy();
             Container.Bind<EndingService>().AsSingle();
             Container.Bind<MessageService>().AsSingle();
