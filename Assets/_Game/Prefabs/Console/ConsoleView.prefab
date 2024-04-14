@@ -273,7 +273,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1877.5266, y: 0}
+  m_SizeDelta: {x: 1683.2301, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1627586010688925645
 MonoBehaviour:
@@ -955,7 +955,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2735085158337305575}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.21061161
+  m_Size: 0.9999878
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1164,7 +1164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 167.99998, y: 0}
+  m_AnchoredPosition: {x: 167.99994, y: 0}
   m_SizeDelta: {x: -336.00003, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5197864038497313198
@@ -1188,7 +1188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1455,7 +1455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9244ee5f4665e4649862b81bfc853160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipInitAnimation: 0
+  skipInitAnimation: 1
   inputField: {fileID: 173090450246272171}
   outputScrollRect: {fileID: 1498206715183586601}
   outputContainer: {fileID: 8931382859185670321}
@@ -1571,7 +1571,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -380.00003}
+  m_AnchoredPosition: {x: 0, y: -379.9998}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &3668390463260757237

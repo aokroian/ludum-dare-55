@@ -43,7 +43,6 @@ namespace _Game.Scripts.Console
 
             if (skipInitAnimation)
             {
-                inputField.interactable = true;
                 inputField.SetTextWithoutNotify("summon game");
                 OnCommandSubmit(inputField.text);
             }
