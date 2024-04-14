@@ -25,7 +25,7 @@ namespace _Game.Scripts.Console
 
         // private void Awake()
         // {
-            // Init();
+        // Init();
         // }
 
         public void Init()
@@ -122,7 +122,10 @@ namespace _Game.Scripts.Console
             {
                 _currentHistoryIndex--;
                 if (_currentHistoryIndex <= -1)
+                {
+                    inputField.text = "";
                     _currentHistoryIndex = -1;
+                }
             }
 
             if (_currentHistoryIndex > -1)
