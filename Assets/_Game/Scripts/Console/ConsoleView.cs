@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor.iOS.Xcode;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -22,11 +23,8 @@ namespace _Game.Scripts.Console
 
         private readonly List<string> _commandsHistory = new();
         private int _currentHistoryIndex = -1;
-
-        // private void Awake()
-        // {
-        // Init();
-        // }
+        private bool _playerInputInProcessFlag;
+        private string _animationInputText;
 
         public void Init()
         {
@@ -47,7 +45,7 @@ namespace _Game.Scripts.Console
             if (skipInitAnimation)
             {
                 inputField.interactable = true;
-                inputField.text = "summon game";
+                inputField.SetTextWithoutNotify("summon game");
                 OnCommandSubmit(inputField.text);
             }
             else
@@ -59,6 +57,7 @@ namespace _Game.Scripts.Console
         private void OnInputValueChanged(string currentInputValue)
         {
             outputScrollRect.verticalNormalizedPosition = 0;
+            _playerInputInProcessFlag = true;
             _currentHistoryIndex = -1;
         }
 
@@ -66,10 +65,11 @@ namespace _Game.Scripts.Console
         {
             if (_animationInputText != null)
                 return;
+            _currentHistoryIndex = -1;
+            _playerInputInProcessFlag = false;
             inputField.interactable = false;
             _soundManager.PlaySubmitKeySound();
             _commandsHandler.SubmitCommand(text, OnCommandProcessed);
-            _currentHistoryIndex = -1;
 
             inputField.caretPosition = inputField.text.Length;
             inputField.ActivateInputField();
@@ -105,7 +105,7 @@ namespace _Game.Scripts.Console
         {
             if (_animationInputText != null)
             {
-                inputField.text = _animationInputText;
+                inputField.SetTextWithoutNotify(_animationInputText);
                 inputField.caretPosition = inputField.text.Length;
                 inputField.ActivateInputField();
                 inputField.Select();
@@ -114,30 +114,31 @@ namespace _Game.Scripts.Console
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                _currentHistoryIndex++;
-                if (_currentHistoryIndex >= _commandsHistory.Count)
+                if (_currentHistoryIndex == -1)
                     _currentHistoryIndex = _commandsHistory.Count - 1;
+                else if (_currentHistoryIndex > 0)
+                    _currentHistoryIndex--;
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                _currentHistoryIndex--;
-                if (_currentHistoryIndex <= -1)
-                {
-                    inputField.text = "";
+                if (_currentHistoryIndex != -1)
+                    _currentHistoryIndex++;
+                if (_currentHistoryIndex >= _commandsHistory.Count)
                     _currentHistoryIndex = -1;
-                }
+                if (_currentHistoryIndex == -1 && !_playerInputInProcessFlag)
+                    inputField.text = "";
             }
 
-            if (_currentHistoryIndex > -1)
+            if (_currentHistoryIndex != -1)
             {
-                inputField.text = _commandsHistory[_currentHistoryIndex];
+                inputField.SetTextWithoutNotify(_commandsHistory[_currentHistoryIndex]);
                 inputField.caretPosition = inputField.text.Length;
                 inputField.ActivateInputField();
                 inputField.Select();
+                _playerInputInProcessFlag = false;
+                return;
             }
         }
-
-        private string _animationInputText;
 
         private IEnumerator GameInitAnimation()
         {
