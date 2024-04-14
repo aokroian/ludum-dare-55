@@ -7,12 +7,12 @@ namespace _Game.Scripts.Summon
     public class SummonerService
     {
         private Summoner.SummonParams _summonParams;
-        private DungeonService _dungeonService;
+        private Dungeon _dungeon;
         private Dictionary<string, Summoner> _summoners;
 
-        public SummonerService(DungeonService dungeonService)
+        public SummonerService(Dungeon dungeon)
         {
-            _dungeonService = dungeonService;
+            _dungeon = dungeon;
         }
 
         public void Init(IEnumerable<Summoner> summoners)
@@ -39,7 +39,7 @@ namespace _Game.Scripts.Summon
         private Summoner.SummonParams GetSummonParams()
         {
             if (_summonParams._camera == null)
-                _summonParams = new Summoner.SummonParams(Camera.main, _dungeonService);
+                _summonParams = new Summoner.SummonParams(Camera.main, _dungeon);
 
             return _summonParams;
         }

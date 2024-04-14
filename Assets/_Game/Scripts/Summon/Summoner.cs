@@ -23,12 +23,12 @@ namespace _Game.Scripts.Summon
         public struct SummonParams
         {
             public readonly Camera _camera;
-            public readonly DungeonService _dungeonService;
+            public readonly Dungeon Dungeon;
 
-            public SummonParams(Camera camera, DungeonService dungeonService)
+            public SummonParams(Camera camera, Dungeon dungeon)
             {
                 _camera = camera;
-                _dungeonService = dungeonService;
+                Dungeon = dungeon;
             }
         }
     }
