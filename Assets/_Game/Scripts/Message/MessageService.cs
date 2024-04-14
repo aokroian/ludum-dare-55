@@ -17,7 +17,7 @@ namespace _Game.Scripts.Message
             _consoleView.DisplayNewOutputEntry(new ConsoleOutputData()
             {
                 messageText = message,
-                senderText = speaker.Id,
+                senderText = $"{speaker.Id}@ld-55:$ ",
                 type = ConsoleOutputType.Info
             });
         }
