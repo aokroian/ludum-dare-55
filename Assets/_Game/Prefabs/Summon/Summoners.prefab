@@ -138,6 +138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6534036310040475505}
+  - component: {fileID: 6772859867320753062}
   m_Layer: 0
   m_Name: PlayerSummoner
   m_TagString: Untagged
@@ -160,3 +161,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3080183336028148863}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6772859867320753062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8813114400094327124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ba282001ada4aa08322814ceee75dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField: player
+  prefabs:
+  - {fileID: 6891337653675332884, guid: 7a63a46520ceb2b459b655acbb98abe6, type: 3}
