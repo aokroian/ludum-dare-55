@@ -1,4 +1,4 @@
-﻿using System;
+﻿using _Game.Scripts.Console;
 using _Game.Scripts.GameState;
 using _Game.Scripts.Summon;
 using UnityEngine;
@@ -8,6 +8,8 @@ namespace _Game.Scripts.GameLoop
 {
     public class SceneEntryPoint: MonoBehaviour
     {
+        [SerializeField] private ConsoleView consoleView;
+        
         [Inject]
         private IGameStateProvider _gameStateProvider;
         [Inject]
@@ -20,6 +22,8 @@ namespace _Game.Scripts.GameLoop
             _gameStateProvider.Load();
             
             InitSummonerService();
+
+            InitViews();
         }
         
         private void InitSummonerService()
@@ -28,6 +32,11 @@ namespace _Game.Scripts.GameLoop
             _dungeon.Init(_gameStateProvider.TransientGameState.DungeonData);
             var summoners = FindObjectsByType<Summoner>(FindObjectsSortMode.None);
             _summonerService.Init(summoners);
+        }
+        
+        private void InitViews()
+        {
+            consoleView.Init();
         }
 
         private void OnDestroy()
