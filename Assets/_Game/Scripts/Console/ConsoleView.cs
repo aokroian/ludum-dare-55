@@ -157,6 +157,38 @@ namespace _Game.Scripts.Console
                 inputField.Select();
                 return;
             }
+
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                AutoComplete();
+            }
+        }
+
+        private void AutoComplete()
+        {
+            var inputArray = inputField.text.Split(" ");
+            if (inputArray.Length == 1)
+            {
+                if ("summon".StartsWith(inputField.text))
+                {
+                    inputField.text = "summon ";
+                    inputField.caretPosition = inputField.text.Length;
+                }
+            }
+            else if (inputArray.Length == 2 && !string.IsNullOrWhiteSpace(inputArray[1]))
+            {
+                var knownCommands = _commandsHandler.PermanentGameState.knownCommands;
+                foreach (var command in knownCommands)
+                {
+                    var fullCommand = $"summon {command}";
+                    if (fullCommand.StartsWith(inputField.text))
+                    {
+                        inputField.text = fullCommand;
+                        inputField.caretPosition = inputField.text.Length;
+                        break;
+                    }
+                }
+            }
         }
 
         private IEnumerator GameInitAnimation()

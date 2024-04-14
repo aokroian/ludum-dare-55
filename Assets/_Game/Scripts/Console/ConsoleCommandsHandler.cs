@@ -12,7 +12,7 @@ namespace _Game.Scripts.Console
     {
         private readonly ConsoleCommand[] _allCommands = ConsoleHelpers.GetAllCommands();
         private readonly SummonerService _summonerService;
-        private PermanentGameState _permanentGameState;
+        public PermanentGameState PermanentGameState { get; private set; }
 
         public ConsoleCommandsHandler(SummonerService summonerService)
         {
@@ -44,7 +44,7 @@ namespace _Game.Scripts.Console
 
         public void InjectKnownCommands(PermanentGameState permanentGameState)
         {
-            _permanentGameState = permanentGameState;
+            PermanentGameState = permanentGameState;
         }
 
 
@@ -88,9 +88,9 @@ namespace _Game.Scripts.Console
             }
 
             var isHelpCommand = command.mainWord == "help";
-            if (!_permanentGameState.knownCommands.IsContainsCommand(command))
+            if (!PermanentGameState.knownCommands.IsContainsCommand(command))
             {
-                _permanentGameState.knownCommands.Add(command.mainWord);
+                PermanentGameState.knownCommands.Add(command.mainWord);
                 SaveKnownCommands();
             }
 
@@ -104,9 +104,9 @@ namespace _Game.Scripts.Console
             if (isHelpCommand)
             {
                 outputData.messageText = "Known commands:\n";
-                for (var i = 0; i < _permanentGameState.knownCommands.Count; i++)
+                for (var i = 0; i < PermanentGameState.knownCommands.Count; i++)
                 {
-                    var knownCommand = _permanentGameState.knownCommands[i];
+                    var knownCommand = PermanentGameState.knownCommands[i];
                     outputData.messageText += $"\nsummon {knownCommand}";
                 }
             }
