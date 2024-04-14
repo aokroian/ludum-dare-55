@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using _Game.Scripts.Summon.View;
+using Unity.VisualScripting;
+using UnityEngine;
 
 namespace _Game.Scripts.Summon.Data
 {
@@ -21,10 +23,8 @@ namespace _Game.Scripts.Summon.Data
         {
             foreach (var room in rooms)
             {
-                if (room.Objects.FirstOrDefault(it => it is SummonedPlayer) != null)
-                {
+                if (room.Objects.FirstOrDefault(it => it == _summonedPlayer) != null)
                     return room;
-                }
             }
 
             return null;
@@ -38,6 +38,28 @@ namespace _Game.Scripts.Summon.Data
         public SummonedPlayer GetPlayer()
         {
             return _summonedPlayer;
+        }
+
+        public void ClearEverything()
+        {
+            Object.Destroy(_summonedPlayer);
+            _summonedPlayer = null;
+            
+            foreach (var obj in objectsOutOfRoom)
+            {
+                Object.Destroy(obj.gameObject);
+            }
+            objectsOutOfRoom.Clear();
+            
+            foreach (var room in rooms)
+            {
+                foreach (var obj in room.Objects)
+                {
+                    Object.Destroy(obj.gameObject);
+                }
+                Object.Destroy(room.gameObject);
+            }
+            rooms.Clear();
         }
     }
 }

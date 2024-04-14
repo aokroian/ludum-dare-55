@@ -1,5 +1,6 @@
 ﻿using _Game.Scripts.GameLoop.Events;
 using _Game.Scripts.Story;
+using _Game.Scripts.Summon.Data;
 using Zenject;
 
 namespace _Game.Scripts.GameLoop
@@ -9,32 +10,40 @@ namespace _Game.Scripts.GameLoop
         private SignalBus _signalBus;
         private GameplayEventsChecker _eventsChecker;
         private GlobalInputSwitcher _inputSwitcher;
+        private SummonedObjectsHolder _objectsHolder;
 
-        public GameLoopController(SignalBus signalBus, GameplayEventsChecker eventsChecker, GlobalInputSwitcher inputSwitcher)
+        public GameLoopController(SignalBus signalBus,
+            GameplayEventsChecker eventsChecker,
+            GlobalInputSwitcher inputSwitcher,
+            SummonedObjectsHolder objectsHolder)
         {
             _signalBus = signalBus;
             _eventsChecker = eventsChecker;
             _inputSwitcher = inputSwitcher;
+            _objectsHolder = objectsHolder;
             
             _signalBus.Subscribe<GameEndEvent>(OnEndGame);
+            _signalBus.Subscribe<GameStartEvent>(StartGame);
         }
         
         public bool IsGameEnded { get; private set; }
         
-        private void OnEndGame()
+        private void StartGame(GameStartEvent startEvent)
+        {
+            IsGameEnded = false;
+            // TODO: Restart everything
+            _objectsHolder.ClearEverything();
+            
+            _eventsChecker.CheckingEnabled = true;
+            _inputSwitcher.ToggleLockToConsole(false);
+        }
+        
+        private void OnEndGame(GameEndEvent endEvent)
         {
             IsGameEnded = true;
             _eventsChecker.CheckingEnabled = false;
             _inputSwitcher.ToggleLockToConsole(true);
         }
 
-        public void RestartGame()
-        {
-            IsGameEnded = false;
-            // TODO: Restart everything
-            
-            _eventsChecker.CheckingEnabled = true;
-            _inputSwitcher.ToggleLockToConsole(false);
-        }
     }
 }

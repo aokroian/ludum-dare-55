@@ -9,6 +9,7 @@ namespace _Game.Scripts.Installers
         {
             SignalBusInstaller.Install(Container);
 
+            Container.DeclareSignal<GameStartEvent>();
             Container.DeclareSignal<GameEndEvent>();
         }
     }
