@@ -13,7 +13,6 @@ namespace _Game.Scripts.Installers
             Container.BindInterfacesAndSelfTo<GameStatePlayerPrefsProvider>().AsSingle();
             Container.Bind<ConsoleCommandsHandler>().AsSingle();
             Container.Bind<SummonerService>().AsSingle();
-            Container.Bind<Dungeon>().AsSingle();
             Container.Bind<SummonedObjectsHolder>().AsSingle();
             Container.Bind<SoundManager>().FromComponentInNewPrefabResource("Prefabs/SoundManager").AsSingle();
         }

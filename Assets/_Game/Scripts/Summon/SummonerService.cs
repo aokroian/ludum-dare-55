@@ -7,13 +7,7 @@ namespace _Game.Scripts.Summon
     public class SummonerService
     {
         private Summoner.SummonParams _summonParams;
-        private Dungeon _dungeon;
         private Dictionary<string, Summoner> _summoners;
-
-        public SummonerService(Dungeon dungeon)
-        {
-            _dungeon = dungeon;
-        }
 
         public void Init(IEnumerable<Summoner> summoners)
         {

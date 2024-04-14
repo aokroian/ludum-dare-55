@@ -14,8 +14,6 @@ namespace _Game.Scripts.GameLoop
         private IGameStateProvider _gameStateProvider;
         [Inject]
         private SummonerService _summonerService;
-        [Inject]
-        private Dungeon _dungeon;
         
         private void Start()
         {
@@ -29,7 +27,6 @@ namespace _Game.Scripts.GameLoop
         private void InitSummonerService()
         {
             // Init dungeon with default data
-            _dungeon.Init(_gameStateProvider.TransientGameState.DungeonData);
             var summoners = FindObjectsByType<Summoner>(FindObjectsSortMode.None);
             _summonerService.Init(summoners);
         }
