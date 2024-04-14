@@ -75,7 +75,8 @@ namespace _Game.Scripts.Console
         private void OnCommandProcessed(ConsoleOutputData data, string originalInputText)
         {
             ViewOutput(data);
-            _commandsHistory.Add(originalInputText);
+            if (originalInputText != "")
+                _commandsHistory.Add(originalInputText);
             inputField.text = "";
         }
 
