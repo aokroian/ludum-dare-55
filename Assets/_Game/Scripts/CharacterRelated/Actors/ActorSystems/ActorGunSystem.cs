@@ -1,7 +1,10 @@
 using System;
+using System.Collections;
+using _Game.Scripts;
 using Actors.Combat;
 using Actors.Upgrades;
 using UnityEngine;
+using Zenject;
 
 namespace Actors.ActorSystems
 {
@@ -9,8 +12,10 @@ namespace Actors.ActorSystems
     {
         [field: SerializeField] public ActorStatsController ActorStatsController { get; private set; }
         [SerializeField] private GunTypes startGunType = GunTypes.Pistol;
-        [SerializeField] private Transform gunPoint; 
+        [SerializeField] private Transform gunPoint;
 
+        [Inject] private SoundManager _soundManager;
+        
         public event Action<Gun> OnActiveGunChanged;
 
         private Gun _currentActiveGun;
@@ -22,11 +27,11 @@ namespace Actors.ActorSystems
         {
             base.Awake();
             _gunsConfig = Resources.Load<GunsConfigSo>("GunsConfig");
-
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return new WaitForSeconds(.1f);
             ChangeActiveGun(startGunType);
         }
 
@@ -34,9 +39,9 @@ namespace Actors.ActorSystems
         {
             if (!_isGunSpawned)
                 return;
-            _currentActiveGun.transform.position = gunPoint.position; 
+            _currentActiveGun.transform.position = gunPoint.position;
             RotateGunAroundPlayer();
-            if (ActorInput.Fire)
+            if (ActorInput.Fire && _currentActiveGun != null)
                 _currentActiveGun.Fire();
 
             // temp code jus for testing 
@@ -63,7 +68,7 @@ namespace Actors.ActorSystems
                 Destroy(_currentActiveGun.gameObject);
 
             var spawnedGun = Instantiate(gun, transform);
-            spawnedGun.Init(this); 
+            spawnedGun.Init(this, _soundManager);
 
             _currentActiveGun = spawnedGun;
             _isGunSpawned = true;
@@ -80,7 +85,7 @@ namespace Actors.ActorSystems
             var direction = (mousePosition - position).normalized;
 
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            _currentActiveGun.transform.rotation = Quaternion.Euler(0, 0, angle); 
+            _currentActiveGun.transform.rotation = Quaternion.Euler(0, 0, angle);
             _currentActiveGun.FlipSprite(angle);
         }
     }

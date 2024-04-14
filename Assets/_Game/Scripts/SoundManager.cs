@@ -1,13 +1,20 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace _Game.Scripts
 {
     public class SoundManager : MonoBehaviour
     {
+        [Header("Console")]
         [SerializeField] private AudioClip[] typingSounds;
         [SerializeField] private AudioClip submitKeySound;
         [SerializeField] private AudioSource consoleAudioSource;
+        [Header("Characters")]
+        public AudioClip playerDamageSound;
+        public AudioClip playerDeathSound;
+        public AudioClip bulletShotSound;
+        public AudioClip bulletHitSound;
 
         private Camera _mainCam;
         private Vector3 CamPosition
@@ -21,6 +28,26 @@ namespace _Game.Scripts
         }
 
         private float _lastConsoleSoundTime;
+
+        public void PlayBulletShotSound(Vector3 position)
+        {
+            AudioSource.PlayClipAtPoint(bulletShotSound, position);
+        }
+
+        public void PlayBulletHitSound(Vector3 position)
+        {
+            AudioSource.PlayClipAtPoint(bulletHitSound, position);
+        }
+
+        public void PlayPlayerDamageSound(AudioSource playerAudioSource)
+        {
+            playerAudioSource.PlayOneShot(playerDamageSound);
+        }
+
+        public void PlayPlayerDeathSound(AudioSource playerAudioSource)
+        {
+            playerAudioSource.PlayOneShot(playerDeathSound);
+        }
 
         public void PlayTypeSound()
         {

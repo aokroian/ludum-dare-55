@@ -1,9 +1,9 @@
 using System;
+using _Game.Scripts;
 using Actors.ActorSystems;
-using Actors.InputThings;
 using Actors.Upgrades;
-using Sounds;
 using UnityEngine;
+using Zenject;
 
 namespace Actors.Combat
 {
@@ -28,10 +28,14 @@ namespace Actors.Combat
         private float _currentShootRate;
         private float _currentBulletsPerShotCount;
 
+        private SoundManager _soundManager;
+
         public event Action OnFire;
 
-        public void Init(ActorGunSystem actorGunSystem, ActorStatsController actorStatsController = null)
+        public void Init(ActorGunSystem actorGunSystem, SoundManager soundManager,
+            ActorStatsController actorStatsController = null)
         {
+            _soundManager = soundManager;
             OwnerActor = actorGunSystem.gameObject.transform;
             GunSystem = actorGunSystem;
             ActorStatsController = actorStatsController;
@@ -84,7 +88,7 @@ namespace Actors.Combat
 
                 var initialAngle = -(fullAngle / 2);
                 OnFire?.Invoke();
-                SoundSystem.GunShotSound(this);
+                _soundManager.PlayBulletShotSound(transform.position);
                 for (var i = 0; i < _currentBulletsPerShotCount; i++)
                 {
                     var bulletRotation = Quaternion.Euler(
@@ -92,7 +96,7 @@ namespace Actors.Combat
                         0,
                         transform.rotation.eulerAngles.z + initialAngle + i * zAngleBetweenBullets);
                     var spawnedBullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletRotation);
-                    spawnedBullet.Init(this);
+                    spawnedBullet.Init(this, _soundManager);
                 }
 
                 _shootRateTimer = 1 / _currentShootRate;

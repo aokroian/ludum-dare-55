@@ -8,12 +8,11 @@ namespace Sounds
     public class SoundsConfig : ScriptableObject
     {
         // music not implemented
-        
+
         [Header("Music")]
         public AudioClip menuMusic;
         public AudioClip combatMusic;
         public AudioClip peacefulMusic;
-
 
         [Header("Actor Sounds")]
         public AudioClip actorDamageSound;
@@ -52,5 +51,5 @@ namespace Sounds
     {
         public GunTypes gunType;
         public AudioClip shotSound;
-    } 
+    }
 }

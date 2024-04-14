@@ -49,6 +49,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0c855b8c5d4c34c94955df21553fbe81, type: 3}
   submitKeySound: {fileID: 8300000, guid: e9f6162fb9d0f4a6abb215d00cce48c9, type: 3}
   consoleAudioSource: {fileID: 8436429634095837023}
+  playerDamageSound: {fileID: 8300000, guid: 3f361b70621a24847b915f3cdabf0bd5, type: 3}
+  playerDeathSound: {fileID: 8300000, guid: 3f361b70621a24847b915f3cdabf0bd5, type: 3}
+  bulletShotSound: {fileID: 8300000, guid: 3f361b70621a24847b915f3cdabf0bd5, type: 3}
+  bulletHitSound: {fileID: 8300000, guid: 3f361b70621a24847b915f3cdabf0bd5, type: 3}
 --- !u!82 &8436429634095837023
 AudioSource:
   m_ObjectHideFlags: 0

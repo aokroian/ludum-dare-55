@@ -1,18 +1,20 @@
 using System;
+using _Game.Scripts;
 using Actors.Upgrades;
-using Sounds;
 using UnityEngine;
+using Zenject;
 
 namespace Actors.ActorSystems
 {
     public class ActorHealth : ActorSystem, IActorStatsReceiver
     {
-        [SerializeField] private ActorStatsController actorStatsController;
+        public bool isPlayer;
         public float invincibilityTime;
-        public bool isDeathSound;
-        public bool isDamageSound;
-        public bool isHealSound;
         [SerializeField] private int defaultMaxHealth = 30;
+
+        [SerializeField] private ActorStatsController actorStatsController;
+        [SerializeField] private AudioSource audioSource;
+        [Inject] private SoundManager _soundManager;
 
         private bool IsDead => _currentHealth <= 0;
         private float _invincibilityEndTime;
@@ -22,7 +24,6 @@ namespace Actors.ActorSystems
         public event Action<ActorHealth> OnDeath;
         private event Action<ActorHealth> OnRevive;
         public event Action<int, int> OnHealthChanged;
-        public event Action<int> OnHeal;
         public event Action<int> OnDamageTaken;
 
         protected override void Awake()
@@ -76,9 +77,6 @@ namespace Actors.ActorSystems
                 _currentHealth = _currentMaxHealth;
 
             OnHealthChanged?.Invoke(_currentHealth, _currentMaxHealth);
-            OnHeal?.Invoke(amount);
-            if (isHealSound)
-                SoundSystem.ActorHealSound(this);
         }
 
         public void TakeDamage(int damage)
@@ -94,15 +92,15 @@ namespace Actors.ActorSystems
 
             if (IsDead)
             {
-                if (isDeathSound)
-                    SoundSystem.ActorDeathSound(this);
+                if (isPlayer)
+                    _soundManager.PlayPlayerDeathSound(audioSource);
                 OnDeath?.Invoke(this);
             }
 
             OnHealthChanged?.Invoke(_currentHealth, _currentMaxHealth);
             OnDamageTaken?.Invoke(damage);
-            if (isDamageSound)
-                SoundSystem.ActorDamageSound(this);
+            if (isPlayer)
+                _soundManager.PlayPlayerDamageSound(audioSource);
         }
     }
 }

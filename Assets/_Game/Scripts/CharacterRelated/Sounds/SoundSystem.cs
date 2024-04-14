@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Sounds
 {
-    public static class SoundSystem
+    public class SoundSystem
     {
         private static SoundsConfig Sounds
         {
@@ -138,43 +138,6 @@ namespace Sounds
         public static void PlayPeacefulMusic()
         {
             CrossFadeMusic(Sounds.peacefulMusic, 1f);
-        }
-
-        #endregion
-
-        #region Actor_Sounds
-
-        public static void ActorDamageSound(ActorHealth actorHealth)
-        {
-            PlayAtPointIfNotNull(Sounds.actorDamageSound, actorHealth.transform.position);
-        }
-
-        public static void ActorDeathSound(ActorHealth actorHealth)
-        {
-            PlayAtPointIfNotNull(Sounds.actorDeathSound, actorHealth.transform.position);
-        }
-
-        public static void ActorHealSound(ActorHealth actorHealth)
-        {
-            PlayAtPointIfNotNull(Sounds.actorHealSound, actorHealth.transform.position);
-        }
-
-        #endregion
-
-        #region Combat_Sounds
-
-        public static void BulletHitSound(Bullet bullet)
-        {
-            var sound = Sounds.bulletsSounds.FirstOrDefault(p => p.bulletType == bullet.BulletType)?.bulletHitSound;
-            if (sound != null)
-                PlayAtPointIfNotNull(sound, bullet.transform.position);
-        }
-
-        public static void GunShotSound(Gun gun)
-        {
-            var sound = Sounds.gunShotsSound.FirstOrDefault(p => p.gunType == gun.GunType)?.shotSound;
-            if (sound != null)
-                PlayAtPointIfNotNull(sound, gun.transform.position);
         }
 
         #endregion
