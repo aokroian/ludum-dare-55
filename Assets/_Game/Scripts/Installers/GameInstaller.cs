@@ -1,4 +1,5 @@
-﻿using _Game.Scripts.Common;
+﻿using _Game.Scripts.CharacterRelated._LD55;
+using _Game.Scripts.Common;
 using _Game.Scripts.Console;
 using _Game.Scripts.GameLoop;
 using _Game.Scripts.GameState;
@@ -26,6 +27,7 @@ namespace _Game.Scripts.Installers
             Container.Bind<SoundManager>().FromComponentInNewPrefabResource("Prefabs/SoundManager").AsSingle();
             Container.BindInterfacesAndSelfTo<GlobalInputSwitcher>().AsSingle();
 
+            Container.Bind<PlayerInventoryService>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameplayEventsChecker>().AsSingle().NonLazy();
             Container.Bind<EndingService>().AsSingle();
             Container.Bind<MessageService>().AsSingle();

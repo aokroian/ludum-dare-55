@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using _Game.Scripts.CharacterRelated._LD55;
+using _Game.Scripts.CharacterRelated._LD55.Events;
 using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
+using _Game.Scripts.Map;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Game.Scripts.CharacterRelated.UI.Hud
 {
@@ -17,14 +22,35 @@ namespace _Game.Scripts.CharacterRelated.UI.Hud
         [SerializeField] private TextMeshProUGUI keysCountTmp;
         [SerializeField] private LayoutGroup[] layoutGroups;
 
-
         private int _curMaxHealth;
         private readonly List<PlayerHeart> _hearts = new();
+        private SignalBus _signalBus;
+        private PlayerInventoryService _inventoryService;
 
         private void Awake()
         {
             var playerHealth = GetComponentInParent<ActorHealth>();
             playerHealth.OnHealthChanged += (curHealth, curMaxHealth) => SetHealth(curMaxHealth, curHealth);
+            SetCoins(0);
+            SetKeys(0);
+        }
+
+        public void Init(SignalBus signalBus, PlayerInventoryService inventoryService)
+        {
+            _signalBus = signalBus;
+            _inventoryService = inventoryService;
+            _signalBus.Subscribe<PlayerInventoryChangedEvent>(OnPlayerInventoryChangedEvent);
+        }
+
+        private void OnDestroy()
+        {
+            _signalBus.Unsubscribe<PlayerInventoryChangedEvent>(OnPlayerInventoryChangedEvent);
+        }
+
+        private void OnPlayerInventoryChangedEvent()
+        {
+            SetCoins(_inventoryService.Inventory[LootType.Coin]);
+            SetKeys(_inventoryService.Inventory[LootType.Key]);
         }
 
         private void RefreshLayoutGroups()

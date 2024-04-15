@@ -1,4 +1,5 @@
-﻿using _Game.Scripts.GameLoop.Events;
+﻿using _Game.Scripts.CharacterRelated._LD55.Events;
+using _Game.Scripts.GameLoop.Events;
 using _Game.Scripts.Map.Events;
 using _Game.Scripts.Story.Events;
 using Zenject;
@@ -20,6 +21,7 @@ namespace _Game.Scripts.Installers
             Container.DeclareSignal<PlayerCoinPickupEvent>();
             Container.DeclareSignal<PlayerKeyPickupEvent>();
             Container.DeclareSignal<PlayerDoorOpenEvent>();
+            Container.DeclareSignal<PlayerInventoryChangedEvent>();
         }
     }
 }
