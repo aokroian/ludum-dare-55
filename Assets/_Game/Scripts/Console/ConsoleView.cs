@@ -33,13 +33,16 @@ namespace _Game.Scripts.Console
             _globalInputSwitcher.SwitchToConsoleControls();
         }
 
+        public void SimulatePointerDown()
+        {
+            _globalInputSwitcher.SwitchToConsoleControls();
+        }
+
         public void OnGlobalInputSwitch(bool isConsoleInputOn)
         {
             if (isConsoleInputOn)
             {
-                inputField.interactable = true;
-                inputField.ActivateInputField();
-                inputField.Select();
+                SetInputText(inputField.text);
             }
             else
             {

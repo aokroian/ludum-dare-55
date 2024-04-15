@@ -1,6 +1,7 @@
 using _Game.Scripts.Console;
 using _Game.Scripts.Summon.Data;
 using Actors.InputThings;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using Zenject;
 
@@ -42,12 +43,13 @@ namespace _Game.Scripts
 
         public void SwitchToPlayerControls()
         {
-            if (_consoleView == null)
+            var notAllowed = _consoleView == null || _isLockedToConsole || !TogglePlayerInput(true);
+            if (notAllowed)
+            {
+                _consoleView.Invoke(nameof(ConsoleView.SimulatePointerDown), .2f);
                 return;
-            if (_isLockedToConsole)
-                return;
-            if (!TogglePlayerInput(true))
-                return;
+            }
+
             _consoleView.OnGlobalInputSwitch(false);
             _controlsHelpUI.OnGlobalInputSwitch(false);
             _isPlayerInputActive = true;
@@ -64,8 +66,7 @@ namespace _Game.Scripts
         {
             if (_consoleView == null)
                 return;
-            if (!TogglePlayerInput(false))
-                return;
+            TogglePlayerInput(false);
             _consoleView.OnGlobalInputSwitch(true);
             _controlsHelpUI.OnGlobalInputSwitch(true);
             _isPlayerInputActive = false;
