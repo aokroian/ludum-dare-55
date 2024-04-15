@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using _Game.Scripts.Map;
 using _Game.Scripts.Summon.Data;
 using _Game.Scripts.Summon.View;
 using UnityEngine;
@@ -31,7 +32,7 @@ namespace _Game.Scripts.Summon
 
         public abstract Task Summon(SummonParams summonParams);
         
-        protected async Task MoveCameraToAsync(Camera camera, Vector3 position)
+        protected async Task MoveCameraToAsync(CameraWrapper camera, Vector3 position)
         {
             var cameraPosition = camera.transform.position;
             var cameraTargetPosition = new Vector3(position.x, position.y, cameraPosition.z);
@@ -48,9 +49,9 @@ namespace _Game.Scripts.Summon
         
         public struct SummonParams
         {
-            public readonly Camera _camera;
+            public readonly CameraWrapper _camera;
 
-            public SummonParams(Camera camera)
+            public SummonParams(CameraWrapper camera)
             {
                 _camera = camera;
             }

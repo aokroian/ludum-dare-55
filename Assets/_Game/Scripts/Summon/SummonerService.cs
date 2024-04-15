@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _Game.Scripts.Map;
 using _Game.Scripts.Summon.View;
 using UnityEngine;
 using Zenject;
@@ -14,6 +15,7 @@ namespace _Game.Scripts.Summon
         private Dictionary<string, Summoner> _summoners;
         
         [Inject] private SoundManager _soundManager;
+        [Inject] private CameraWrapper _cameraWrapper;
 
         public void Init(IEnumerable<Summoner> summoners, GlobalInputSwitcher inputEnabledHandler)
         {
@@ -68,7 +70,7 @@ namespace _Game.Scripts.Summon
         private Summoner.SummonParams GetSummonParams()
         {
             if (_summonParams._camera == null)
-                _summonParams = new Summoner.SummonParams(Camera.main);
+                _summonParams = new Summoner.SummonParams(_cameraWrapper);
 
             return _summonParams;
         }
