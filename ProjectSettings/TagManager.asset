@@ -11,6 +11,7 @@ TagManager:
   - Damage_Collider
   - AI_Walk_Area
   - Fit_Player_To_Door_Area
+  - UICamera
   layers:
   - Default
   - TransparentFX

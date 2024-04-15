@@ -4,12 +4,14 @@ using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
 using _Game.Scripts.CharacterRelated.UI.Hud;
 using _Game.Scripts.Story;
 using _Game.Scripts.Story.GameplayEvents;
+using UnityEngine;
 using Zenject;
 
 namespace _Game.Scripts.Summon.View
 {
     public class SummonedPlayer : SummonedObject
     {
+        [SerializeField] private Canvas hudCanvas;
         private bool _died;
         [Inject]
         private SignalBus _signalBus;
@@ -21,6 +23,12 @@ namespace _Game.Scripts.Summon.View
             base.Start();
             GetComponent<ActorHealth>().OnDeath += _ => OnDeath();
             GetComponentInChildren<PlayerHud>().Init(_signalBus, _playerInventoryService);
+            var uiCamera = GameObject.FindWithTag("UICamera");
+            if (uiCamera != null)
+            {
+                hudCanvas.renderMode = RenderMode.ScreenSpaceCamera;
+                hudCanvas.worldCamera = uiCamera.GetComponent<Camera>();
+            }
         }
 
         private void OnDeath()
