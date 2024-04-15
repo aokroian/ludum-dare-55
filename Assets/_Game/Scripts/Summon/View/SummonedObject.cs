@@ -14,7 +14,14 @@ namespace _Game.Scripts.Summon.View
         public SummonedObjectsHolder ObjectsHolder;
         [Inject]
         public MessageService MessageService;
+
+        protected SummonedRoom CurrentRoom;
         
         public abstract IGameplayEvent GetEventIfAny();
+
+        public virtual void OnMovedToRoom(SummonedRoom room)
+        {
+            CurrentRoom = room;
+        }
     }
 }

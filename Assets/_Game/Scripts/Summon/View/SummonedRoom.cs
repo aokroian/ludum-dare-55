@@ -7,6 +7,9 @@ namespace _Game.Scripts.Summon.View
 {
     public class SummonedRoom : SummonedObject
     {
+        [field: SerializeField] public  Collider2D WalkArea { get; private set; }
+        [field: SerializeField] public Collider2D PatrolArea { get; private set; }
+        
         [field: SerializeField] public RoomType RoomType { get; private set; }
         [field: SerializeField] public Transform entrance { get; private set; }
         [field: SerializeField] public Transform exit { get; private set; }
@@ -23,6 +26,7 @@ namespace _Game.Scripts.Summon.View
         public void AddObject(SummonedObject summonedObject)
         {
             _objects.Add(summonedObject);
+            summonedObject.OnMovedToRoom(this);
         }
         
         public void RemoveObject(SummonedObject summonedObject)

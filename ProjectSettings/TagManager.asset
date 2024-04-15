@@ -7,6 +7,10 @@ TagManager:
   - ship
   - asteroid
   - Interactable
+  - Enemy
+  - Damage_Collider
+  - AI_Walk_Area
+  - Fit_Player_To_Door_Area
   layers:
   - Default
   - TransparentFX
