@@ -45,10 +45,9 @@ namespace _Game.Scripts.CharacterRelated.Actors.ActorSystems
 
         public void ReceiveActorStats(ActorStatsSo actorStatsSo)
         {
-            _currentSpeed = defaultSpeed + actorStatsSo.addedMovementSpeed;
-            _currentScale = _defaultScale + actorStatsSo.addedScaleModifier;
-
-            transform.localScale = new Vector3(_currentScale, _currentScale, 1);
+            // _currentSpeed = defaultSpeed + actorStatsSo.addedMovementSpeed;
+            // _currentScale = _defaultScale + actorStatsSo.addedScaleModifier;
+            // transform.localScale = new Vector3(_currentScale, _currentScale, 1);
         }
 
         private void FixedUpdate()

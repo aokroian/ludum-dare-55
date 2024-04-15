@@ -23,8 +23,9 @@ namespace _Game.Scripts.Summon.View
         private IGameplayEvent _currentEvent;
         private SummonedRoom _room;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             GetComponent<ActorHealth>().OnDeath += _ => OnDeath();
             _signalBus.Subscribe<EndingStartedEvent>(OnEnding);
         }

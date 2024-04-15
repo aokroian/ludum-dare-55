@@ -16,8 +16,9 @@ namespace _Game.Scripts.Summon.View
         [Inject]
         private PlayerInventoryService _playerInventoryService;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             GetComponent<ActorHealth>().OnDeath += _ => OnDeath();
             GetComponentInChildren<PlayerHud>().Init(_signalBus, _playerInventoryService);
         }
