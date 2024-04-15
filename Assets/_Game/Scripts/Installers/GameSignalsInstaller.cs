@@ -14,7 +14,7 @@ namespace _Game.Scripts.Installers
             Container.DeclareSignal<GameStartEvent>();
             Container.DeclareSignal<GameEndEvent>();
             Container.DeclareSignal<SummonPlayerEvent>();
-            Container.DeclareSignal<SummonPlayerWeaponEvent>();
+            Container.DeclareSignal<PlayerWeaponPickupEvent>();
             Container.DeclareSignal<EndingStartedEvent>();
         }
     }

@@ -14,9 +14,11 @@ namespace _Game.Scripts.Common
         [SerializeField] private AudioClip[] typingSounds;
         [SerializeField] private AudioClip submitKeySound;
         [SerializeField] private AudioClip universalSummonSound;
+        [SerializeField] private AudioClip notificationSound;
         [SerializeField] private AudioSource consoleAudioSource;
         [Header("Characters")]
         [SerializeField] private AudioClip playerDamageSound;
+        [SerializeField] private AudioClip playerGunPickupSound;
         [SerializeField] private AudioClip playerDeathSound;
         [SerializeField] private AudioClip bulletShotSound;
         [SerializeField] private AudioClip bulletHitSound;
@@ -41,15 +43,6 @@ namespace _Game.Scripts.Common
 
         private AudioSource _activeMusicSource;
 
-        private void Awake()
-        {
-            _signalBus.Subscribe<EndingStartedEvent>(eventData =>
-            {
-                PlayGameEndingSound(eventData.EndingData.IsGoodEnding);
-            });
-            _signalBus.Subscribe<GameStartEvent>(PlayDefaultMusic);
-        }
-
         private Camera _mainCam;
         private Vector3 CamPosition
         {
@@ -62,6 +55,16 @@ namespace _Game.Scripts.Common
         }
 
         private float _lastConsoleSoundTime;
+
+        private void Awake()
+        {
+            _signalBus.Subscribe<EndingStartedEvent>(eventData =>
+            {
+                PlayGameEndingSound(eventData.EndingData.IsGoodEnding);
+            });
+            _signalBus.Subscribe<PlayerWeaponPickupEvent>(PlayPlayerGunPickupSound);
+            _signalBus.Subscribe<GameStartEvent>(PlayDefaultMusic);
+        }
 
         private void PlayDefaultMusic()
         {
@@ -102,6 +105,12 @@ namespace _Game.Scripts.Common
             consoleAudioSource.PlayOneShot(universalSummonSound);
         }
 
+        public void PlayNotificationSound()
+        {
+            consoleAudioSource.transform.position = CamPosition;
+            consoleAudioSource.PlayOneShot(notificationSound);
+        }
+
         private void PlayGameEndingSound(bool isGoodEnding)
         {
             var rand = Random.Range(0, isGoodEnding ? happyEndSounds.Length : sadEndSounds.Length);
@@ -130,6 +139,12 @@ namespace _Game.Scripts.Common
         public void PlayPlayerDeathSound(AudioSource playerAudioSource)
         {
             playerAudioSource.PlayOneShot(playerDeathSound);
+        }
+
+        private void PlayPlayerGunPickupSound()
+        {
+            consoleAudioSource.transform.position = CamPosition;
+            consoleAudioSource.PlayOneShot(playerGunPickupSound);
         }
 
         public void PlayTypeSound()

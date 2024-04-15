@@ -120,11 +120,11 @@ namespace _Game.Scripts.Console
             inputField.text = "";
         }
 
-        public void DisplayNewOutputEntry(ConsoleOutputData data)
+        public void DisplayNewOutputEntry(ConsoleOutputData data, bool isFromSpeaker = false)
         {
             var spawnedOutputEntry = Instantiate(outputEntryPrefab, outputContainer);
             ((RectTransform)spawnedOutputEntry.transform).pivot = new Vector2(0, 1);
-            spawnedOutputEntry.Init(data);
+            spawnedOutputEntry.Init(data, isFromSpeaker);
             if (outputContainer.childCount > maxOutputEntries)
                 Destroy(outputContainer.GetChild(0).gameObject);
             outputScrollRect.verticalNormalizedPosition = 0;

@@ -1,4 +1,6 @@
+using DG.Tweening;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +17,7 @@ namespace _Game.Scripts.Console
         [SerializeField] private Color warningColor;
         [SerializeField] private Color errorColor;
 
-        public void Init(ConsoleOutputData data)
+        public void Init(ConsoleOutputData data, bool withSpeakerNotificationAnim = false)
         {
             senderText.text = data.senderText;
             messageText.text = data.messageText;
@@ -37,6 +39,20 @@ namespace _Game.Scripts.Console
 
             layoutGroup.enabled = false;
             layoutGroup.enabled = true;
+
+            if (withSpeakerNotificationAnim)
+            {
+                PlaySpeakerNotificationAnim();
+            }
+        }
+
+        private void PlaySpeakerNotificationAnim()
+        {
+            var rt = (RectTransform)senderText.transform;
+            rt.DOPunchRotation(new Vector3(0, 0, 10), 1f).OnComplete(() =>
+            {
+                rt.rotation = Quaternion.identity;
+            });
         }
     }
 }

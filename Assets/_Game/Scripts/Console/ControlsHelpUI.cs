@@ -28,7 +28,7 @@ namespace _Game.Scripts.Console
         {
             signalBus.Subscribe<GameStartEvent>(OnGameSummoned);
             signalBus.Subscribe<SummonPlayerEvent>(OnPlayerSummoned);
-            signalBus.Subscribe<SummonPlayerWeaponEvent>(OnWeaponSummoned);
+            signalBus.Subscribe<PlayerWeaponPickupEvent>(OnWeaponSummoned);
         }
 
         private void Awake()

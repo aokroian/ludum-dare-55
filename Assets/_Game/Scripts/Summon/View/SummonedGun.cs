@@ -1,5 +1,6 @@
 ﻿using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
 using _Game.Scripts.CharacterRelated.Actors.Combat;
+using _Game.Scripts.GameLoop.Events;
 using _Game.Scripts.Story;
 using _Game.Scripts.Summon.Data;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace _Game.Scripts.Summon.View
     {
         [Inject]
         private SummonedObjectsHolder _objectsHolder;
+        [Inject] private SignalBus _signalBus;
         
         public override IGameplayEvent GetEventIfAny()
         {
@@ -23,6 +25,7 @@ namespace _Game.Scripts.Summon.View
         {
             if (other.CompareTag("Player"))
             {
+                _signalBus.Fire(new PlayerWeaponPickupEvent());
                 _objectsHolder.GetPlayerRoomOrFirst().RemoveObject(this);
                 other.GetComponent<ActorGunSystem>().ChangeActiveGun(GunTypes.Pistol);
                 Destroy(gameObject);

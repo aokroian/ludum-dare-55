@@ -7,10 +7,12 @@ namespace _Game.Scripts.Message
     public class MessageService
     {
         private ConsoleView _consoleView;
+        private SoundManager _soundManager;
 
-        public MessageService(ConsoleView consoleView)
+        public MessageService(ConsoleView consoleView, SoundManager soundManager)
         {
             _consoleView = consoleView;
+            _soundManager = soundManager;
         }
 
         public void Speak(SummonedObject speaker, string message)
@@ -22,7 +24,8 @@ namespace _Game.Scripts.Message
                 messageText = message,
                 senderText = senderText,
                 type = ConsoleOutputType.Info
-            });
+            }, true);
+            _soundManager.PlayNotificationSound();
         }
     }
 }
