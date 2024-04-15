@@ -6,5 +6,7 @@ namespace _Game.Scripts.CharacterRelated.Actors.Combat
         Shotgun,
         Rifle,
         StationaryShooterEnemyGun,
+        
+        None = 999
     }
 }

@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ActorStatsController>k__BackingField: {fileID: 1159252010573160953}
-  startGunType: 0
+  startGunType: 999
   gunPoint: {fileID: 5128511365247913657}
 --- !u!114 &7027276179020110475
 MonoBehaviour:

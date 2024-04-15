@@ -11,7 +11,7 @@ namespace _Game.Scripts.CharacterRelated.Actors.ActorSystems
     public class ActorGunSystem : ActorSystem
     {
         [field: SerializeField] public ActorStatsController ActorStatsController { get; private set; }
-        [SerializeField] private GunTypes startGunType = GunTypes.Pistol;
+        [SerializeField] private GunTypes startGunType = GunTypes.None;
         [SerializeField] private Transform gunPoint;
 
         [Inject] private SoundManager _soundManager;
@@ -58,7 +58,7 @@ namespace _Game.Scripts.CharacterRelated.Actors.ActorSystems
             if (_currentActiveGun != null && _currentActiveGun.GunType == gunType)
                 return _currentActiveGun;
             var gun = _gunsConfig.GetGunPrefab(gunType);
-            if (gun == null)
+            if (gun == null && gunType != GunTypes.None)
             {
                 Debug.LogError($"Gun with type {gunType} not found");
                 return null;
@@ -66,6 +66,12 @@ namespace _Game.Scripts.CharacterRelated.Actors.ActorSystems
 
             if (_currentActiveGun != null)
                 Destroy(_currentActiveGun.gameObject);
+            
+            if (gunType == GunTypes.None)
+            {
+                _isGunSpawned = false;
+                return null;
+            }
 
             var spawnedGun = Instantiate(gun, transform);
             spawnedGun.Init(this, _soundManager);
