@@ -1,9 +1,8 @@
-﻿using Actors;
-using Actors.ActorSystems;
-using Actors.InputThings;
+﻿using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
+using _Game.Scripts.CharacterRelated.Actors.InputThings;
 using UnityEngine;
 
-namespace Bonus.BonusTypes
+namespace _Game.Scripts.CharacterRelated.Bonus.BonusTypes
 {
     public class HealBonus : AbstractBonus
     {

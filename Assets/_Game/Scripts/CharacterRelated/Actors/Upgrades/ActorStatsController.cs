@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Actors.Upgrades
+namespace _Game.Scripts.CharacterRelated.Actors.Upgrades
 {
     public class ActorStatsController : MonoBehaviour
     {

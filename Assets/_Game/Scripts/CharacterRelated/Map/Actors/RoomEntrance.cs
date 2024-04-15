@@ -1,7 +1,7 @@
-﻿using Common;
+﻿using _Game.Scripts.CharacterRelated.Common;
 using UnityEngine;
 
-namespace Map.Model
+namespace _Game.Scripts.CharacterRelated.Map.Actors
 {
     public class RoomEntrance : MonoBehaviour
     {

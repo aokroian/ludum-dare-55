@@ -1,9 +1,9 @@
-﻿using Common;
+﻿using _Game.Scripts.CharacterRelated.Common;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game
+namespace _Game.Scripts.CharacterRelated.Game
 {
     public class EndingController : SingletonScene<EndingController>
     {

@@ -1,11 +1,10 @@
 using System;
-using _Game.Scripts;
-using Actors.ActorSystems;
-using Actors.Upgrades;
+using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
+using _Game.Scripts.CharacterRelated.Actors.Upgrades;
+using _Game.Scripts.Common;
 using UnityEngine;
-using Zenject;
 
-namespace Actors.Combat
+namespace _Game.Scripts.CharacterRelated.Actors.Combat
 {
     public class Gun : MonoBehaviour, IActorStatsReceiver
     {

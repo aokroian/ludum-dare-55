@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
-using Common;
-using Sounds;
-using UI;
+using _Game.Scripts.CharacterRelated.Common;
+using _Game.Scripts.CharacterRelated.Sounds;
+using _Game.Scripts.CharacterRelated.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Scene
+namespace _Game.Scripts.CharacterRelated.Scene
 {
     public class SceneController : SingletonGlobal<SceneController>
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sounds
+namespace _Game.Scripts.CharacterRelated.Sounds
 {
     public class DummyMonoBehaviour : MonoBehaviour
     { 

@@ -1,9 +1,9 @@
-﻿using Common;
+﻿using _Game.Scripts.CharacterRelated.Common;
+using _Game.Scripts.CharacterRelated.Utils;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils;
 
-namespace Game
+namespace _Game.Scripts.CharacterRelated.Game
 {
     public class PackageController : SingletonScene<PackageController>
     {

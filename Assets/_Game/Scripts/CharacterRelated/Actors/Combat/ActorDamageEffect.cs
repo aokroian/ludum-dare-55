@@ -1,8 +1,8 @@
-using Actors.ActorSystems;
+using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Actors.Combat
+namespace _Game.Scripts.CharacterRelated.Actors.Combat
 {
     public class ActorDamageEffect : MonoBehaviour
     {

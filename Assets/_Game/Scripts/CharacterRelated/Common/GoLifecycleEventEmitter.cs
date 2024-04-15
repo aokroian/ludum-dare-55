@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Common
+namespace _Game.Scripts.CharacterRelated.Common
 {
     public class GoLifecycleEventEmitter : MonoBehaviour
     {

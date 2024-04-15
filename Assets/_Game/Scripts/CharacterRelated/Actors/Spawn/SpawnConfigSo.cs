@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Actors.Spawn
+namespace _Game.Scripts.CharacterRelated.Actors.Spawn
 {
     [CreateAssetMenu(fileName = "SpawnConfigSo", menuName = "LD53/SpawnConfigSo", order = 10)]
     public class SpawnConfigSo : ScriptableObject

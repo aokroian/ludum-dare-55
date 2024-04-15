@@ -1,4 +1,4 @@
-namespace Actors.InputThings.StateMachineThings
+namespace _Game.Scripts.CharacterRelated.Actors.InputThings.StateMachineThings
 {
     public class StateMachine
     {

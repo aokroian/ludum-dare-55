@@ -1,9 +1,8 @@
-﻿using System;
+﻿using _Game.Scripts.CharacterRelated.Map.Actors;
 using DG.Tweening;
-using Map.Model;
 using UnityEngine;
 
-namespace Map
+namespace _Game.Scripts.CharacterRelated.Map
 {
     public class GameCameraController : MonoBehaviour
     {

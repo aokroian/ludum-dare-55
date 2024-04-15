@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using Common;
-using Map.Model;
-using Map.Runtime;
-using Map.Transitions;
+using _Game.Scripts.CharacterRelated.Common;
+using _Game.Scripts.CharacterRelated.Map.Actors;
+using _Game.Scripts.CharacterRelated.Map.Runtime;
+using _Game.Scripts.CharacterRelated.Map.Transitions;
 using UnityEngine;
 
-namespace Map
+namespace _Game.Scripts.CharacterRelated.Map
 {
     public class RoomFactory: MonoBehaviour
     {

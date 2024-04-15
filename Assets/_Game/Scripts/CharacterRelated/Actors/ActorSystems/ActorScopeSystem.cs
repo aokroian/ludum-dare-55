@@ -1,8 +1,7 @@
-using Actors.ActorSystems;
-using Actors.Combat;
+using _Game.Scripts.CharacterRelated.Actors.Combat;
 using UnityEngine;
 
-namespace Actors
+namespace _Game.Scripts.CharacterRelated.Actors.ActorSystems
 {
     public class ActorScopeSystem : ActorSystem
     {

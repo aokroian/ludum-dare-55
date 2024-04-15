@@ -1,10 +1,10 @@
-﻿using Bonus;
+﻿using _Game.Scripts.CharacterRelated.Bonus;
+using _Game.Scripts.CharacterRelated.Sounds;
 using DG.Tweening;
-using Sounds;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Map.Model
+namespace _Game.Scripts.CharacterRelated.Map.Actors
 {
     public class Room : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace UI.Hud
+namespace _Game.Scripts.CharacterRelated.UI.Hud
 {
     public class PlayerWeaponHud : MonoBehaviour
     {

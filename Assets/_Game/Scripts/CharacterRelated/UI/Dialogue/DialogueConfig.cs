@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UI.Dialogue
+namespace _Game.Scripts.CharacterRelated.UI.Dialogue
 {
     public class DialogueConfig
     {

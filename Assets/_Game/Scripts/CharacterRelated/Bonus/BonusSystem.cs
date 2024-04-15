@@ -1,7 +1,7 @@
-﻿using Common;
+﻿using _Game.Scripts.CharacterRelated.Common;
 using UnityEngine;
 
-namespace Bonus
+namespace _Game.Scripts.CharacterRelated.Bonus
 {
     public class BonusSystem : SingletonScene<BonusSystem>
     {

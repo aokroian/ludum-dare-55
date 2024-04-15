@@ -1,9 +1,8 @@
-﻿using System;
-using Scene;
+﻿using _Game.Scripts.CharacterRelated.Scene;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.Menus
+namespace _Game.Scripts.CharacterRelated.UI.Menus
 {
     public class MainMenu : MonoBehaviour
     {

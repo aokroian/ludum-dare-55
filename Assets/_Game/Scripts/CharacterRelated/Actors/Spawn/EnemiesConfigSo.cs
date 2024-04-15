@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
-using Actors.InputThings.AI;
+using _Game.Scripts.CharacterRelated.Actors.InputThings.AI;
 using UnityEngine;
 
-namespace Actors.Spawn
+namespace _Game.Scripts.CharacterRelated.Actors.Spawn
 {
     [CreateAssetMenu(fileName = "EnemiesConfig", menuName = "LD53/EnemiesConfig", order = 0)]
     public class EnemiesConfigSo : ScriptableObject

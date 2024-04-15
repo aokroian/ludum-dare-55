@@ -1,9 +1,8 @@
 using System;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Actors.Combat
+namespace _Game.Scripts.CharacterRelated.Actors.Combat
 {
     [CreateAssetMenu(fileName = "GunsConfig", menuName = "LD53/GunsConfig", order = 2)]
     public class GunsConfigSo : ScriptableObject

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Common
+namespace _Game.Scripts.CharacterRelated.Common
 {
     public class SingletonGlobal<T> : MonoBehaviour where T : Component
     {

@@ -1,4 +1,5 @@
-﻿using _Game.Scripts.Console;
+﻿using _Game.Scripts.Common;
+using _Game.Scripts.Console;
 using _Game.Scripts.Summon.View;
 
 namespace _Game.Scripts.Message

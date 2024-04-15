@@ -1,13 +1,9 @@
 using System.Collections;
-using System.Linq;
-using Actors;
-using Actors.ActorSystems;
-using Actors.Combat;
-using Actors.InputThings;
-using Map.Model;
+using _Game.Scripts.CharacterRelated.Actors.InputThings;
+using _Game.Scripts.CharacterRelated.Map.Actors;
 using UnityEngine;
 
-namespace Sounds
+namespace _Game.Scripts.CharacterRelated.Sounds
 {
     public class SoundSystem
     {

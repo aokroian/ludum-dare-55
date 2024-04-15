@@ -1,11 +1,10 @@
-﻿using Actors;
-using Actors.ActorSystems;
-using Actors.Combat;
-using Actors.InputThings;
-using UI.Hud;
+﻿using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
+using _Game.Scripts.CharacterRelated.Actors.Combat;
+using _Game.Scripts.CharacterRelated.Actors.InputThings;
+using _Game.Scripts.CharacterRelated.UI.Hud;
 using UnityEngine;
 
-namespace Bonus.BonusTypes
+namespace _Game.Scripts.CharacterRelated.Bonus.BonusTypes
 {
     public class ShotgunBonus : AbstractBonus
     {

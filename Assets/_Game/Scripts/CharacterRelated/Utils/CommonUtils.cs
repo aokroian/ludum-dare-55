@@ -1,8 +1,8 @@
 ﻿using System;
-using Common;
+using _Game.Scripts.CharacterRelated.Common;
 using UnityEngine;
 
-namespace Utils
+namespace _Game.Scripts.CharacterRelated.Utils
 {
     public class CommonUtils
     {

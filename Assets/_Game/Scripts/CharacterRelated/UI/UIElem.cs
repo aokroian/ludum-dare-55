@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UI
+namespace _Game.Scripts.CharacterRelated.UI
 {
     public class UIElem : MonoBehaviour
     {

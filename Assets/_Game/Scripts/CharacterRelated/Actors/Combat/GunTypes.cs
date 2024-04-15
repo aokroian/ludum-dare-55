@@ -1,4 +1,4 @@
-namespace Actors.Combat
+namespace _Game.Scripts.CharacterRelated.Actors.Combat
 {
     public enum GunTypes
     {

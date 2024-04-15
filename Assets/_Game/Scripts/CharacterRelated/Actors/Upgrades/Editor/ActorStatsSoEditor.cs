@@ -1,6 +1,6 @@
 using UnityEditor;
 
-namespace Actors.Upgrades.Editor
+namespace _Game.Scripts.CharacterRelated.Actors.Upgrades.Editor
 {
     [CustomEditor(typeof(ActorStatsController))]
     public class ActorStatsEditor : UnityEditor.Editor

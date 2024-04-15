@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
-using _Game.Scripts;
-using Actors.Combat;
-using Actors.Upgrades;
+using _Game.Scripts.CharacterRelated.Actors.Combat;
+using _Game.Scripts.CharacterRelated.Actors.Upgrades;
+using _Game.Scripts.Common;
 using UnityEngine;
 using Zenject;
 
-namespace Actors.ActorSystems
+namespace _Game.Scripts.CharacterRelated.Actors.ActorSystems
 {
     public class ActorGunSystem : ActorSystem
     {

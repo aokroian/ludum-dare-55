@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Actors;
-using Actors.ActorSystems;
+using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
 using UnityEngine;
 
-namespace UI.Hud
+namespace _Game.Scripts.CharacterRelated.UI.Hud
 {
     public class PlayerHealthHud : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-namespace Utils
+namespace _Game.Scripts.CharacterRelated.Utils
 {
     public class NameGenerator
     {

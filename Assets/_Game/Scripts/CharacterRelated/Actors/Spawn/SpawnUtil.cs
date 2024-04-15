@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using Actors.InputThings.AI;
-using Common;
-using Map.Model;
-using Map.Runtime;
+using _Game.Scripts.CharacterRelated.Actors.InputThings.AI;
+using _Game.Scripts.CharacterRelated.Common;
+using _Game.Scripts.CharacterRelated.Map.Actors;
+using _Game.Scripts.CharacterRelated.Map.Runtime;
+using _Game.Scripts.CharacterRelated.Utils;
 using UnityEngine;
-using Utils;
 
-namespace Actors.Spawn
+namespace _Game.Scripts.CharacterRelated.Actors.Spawn
 {
     public static class SpawnUtil
     {

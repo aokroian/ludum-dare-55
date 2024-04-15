@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Actors.InputThings
+namespace _Game.Scripts.CharacterRelated.Actors.InputThings
 {
     public interface IActorInput
     {

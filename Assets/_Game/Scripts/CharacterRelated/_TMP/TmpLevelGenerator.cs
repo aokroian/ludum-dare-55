@@ -1,8 +1,8 @@
-﻿using Map;
-using Map.Model;
+﻿using _Game.Scripts.CharacterRelated.Map;
+using _Game.Scripts.CharacterRelated.Map.Actors;
 using UnityEngine;
 
-namespace _TMP
+namespace _Game.Scripts.CharacterRelated._TMP
 {
     public class TmpLevelGenerator : MonoBehaviour
     {

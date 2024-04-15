@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Actors.Combat
+namespace _Game.Scripts.CharacterRelated.Actors.Combat
 {
     public class DestroyDelay : MonoBehaviour
     {

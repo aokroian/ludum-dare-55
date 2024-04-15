@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Map;
+using _Game.Scripts.CharacterRelated.Common;
+using _Game.Scripts.CharacterRelated.Map;
 using UnityEngine;
-using Common;
 
-namespace _TMP
+namespace _Game.Scripts.CharacterRelated._TMP
 {
     public class RoomsSpawnerNew : MonoBehaviour
     {

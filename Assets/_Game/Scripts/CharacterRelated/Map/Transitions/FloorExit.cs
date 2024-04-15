@@ -1,8 +1,8 @@
-﻿using Actors.InputThings;
-using Map.Runtime;
+﻿using _Game.Scripts.CharacterRelated.Actors.InputThings;
+using _Game.Scripts.CharacterRelated.Map.Runtime;
 using UnityEngine;
 
-namespace Map.Transitions
+namespace _Game.Scripts.CharacterRelated.Map.Transitions
 {
     public class FloorExit : MonoBehaviour
     {

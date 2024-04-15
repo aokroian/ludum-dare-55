@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Common;
-using Map.Model;
+using _Game.Scripts.CharacterRelated.Common;
+using _Game.Scripts.CharacterRelated.Map.Actors;
 using UnityEngine;
 
-namespace Map
+namespace _Game.Scripts.CharacterRelated.Map
 {
     public class LevelGenerator : MonoBehaviour
     {

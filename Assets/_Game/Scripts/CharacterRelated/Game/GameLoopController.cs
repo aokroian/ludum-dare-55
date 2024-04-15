@@ -1,16 +1,15 @@
 ﻿using System;
-using Actors;
-using Actors.ActorSystems;
-using Actors.InputThings;
-using Common;
+using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
+using _Game.Scripts.CharacterRelated.Actors.InputThings;
+using _Game.Scripts.CharacterRelated.Common;
+using _Game.Scripts.CharacterRelated.Map.Runtime;
+using _Game.Scripts.CharacterRelated.Scene;
 using DG.Tweening;
-using Map.Runtime;
-using Scene;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game
+namespace _Game.Scripts.CharacterRelated.Game
 {
     public class GameLoopController : SingletonScene<GameLoopController>, Initializable
     {

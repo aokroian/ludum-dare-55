@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Map.Model
+namespace _Game.Scripts.CharacterRelated.Map.Actors
 {
     public class Level : MonoBehaviour
     {

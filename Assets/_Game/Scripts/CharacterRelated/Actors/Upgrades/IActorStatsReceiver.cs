@@ -1,4 +1,4 @@
-namespace Actors.Upgrades
+namespace _Game.Scripts.CharacterRelated.Actors.Upgrades
 {
     public interface IActorStatsReceiver
     {

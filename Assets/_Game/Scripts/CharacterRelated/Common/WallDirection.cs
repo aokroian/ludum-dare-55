@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace _Game.Scripts.CharacterRelated.Common
 {
     public enum WallDirection
     {

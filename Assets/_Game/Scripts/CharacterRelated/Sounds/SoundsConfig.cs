@@ -1,8 +1,8 @@
 using System;
-using Actors.Combat;
+using _Game.Scripts.CharacterRelated.Actors.Combat;
 using UnityEngine;
 
-namespace Sounds
+namespace _Game.Scripts.CharacterRelated.Sounds
 {
     [CreateAssetMenu(fileName = "SoundsConfig", menuName = "LD53/SoundsConfig", order = 3)]
     public class SoundsConfig : ScriptableObject

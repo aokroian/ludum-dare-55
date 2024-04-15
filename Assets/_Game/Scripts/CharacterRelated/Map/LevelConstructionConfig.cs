@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Map
+namespace _Game.Scripts.CharacterRelated.Map
 {
     public class LevelConstructionConfig
     {

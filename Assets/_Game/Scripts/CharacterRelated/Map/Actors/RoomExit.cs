@@ -1,10 +1,9 @@
-﻿using Actors.InputThings;
-using Common;
-using Map.Runtime;
+﻿using _Game.Scripts.CharacterRelated.Actors.InputThings;
+using _Game.Scripts.CharacterRelated.Common;
+using _Game.Scripts.CharacterRelated.Map.Runtime;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-namespace Map.Model
+namespace _Game.Scripts.CharacterRelated.Map.Actors
 {
     public class RoomExit : MonoBehaviour
     {

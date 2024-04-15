@@ -1,10 +1,10 @@
+using _Game.Scripts.CharacterRelated.Actors.InputThings;
 using _Game.Scripts.Console;
 using _Game.Scripts.Summon.Data;
-using Actors.InputThings;
 using UnityEngine;
 using Zenject;
 
-namespace _Game.Scripts
+namespace _Game.Scripts.Common
 {
     public class GlobalInputSwitcher : ITickable
     {

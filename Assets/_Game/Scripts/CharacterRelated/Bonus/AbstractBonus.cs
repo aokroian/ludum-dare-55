@@ -1,10 +1,9 @@
-﻿using System;
-using Actors.InputThings;
+﻿using _Game.Scripts.CharacterRelated.Actors.InputThings;
+using _Game.Scripts.CharacterRelated.Sounds;
 using DG.Tweening;
-using Sounds;
 using UnityEngine;
 
-namespace Bonus
+namespace _Game.Scripts.CharacterRelated.Bonus
 {
     public abstract class AbstractBonus : MonoBehaviour
     {

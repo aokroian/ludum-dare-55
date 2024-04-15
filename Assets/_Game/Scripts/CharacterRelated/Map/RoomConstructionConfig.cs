@@ -1,7 +1,7 @@
-﻿using Common;
+﻿using _Game.Scripts.CharacterRelated.Common;
 using UnityEngine;
 
-namespace Map
+namespace _Game.Scripts.CharacterRelated.Map
 {
     public struct RoomConstructionConfig
     {

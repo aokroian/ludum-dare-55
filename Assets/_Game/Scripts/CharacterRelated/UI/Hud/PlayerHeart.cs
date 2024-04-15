@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.Hud
+namespace _Game.Scripts.CharacterRelated.UI.Hud
 {
     public class PlayerHeart : MonoBehaviour
     {

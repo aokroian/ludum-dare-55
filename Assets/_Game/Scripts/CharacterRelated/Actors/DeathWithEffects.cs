@@ -1,7 +1,7 @@
-using Actors.ActorSystems;
+using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
 using UnityEngine;
 
-namespace Actors
+namespace _Game.Scripts.CharacterRelated.Actors
 {
     [RequireComponent(typeof(ActorHealth))]
     public class DeathWithEffects : MonoBehaviour

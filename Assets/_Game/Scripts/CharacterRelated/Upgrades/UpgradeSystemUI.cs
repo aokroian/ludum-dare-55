@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Actors.InputThings;
-using Actors.Upgrades;
-using Common;
-using Scene;
-using Sounds;
+using _Game.Scripts.CharacterRelated.Actors.InputThings;
+using _Game.Scripts.CharacterRelated.Actors.Upgrades;
+using _Game.Scripts.CharacterRelated.Common;
+using _Game.Scripts.CharacterRelated.Scene;
+using _Game.Scripts.CharacterRelated.Sounds;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Upgrades
+namespace _Game.Scripts.CharacterRelated.Upgrades
 {
     public class UpgradeSystemUI : SingletonScene<UpgradeSystemUI>, Initializable
     {

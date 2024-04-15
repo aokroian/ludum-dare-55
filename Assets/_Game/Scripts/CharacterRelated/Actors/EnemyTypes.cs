@@ -1,4 +1,4 @@
-namespace Actors
+namespace _Game.Scripts.CharacterRelated.Actors
 {
     public enum EnemyTypes
     {

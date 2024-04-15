@@ -1,4 +1,5 @@
-﻿using _Game.Scripts.Console;
+﻿using _Game.Scripts.Common;
+using _Game.Scripts.Console;
 using _Game.Scripts.GameLoop;
 using _Game.Scripts.GameState;
 using _Game.Scripts.Map;

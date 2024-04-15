@@ -1,7 +1,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace _Game.Scripts
+namespace _Game.Scripts.Common
 {
     public class SoundManager : MonoBehaviour
     {

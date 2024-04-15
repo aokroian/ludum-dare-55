@@ -1,13 +1,13 @@
 ﻿using System;
-using Common;
-using Scene;
-using Sounds;
-using UI.Dialogue;
+using _Game.Scripts.CharacterRelated.Common;
+using _Game.Scripts.CharacterRelated.Scene;
+using _Game.Scripts.CharacterRelated.Sounds;
+using _Game.Scripts.CharacterRelated.UI.Dialogue;
+using _Game.Scripts.CharacterRelated.Upgrades;
+using _Game.Scripts.CharacterRelated.Utils;
 using UnityEngine;
-using Upgrades;
-using Utils;
 
-namespace Game
+namespace _Game.Scripts.CharacterRelated.Game
 {
     public class DialogueController : SingletonScene<DialogueController>
     {

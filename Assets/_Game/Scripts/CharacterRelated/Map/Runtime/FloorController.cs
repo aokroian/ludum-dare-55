@@ -1,10 +1,10 @@
-﻿using Actors.InputThings;
-using Common;
-using Game;
-using Sounds;
+﻿using _Game.Scripts.CharacterRelated.Actors.InputThings;
+using _Game.Scripts.CharacterRelated.Common;
+using _Game.Scripts.CharacterRelated.Game;
+using _Game.Scripts.CharacterRelated.Sounds;
 using UnityEngine;
 
-namespace Map.Runtime
+namespace _Game.Scripts.CharacterRelated.Map.Runtime
 {
     public class FloorController: SingletonScene<FloorController>
     {

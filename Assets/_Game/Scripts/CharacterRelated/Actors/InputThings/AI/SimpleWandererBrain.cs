@@ -1,7 +1,7 @@
-using Actors.InputThings.AI.States;
+using _Game.Scripts.CharacterRelated.Actors.InputThings.AI.States;
 using UnityEngine;
 
-namespace Actors.InputThings.AI
+namespace _Game.Scripts.CharacterRelated.Actors.InputThings.AI
 {
     public class SimpleWandererBrain : AIActorInput
     {

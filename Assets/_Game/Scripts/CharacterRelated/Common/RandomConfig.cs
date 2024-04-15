@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Common
+namespace _Game.Scripts.CharacterRelated.Common
 {
     public class RandomConfig : SingletonGlobal<RandomConfig>
     {

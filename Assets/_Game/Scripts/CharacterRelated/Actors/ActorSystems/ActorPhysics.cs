@@ -1,7 +1,7 @@
-using Actors.Upgrades;
+using _Game.Scripts.CharacterRelated.Actors.Upgrades;
 using UnityEngine;
 
-namespace Actors.ActorSystems
+namespace _Game.Scripts.CharacterRelated.Actors.ActorSystems
 {
     public class ActorPhysics : ActorSystem, IActorStatsReceiver
     {

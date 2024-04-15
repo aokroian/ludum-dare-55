@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _TMP
+namespace _Game.Scripts.CharacterRelated._TMP
 {
     public class RoomSpawnerTest : MonoBehaviour
     {

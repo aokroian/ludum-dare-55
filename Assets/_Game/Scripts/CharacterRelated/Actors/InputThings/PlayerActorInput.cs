@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Actors.InputThings
+namespace _Game.Scripts.CharacterRelated.Actors.InputThings
 {
     public class PlayerActorInput : MonoBehaviour, IActorInput
     {

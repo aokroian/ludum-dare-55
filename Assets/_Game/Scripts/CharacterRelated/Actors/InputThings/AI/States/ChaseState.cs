@@ -1,8 +1,8 @@
 using System;
-using Actors.InputThings.StateMachineThings;
+using _Game.Scripts.CharacterRelated.Actors.InputThings.StateMachineThings;
 using UnityEngine;
 
-namespace Actors.InputThings.AI.States
+namespace _Game.Scripts.CharacterRelated.Actors.InputThings.AI.States
 {
     public class ChaseState : State
     {

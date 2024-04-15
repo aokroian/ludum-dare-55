@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Actors.Upgrades
+namespace _Game.Scripts.CharacterRelated.Actors.Upgrades
 {
     [CreateAssetMenu(fileName = "ActorStats", menuName = "LD53/ActorStats", order = 4)]
     public class ActorStatsSo : ScriptableObject

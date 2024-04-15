@@ -1,16 +1,15 @@
 ﻿using System.Linq;
-using Actors;
-using Actors.ActorSystems;
-using Actors.InputThings;
-using Actors.Spawn;
-using Common;
+using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
+using _Game.Scripts.CharacterRelated.Actors.InputThings;
+using _Game.Scripts.CharacterRelated.Actors.Spawn;
+using _Game.Scripts.CharacterRelated.Common;
+using _Game.Scripts.CharacterRelated.Game;
+using _Game.Scripts.CharacterRelated.Map.Actors;
+using _Game.Scripts.CharacterRelated.Utils;
 using DG.Tweening;
-using Game;
-using Map.Model;
 using UnityEngine;
-using Utils;
 
-namespace Map.Runtime
+namespace _Game.Scripts.CharacterRelated.Map.Runtime
 {
     public class CrawlController : SingletonScene<CrawlController>
     {

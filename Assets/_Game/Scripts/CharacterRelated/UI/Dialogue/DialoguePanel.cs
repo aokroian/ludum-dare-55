@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.Dialogue
+namespace _Game.Scripts.CharacterRelated.UI.Dialogue
 {
     public class DialoguePanel : MonoBehaviour
     {

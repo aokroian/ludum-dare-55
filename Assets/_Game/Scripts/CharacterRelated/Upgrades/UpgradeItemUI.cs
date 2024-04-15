@@ -1,11 +1,10 @@
 ﻿using System;
-using Actors.Upgrades;
+using _Game.Scripts.CharacterRelated.Actors.Upgrades;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Upgrades
+namespace _Game.Scripts.CharacterRelated.Upgrades
 {
     public class UpgradeItemUI : MonoBehaviour
     {
