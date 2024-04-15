@@ -18,7 +18,7 @@ namespace _Game.Scripts.Summon.View
                 return new PlayerInSpaceGameplayEvent(this, MessageService);
             }
 
-            if (ObjectsHolder.GetPlayerRoom().Objects.Count(it => it is SummonedPlayer) > 1)
+            if (ObjectsHolder.GetPlayerRoomOrFirst().Objects.Count(it => it is SummonedPlayer) > 1)
             {
                 return new ManyPlayersGameplayEvent(this, MessageService);
             }

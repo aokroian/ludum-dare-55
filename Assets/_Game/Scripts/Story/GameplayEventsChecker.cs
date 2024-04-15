@@ -40,7 +40,7 @@ namespace _Game.Scripts.Story
                     break;
             }
             
-            var currentRoom = _objectsHolder.GetPlayerRoom();
+            var currentRoom = _objectsHolder.GetPlayerRoomOrFirst();
             if (currentRoom == null)
             {
                 _isEventInProgress = false;

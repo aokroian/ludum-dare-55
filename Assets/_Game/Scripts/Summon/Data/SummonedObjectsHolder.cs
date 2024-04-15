@@ -19,13 +19,15 @@ namespace _Game.Scripts.Summon.Data
             rooms.Add(room);
         }
 
-        public SummonedRoom GetPlayerRoom()
+        public SummonedRoom GetPlayerRoomOrFirst()
         {
             foreach (var room in rooms)
             {
                 if (room.Objects.FirstOrDefault(it => it == _summonedPlayer) != null)
                     return room;
             }
+            if (rooms.Count > 0)
+                return rooms[0];
 
             return null;
         }
