@@ -20,7 +20,7 @@ namespace _Game.Scripts.Console
         [SerializeField] private ContentSizeFitter[] contentSizeFitters;
         [SerializeField] private ConsoleOutputEntry outputEntryPrefab;
         [SerializeField] private int maxOutputEntries = 100;
-        [SerializeField] private PointerDownHandler pointerDownHandler;
+        [SerializeField] private PointerDownHandler[] pointerDownHandlers;
 
         [Inject] private ConsoleCommandsHandler _commandsHandler;
         [Inject] private SoundManager _soundManager;
@@ -33,12 +33,14 @@ namespace _Game.Scripts.Console
 
         private void Awake()
         {
-            pointerDownHandler.OnPointerDownEvent += OnPointerDown;
+            foreach (var pointerDownHandler in pointerDownHandlers)
+                pointerDownHandler.OnPointerDownEvent += OnPointerDown;
         }
 
         private void OnDestroy()
         {
-            pointerDownHandler.OnPointerDownEvent -= OnPointerDown;
+            foreach (var pointerDownHandler in pointerDownHandlers)
+                pointerDownHandler.OnPointerDownEvent -= OnPointerDown;
         }
 
         public void OnPointerDown()
@@ -53,12 +55,14 @@ namespace _Game.Scripts.Console
             {
                 inputField.interactable = true;
                 SetInputText(inputField.text);
-                pointerDownHandler.gameObject.SetActive(false);
+                foreach (var pointerDownHandler in pointerDownHandlers)
+                    pointerDownHandler.gameObject.SetActive(false);
             }
             else
             {
                 inputField.interactable = false;
-                pointerDownHandler.gameObject.SetActive(true);
+                foreach (var pointerDownHandler in pointerDownHandlers)
+                    pointerDownHandler.gameObject.SetActive(true);
             }
         }
 

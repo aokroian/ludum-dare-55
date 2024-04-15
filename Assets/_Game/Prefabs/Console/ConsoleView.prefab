@@ -1030,7 +1030,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2735085158337305575}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.99985945
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1630,7 +1630,9 @@ MonoBehaviour:
   - {fileID: 1627586010688925645}
   outputEntryPrefab: {fileID: 7428161082187956062, guid: 208303734000c4f75a3f71f74bbfbf90, type: 3}
   maxOutputEntries: 100
-  pointerDownHandler: {fileID: 2004433813170083447}
+  pointerDownHandlers:
+  - {fileID: 0}
+  - {fileID: 2004433813170083447}
 --- !u!222 &4208616517764089955
 CanvasRenderer:
   m_ObjectHideFlags: 0

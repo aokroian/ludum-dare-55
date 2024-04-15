@@ -6,7 +6,7 @@ using Zenject;
 
 namespace _Game.Scripts.Console
 {
-    public class ControlsHelpUI : MonoBehaviour, IPointerDownHandler
+    public class ControlsHelpUI : MonoBehaviour
     {
         [Inject] private GlobalInputSwitcher _globalInputSwitcher;
 
@@ -15,6 +15,7 @@ namespace _Game.Scripts.Console
         [SerializeField] private GameObject playerSwitchControlsHelp;
         [SerializeField] private CanvasGroup consoleControlsHelp;
         [SerializeField] private GameObject consoleSwitchControlsHelp;
+        [SerializeField] private PointerDownHandler[] pointerDownHandlers;
 
         private bool _areConsoleControlsAllowed;
         private bool _arePlayerControlsAllowed;
@@ -30,12 +31,24 @@ namespace _Game.Scripts.Console
             signalBus.Subscribe<SummonPlayerWeaponEvent>(OnWeaponSummoned);
         }
 
+        private void Awake()
+        {
+            foreach (var pointerDownHandler in pointerDownHandlers)
+                pointerDownHandler.OnPointerDownEvent += OnPointerDown;
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var pointerDownHandler in pointerDownHandlers)
+                pointerDownHandler.OnPointerDownEvent -= OnPointerDown;
+        }
+
         private void Start()
         {
             OnGlobalInputSwitch(true);
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        private void OnPointerDown()
         {
             _globalInputSwitcher.SwitchToPlayerControls();
         }
@@ -53,6 +66,9 @@ namespace _Game.Scripts.Console
 
             consoleSwitchControlsHelp.SetActive(_arePlayerControlsAllowed && isConsoleInputOn);
             playerSwitchControlsHelp.SetActive(!isConsoleInputOn);
+
+            foreach (var pointerDownHandler in pointerDownHandlers)
+                pointerDownHandler.gameObject.SetActive(isConsoleInputOn);
         }
 
         private void OnGameSummoned()
