@@ -8,6 +8,19 @@ namespace _Game.Scripts.Summon.Summoners
     {
         public override async Task Summon(SummonParams summonParams)
         {
+            try
+            {
+                await SummonInternal(summonParams);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError(e);
+                
+            }
+        }
+
+        private async Task SummonInternal(SummonParams summonParams)
+        {
             var startPosition = summonParams.camera.transform.position;
             var roomIndex = _objectsHolder.Rooms.Count - 1;
             var room = _objectsHolder.Rooms[roomIndex];

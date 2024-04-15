@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using _Game.Scripts.Summon.View;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -12,7 +13,18 @@ namespace _Game.Scripts.Summon.Summoners
         
         public override async Task Summon(SummonParams summonParams)
         {
-            // TODO: try..catch. We need to enable input even if something goes wrong
+            try
+            {
+                await SummonInner(summonParams);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
+        }
+
+        private async Task SummonInner(SummonParams summonParams)
+        {
             var startPosition = summonParams.camera.transform.position;
             var position = CalcRoomPosition();
             var isFirstRoom = _objectsHolder.RealRoomCount == 0;
