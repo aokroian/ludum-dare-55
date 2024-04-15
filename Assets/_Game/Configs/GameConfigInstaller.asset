@@ -16,14 +16,34 @@ MonoBehaviour:
   endingService:
     endings:
     - EndingId: space
-      EndingName: Space
-      EndingDescription: SPAAACE
+      EndingName: '"Space Oddity"'
+      EndingDescription: I'm in space...space..SPPAAAAACE!
       IsGoodEnding: 0
     - EndingId: manyPlayers
-      EndingName: Too many main heroes
+      EndingName: '"Self-Replication Situation"'
       EndingDescription: There can be only one
       IsGoodEnding: 0
     - EndingId: death
-      EndingName: You died
+      EndingName: '"You died"'
       EndingDescription: At least you tried
+      IsGoodEnding: 0
+    - EndingId: manyPrincesses
+      EndingName: '"Double the Damsel"'
+      EndingDescription: Twice the princess, twice the confusion!
+      IsGoodEnding: 0
+    - EndingId: manyPrincesses
+      EndingName: '"Double the Damsel"'
+      EndingDescription: Twice the princess, twice the confusion!
+      IsGoodEnding: 0
+    - EndingId: tooManyRooms
+      EndingName: '"Architect''s Agony"'
+      EndingDescription: Built a dungeon so big, you couldn't afford the light bulbs!
+      IsGoodEnding: 0
+    - EndingId: savePrincess
+      EndingName: '"Damsel, No Distress"'
+      EndingDescription: Enemies? Just a minor inconvenience!
+      IsGoodEnding: 1
+    - EndingId: rejectedByPrincess
+      EndingName: '"Premature Prince"'
+      EndingDescription: Easy come, easy go.
       IsGoodEnding: 0
