@@ -23,3 +23,7 @@ MonoBehaviour:
       EndingName: Too many main heroes
       EndingDescription: There can be only one
       IsGoodEnding: 0
+    - EndingId: death
+      EndingName: You died
+      EndingDescription: At least you tried
+      IsGoodEnding: 0
