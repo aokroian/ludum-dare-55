@@ -24,6 +24,9 @@ namespace _Game.Scripts
         [Header("GameLoop")]
         [SerializeField] private AudioClip[] happyEndSounds;
         [SerializeField] private AudioClip[] sadEndSounds;
+        [Space]
+        [SerializeField] private AudioClip switchToConsoleControlsSound;
+        [SerializeField] private AudioClip switchToPlayerControlsSound;
 
 
         private Camera _mainCam;
@@ -38,6 +41,14 @@ namespace _Game.Scripts
         }
 
         private float _lastConsoleSoundTime;
+
+        public void PlayControlsSwitchSound(bool isToConsoleControls)
+        {
+            consoleAudioSource.transform.position = CamPosition;
+            consoleAudioSource.PlayOneShot(isToConsoleControls
+                ? switchToConsoleControlsSound
+                : switchToPlayerControlsSound);
+        }
 
         public void PlayUniversalSummonSound()
         {

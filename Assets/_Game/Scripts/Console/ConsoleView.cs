@@ -35,7 +35,7 @@ namespace _Game.Scripts.Console
 
         public void SimulatePointerDown()
         {
-            _globalInputSwitcher.SwitchToConsoleControls();
+            _globalInputSwitcher.SwitchToConsoleControls(false);
         }
 
         public void OnGlobalInputSwitch(bool isConsoleInputOn)

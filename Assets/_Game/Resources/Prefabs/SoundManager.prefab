@@ -72,6 +72,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 42b07d70565f249b78202975bf95587a, type: 3}
   - {fileID: 8300000, guid: 61e9f8988e826496b8107da10cd2daeb, type: 3}
   - {fileID: 8300000, guid: 8f62f3d5c2e894922813156291fb5f07, type: 3}
+  switchToConsoleControlsSound: {fileID: 8300000, guid: 6ccae9a74ca7c4f149491e09932f9d24, type: 3}
+  switchToPlayerControlsSound: {fileID: 8300000, guid: 1b4ec5b782b71488cba9b3b3ffc54e54, type: 3}
 --- !u!82 &8436429634095837023
 AudioSource:
   m_ObjectHideFlags: 0
