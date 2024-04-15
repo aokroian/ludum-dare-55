@@ -41,15 +41,11 @@ namespace _Game.Scripts.Console
             pointerDownHandler.OnPointerDownEvent -= OnPointerDown;
         }
 
-        private void OnPointerDown()
+        public void OnPointerDown()
         {
             _globalInputSwitcher.SwitchToConsoleControls();
         }
 
-        public void SwitchToConsoleControlsWithoutSound()
-        {
-            _globalInputSwitcher.SwitchToConsoleControls(false);
-        }
 
         public void OnGlobalInputSwitch(bool isConsoleInputOn)
         {

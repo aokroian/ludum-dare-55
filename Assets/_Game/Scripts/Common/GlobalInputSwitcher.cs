@@ -42,30 +42,30 @@ namespace _Game.Scripts.Common
             }
         }
 
-        public void SwitchToConsoleControls(bool withSound = true)
+        public void SwitchToConsoleControls()
         {
             if (_consoleView == null)
                 return;
             TogglePlayerInput(false);
             _consoleView.OnGlobalInputSwitch(true);
             _controlsHelpUI.OnGlobalInputSwitch(true);
-            if (withSound)
+            if (_isPlayerInputActive)
                 _soundManager.PlayControlsSwitchSound(true);
             _isPlayerInputActive = false;
         }
 
-        public void SwitchToPlayerControls(bool withSound = true)
+        public void SwitchToPlayerControls()
         {
             var notAllowed = _consoleView == null || _isLockedToConsole || !TogglePlayerInput(true);
             if (notAllowed)
             {
-                _consoleView.Invoke(nameof(ConsoleView.SwitchToConsoleControlsWithoutSound), .2f);
+                _consoleView.Invoke(nameof(ConsoleView.OnPointerDown), .2f);
                 return;
             }
 
             _consoleView.OnGlobalInputSwitch(false);
             _controlsHelpUI.OnGlobalInputSwitch(false);
-            if (withSound)
+            if (!_isPlayerInputActive)
                 _soundManager.PlayControlsSwitchSound(false);
             _isPlayerInputActive = true;
         }

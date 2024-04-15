@@ -1,4 +1,9 @@
+using System;
+using _Game.Scripts.GameLoop.Events;
+using _Game.Scripts.Story.Events;
+using DG.Tweening;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 namespace _Game.Scripts.Common
@@ -21,13 +26,29 @@ namespace _Game.Scripts.Common
         [Header("Music")]
         [SerializeField] private AudioClip defaultMusic;
         [SerializeField] private AudioClip storeMusic;
+        [SerializeField] private AudioSource musicAudioSource1;
+        [SerializeField] private AudioSource musicAudioSource2;
         [Header("GameLoop")]
+        [SerializeField] private AudioSource gameEndAudioSource;
         [SerializeField] private AudioClip[] happyEndSounds;
         [SerializeField] private AudioClip[] sadEndSounds;
         [Space]
         [SerializeField] private AudioClip switchToConsoleControlsSound;
         [SerializeField] private AudioClip switchToPlayerControlsSound;
 
+        [Inject]
+        private SignalBus _signalBus;
+
+        private AudioSource _activeMusicSource;
+
+        private void Awake()
+        {
+            _signalBus.Subscribe<EndingStartedEvent>(eventData =>
+            {
+                PlayGameEndingSound(eventData.EndingData.IsGoodEnding);
+            });
+            _signalBus.Subscribe<GameStartEvent>(PlayDefaultMusic);
+        }
 
         private Camera _mainCam;
         private Vector3 CamPosition
@@ -41,6 +62,31 @@ namespace _Game.Scripts.Common
         }
 
         private float _lastConsoleSoundTime;
+
+        private void PlayDefaultMusic()
+        {
+            FadeInMusic(defaultMusic, 0.6f);
+        }
+
+        public void PlayStoreMusic()
+        {
+            FadeInMusic(storeMusic, 0.5f);
+        }
+
+        private void FadeInMusic(AudioClip musicClip, float vol = 1f)
+        {
+            if (_activeMusicSource != null)
+                _activeMusicSource.DOFade(0f, .7f);
+            var nextAudioSource = _activeMusicSource == musicAudioSource1 ? musicAudioSource2 : musicAudioSource1;
+            if (musicClip != null)
+            {
+                nextAudioSource.clip = musicClip;
+                nextAudioSource.Play();
+                nextAudioSource.DOFade(vol, .7f);
+            }
+
+            _activeMusicSource = nextAudioSource;
+        }
 
         public void PlayControlsSwitchSound(bool isToConsoleControls)
         {
@@ -56,11 +102,14 @@ namespace _Game.Scripts.Common
             consoleAudioSource.PlayOneShot(universalSummonSound);
         }
 
-        public void PlayGameEndingSound(bool isPositive)
+        private void PlayGameEndingSound(bool isGoodEnding)
         {
-            var rand = Random.Range(0, isPositive ? happyEndSounds.Length : sadEndSounds.Length);
-            consoleAudioSource.transform.position = CamPosition;
-            consoleAudioSource.PlayOneShot(isPositive ? happyEndSounds[rand] : sadEndSounds[rand]);
+            var rand = Random.Range(0, isGoodEnding ? happyEndSounds.Length : sadEndSounds.Length);
+            var clip = isGoodEnding ? happyEndSounds[rand] : sadEndSounds[rand];
+            FadeInMusic(null);
+            gameEndAudioSource.transform.position = CamPosition;
+            gameEndAudioSource.volume = .25f;
+            gameEndAudioSource.PlayOneShot(clip);
         }
 
         public void PlayBulletShotSound(Vector3 position)
