@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using _Game.Scripts.Summon.View;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -32,12 +33,12 @@ namespace _Game.Scripts.Summon.Summoners
             if (!isFirstRoom)
                 await MoveCameraToAsync(summonParams.camera, position);
             
-            await Task.Delay(100);
+            await UniTask.Delay(100);
             var room = SummonRoom(position);
             Summoned(room);
             
             // TODO: Animate spawn instead
-            await Task.Delay(300);
+            await UniTask.Delay(300);
             
             if (!isFirstRoom)
                 await MoveCameraToAsync(summonParams.camera, startPosition);

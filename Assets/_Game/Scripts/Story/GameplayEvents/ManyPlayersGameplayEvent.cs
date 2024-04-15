@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using _Game.Scripts.Message;
 using _Game.Scripts.Summon.View;
+using Cysharp.Threading.Tasks;
 using Zenject;
 
 namespace _Game.Scripts.Story.GameplayEvents
@@ -22,7 +23,7 @@ namespace _Game.Scripts.Story.GameplayEvents
         {
             _messageService.Speak(_player, "Woah what the hell!");
             _messageService.Speak(_player, "Woah what the hell!");
-            await Task.Delay(500);
+            await UniTask.Delay(500);
 
             return "manyPlayers";
         }

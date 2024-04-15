@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using _Game.Scripts.Common;
 using _Game.Scripts.Message;
 using _Game.Scripts.Summon.View;
+using Cysharp.Threading.Tasks;
 using Zenject;
 
 namespace _Game.Scripts.Story.GameplayEvents
@@ -30,7 +31,7 @@ namespace _Game.Scripts.Story.GameplayEvents
                 if (line.disableInput)
                     inputHandler.DisableAllInput();
                 messageService.Speak(line.Speaker, line.Text);
-                await Task.Delay((int) (line.Duration * 1000));
+                await UniTask.Delay((int) (line.Duration * 1000));
                 if (line.disableInput)
                     inputHandler.EnableAllInput();
             }

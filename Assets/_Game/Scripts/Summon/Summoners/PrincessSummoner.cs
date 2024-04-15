@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using _Game.Scripts.Summon.View;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Game.Scripts.Summon.Summoners
@@ -49,7 +50,7 @@ namespace _Game.Scripts.Summon.Summoners
             room.AddObject(princess);
             _objectsHolder.SetPrincessRef(princess);
             
-            await Task.Delay(300);
+            await UniTask.Delay(300);
             
             if (roomIndex > 0)
                 await MoveCameraToAsync(summonParams.camera, startPosition);
