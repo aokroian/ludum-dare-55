@@ -23,11 +23,16 @@ namespace _Game.Scripts.Summon.View
         private IGameplayEvent _currentEvent;
         private SummonedRoom _room;
 
+        private int _roomIndex;
+        private bool _warningSaid;
+
         protected override void Start()
         {
             base.Start();
             GetComponent<ActorHealth>().OnDeath += _ => OnDeath();
             _signalBus.Subscribe<EndingStartedEvent>(OnEnding);
+
+            _roomIndex = ObjectsHolder.GetRoomIndexForObject(this);
         }
 
         public override IGameplayEvent GetEventIfAny()
@@ -37,6 +42,12 @@ namespace _Game.Scripts.Summon.View
                 var ev = _currentEvent;
                 _currentEvent = null;
                 return ev;
+            }
+            
+            if (!_warningSaid && ObjectsHolder.GetPlayerRoomIndex() == _roomIndex)
+            {
+                Say("Hey, don't come any closer!");
+                _warningSaid = true;
             }
 
             return null;

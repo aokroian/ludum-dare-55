@@ -97,6 +97,32 @@ namespace _Game.Scripts.Summon.Data
             return null;
         }
 
+        public List<SummonedObject> GetObjectsById(string id)
+        {
+            var result = new List<SummonedObject>();
+            foreach (var room in Rooms)
+            {
+                foreach (var obj in room.Objects)
+                {
+                    if (obj.Id == id)
+                        result.Add(obj);
+                }
+            }
+
+            return result;
+        }
+        
+        public int GetRoomIndexForObject(SummonedObject obj)
+        {
+            for (int i = 0; i < _rooms.Count; i++)
+            {
+                if (_rooms[i].Objects.FirstOrDefault(it => it == obj) != null)
+                    return i;
+            }
+
+            return -1;
+        }
+
         public void ClearEverything()
         {
             Object.Destroy(_summonedPlayer);

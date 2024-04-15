@@ -1,7 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using _Game.Scripts.CharacterRelated._LD55;
 using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
 using _Game.Scripts.CharacterRelated.UI.Hud;
+using _Game.Scripts.Common;
 using _Game.Scripts.Story;
 using _Game.Scripts.Story.GameplayEvents;
 using UnityEngine;
@@ -17,6 +18,9 @@ namespace _Game.Scripts.Summon.View
         private SignalBus _signalBus;
         [Inject]
         private PlayerInventoryService _playerInventoryService;
+
+        private int _triggeredEventRoomIndex;
+        private bool _objectiveSaid;
 
         protected override void Start()
         {
@@ -45,20 +49,59 @@ namespace _Game.Scripts.Summon.View
 
             if (ObjectsHolder.RealRoomCount == 0)
             {
-                return new PlayerInSpaceGameplayEvent(this, MessageService);
+                return new PlayerInSpaceGameplayEvent(this, MessageService, true);
             }
 
-            if (ObjectsHolder.GetPlayerRoomIndex() == -1)
+            var playerRoomIndex = ObjectsHolder.GetPlayerRoomIndex();
+            if (playerRoomIndex == -1)
             {
-                return new PlayerInSpaceGameplayEvent(this, MessageService);
+                return new PlayerInSpaceGameplayEvent(this, MessageService, false);
             }
 
-            if (ObjectsHolder.GetPlayerRoomOrFirst().Objects.Count(it => it is SummonedPlayer) > 1)
+            if (ObjectsHolder.GetObjectsById(Id).Count > 1)
             {
                 return new ManyPlayersGameplayEvent(this, MessageService);
             }
+            
+            if (playerRoomIndex > 3 && _triggeredEventRoomIndex <= 3)
+            {
+                _triggeredEventRoomIndex = playerRoomIndex;
+                return new TextGameplayEvent(PrepareMessage("Am I lost?"), null);
+            }
+            if (playerRoomIndex > 4 && _triggeredEventRoomIndex <= 4)
+            {
+                _triggeredEventRoomIndex = playerRoomIndex;
+                return new TextGameplayEvent(PrepareMessage("So tired..."), null);
+            }
+            if (playerRoomIndex > 5 && _triggeredEventRoomIndex <= 5)
+            {
+                _triggeredEventRoomIndex = playerRoomIndex;
+                return new TextGameplayEvent(PrepareMessage("I'm definitely lost"), "tooManyRooms");
+            }
+
+            if (!_objectiveSaid)
+            {
+                _objectiveSaid = true;
+                return new TextGameplayEvent(
+                    PrepareMessage(
+                        $"I must save the {"princess".WrapInColor(Colors.KeywordMessageColor)}! this is my duty!"),
+                    null);
+            }
+            
 
             return null;
+        }
+        
+        private List<TextGameplayEvent.TextEventParams> PrepareMessage(string message)
+        {
+            var p = new TextGameplayEvent.TextEventParams()
+            {
+                disableInput = false,
+                Duration = 0,
+                Speaker = this,
+                Text = message
+            };
+            return new List<TextGameplayEvent.TextEventParams>() {p};
         }
     }
 }

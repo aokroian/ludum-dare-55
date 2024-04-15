@@ -93,7 +93,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Id>k__BackingField: room
   prefabs:
-  - {fileID: 3645989656591352843, guid: 49d638d1a36b092488d5ca552cf345d0, type: 3}
+  - {fileID: 3645989656591352843, guid: 536244b31e0625f4788903a62130f507, type: 3}
+  - {fileID: 3645989656591352843, guid: 0ddbfe2bbc248f8499007e4ea4ef0fbf, type: 3}
+  - {fileID: 3645989656591352843, guid: 1fee1beabf8aa2d4883565ffe8c5fae2, type: 3}
   roomParent: {fileID: 0}
   roomMargin: 1
 --- !u!1 &3341312680554419614
