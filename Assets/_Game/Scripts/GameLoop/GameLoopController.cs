@@ -1,5 +1,6 @@
 ﻿using _Game.Scripts.Common;
 using _Game.Scripts.GameLoop.Events;
+using _Game.Scripts.Map;
 using _Game.Scripts.Story;
 using _Game.Scripts.Summon.Data;
 using Zenject;
@@ -12,12 +13,15 @@ namespace _Game.Scripts.GameLoop
         private GameplayEventsChecker _eventsChecker;
         private GlobalInputSwitcher _inputSwitcher;
         private SummonedObjectsHolder _objectsHolder;
+        private CameraWrapper _cameraWrapper;
 
         public GameLoopController(SignalBus signalBus,
             GameplayEventsChecker eventsChecker,
             GlobalInputSwitcher inputSwitcher,
-            SummonedObjectsHolder objectsHolder)
+            SummonedObjectsHolder objectsHolder, 
+            CameraWrapper cameraWrapper)
         {
+            _cameraWrapper = cameraWrapper;
             _signalBus = signalBus;
             _eventsChecker = eventsChecker;
             _inputSwitcher = inputSwitcher;
@@ -34,6 +38,8 @@ namespace _Game.Scripts.GameLoop
             IsGameEnded = false;
             // TODO: Restart everything
             _objectsHolder.ClearEverything();
+            
+            _cameraWrapper.ResetPosition();
             
             _eventsChecker.CheckingEnabled = true;
             _inputSwitcher.ToggleLockToConsole(false);

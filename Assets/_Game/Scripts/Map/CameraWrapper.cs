@@ -26,5 +26,10 @@ namespace _Game.Scripts.Map
                 await Task.Yield();
             }
         }
+
+        public void ResetPosition()
+        {
+            transform.position = new Vector3(0, 0, transform.position.z);
+        }
     }
 }

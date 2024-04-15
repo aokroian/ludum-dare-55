@@ -25,13 +25,13 @@ namespace _Game.Scripts.Map
         {
             if (_input.Interact && _currentInteractable != null)
             {
+                _input.ResetInteract();
                 _currentInteractable.Interact(_player);
             }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         { 
-            Debug.Log("Collided", other.gameObject);
             if (other.CompareTag("Interactable"))
             {
                 var interactable = other.GetComponent<Interactable>();
@@ -45,7 +45,6 @@ namespace _Game.Scripts.Map
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            Debug.Log("ColliderExit", other.gameObject);
             if (other.CompareTag("Interactable"))
             {
                 _currentInteractable = null;

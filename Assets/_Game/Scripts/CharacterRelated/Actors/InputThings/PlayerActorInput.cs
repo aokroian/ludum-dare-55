@@ -55,6 +55,11 @@ namespace _Game.Scripts.CharacterRelated.Actors.InputThings
             Interact = _liveInteract;
         }
 
+        public void ResetInteract()
+        {
+            Interact = false;
+        }
+
         public void ToggleInput(bool isActive)
         {
             _isActive = isActive;
