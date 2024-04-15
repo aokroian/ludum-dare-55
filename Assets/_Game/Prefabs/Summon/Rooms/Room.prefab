@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Id>k__BackingField: room
+  <PrincessSpawnPoint>k__BackingField: {fileID: 0}
   <WalkArea>k__BackingField: {fileID: 8108016433789160137}
   <PatrolArea>k__BackingField: {fileID: 5374945098592596341}
   <RoomType>k__BackingField: 0
@@ -134,7 +135,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 7, y: 7}
+  m_Size: {x: 7.2, y: 7.2}
   m_EdgeRadius: 0
 --- !u!1 &2676619902405039120
 GameObject:

@@ -9,6 +9,7 @@ namespace _Game.Scripts.CharacterRelated.Actors.InputThings
         public Vector2 Movement { get; private set; }
         public Vector3 Look { get; private set; }
         public bool Fire { get; private set; }
+        public bool Interact { get; private set; }
 
         private Camera _mainCamera;
 
@@ -17,6 +18,7 @@ namespace _Game.Scripts.CharacterRelated.Actors.InputThings
         private Vector3 _liveLook;
         private Vector2 _liveMovement;
         private bool _liveFire;
+        private bool _liveInteract;
 
         public void OnFire(InputValue value)
         {
@@ -43,6 +45,14 @@ namespace _Game.Scripts.CharacterRelated.Actors.InputThings
             if (!_isActive)
                 return;
             Movement = _liveMovement;
+        }
+
+        public void OnInteract(InputValue value)
+        {
+            _liveInteract = Math.Abs(value.Get<float>() - 1f) < 0.1f;
+            if (!_isActive)
+                return;
+            Interact = _liveInteract;
         }
 
         public void ToggleInput(bool isActive)

@@ -1,4 +1,5 @@
-﻿using _Game.Scripts.Summon.View;
+﻿using _Game.Scripts.CharacterRelated.Actors.InputThings;
+using _Game.Scripts.Summon.View;
 using TMPro;
 using UnityEngine;
 
@@ -11,16 +12,18 @@ namespace _Game.Scripts.Map
         private Interactable _currentInteractable;
 
         private SummonedPlayer _player;
+        private PlayerActorInput _input;
 
         private void Start()
         {
             _player = GetComponent<SummonedPlayer>();
+            _input = GetComponent<PlayerActorInput>();
             interactionText.text = "";
         }
 
         private void Update()
         {
-            if ( Input.GetKeyDown(KeyCode.E) && _currentInteractable != null)
+            if (_input.Interact && _currentInteractable != null)
             {
                 _currentInteractable.Interact(_player);
             }
