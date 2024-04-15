@@ -13,4 +13,14 @@ MonoBehaviour:
   m_Name: SummonPlayer_ConsoleCommand
   m_EditorClassIdentifier: 
   mainWord: player
-  aliases: []
+  aliases:
+  - hero
+  - me
+  - protagonist
+  - knight
+  - link
+  - bro
+  - jojo
+  - dude
+  - guy
+  - boy

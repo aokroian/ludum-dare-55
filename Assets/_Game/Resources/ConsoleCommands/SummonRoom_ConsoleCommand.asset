@@ -13,4 +13,13 @@ MonoBehaviour:
   m_Name: SummonRoom_ConsoleCommand
   m_EditorClassIdentifier: 
   mainWord: room
-  aliases: []
+  aliases:
+  - place
+  - dungeon
+  - floor
+  - ground
+  - platform
+  - square
+  - tile
+  - collider
+  - area
