@@ -32,18 +32,9 @@ namespace _Game.Scripts.Summon
 
         public abstract Task Summon(SummonParams summonParams);
         
-        protected async Task MoveCameraToAsync(CameraWrapper camera, Vector3 position)
+        protected async Task MoveCameraToAsync(CameraWrapper cameraWrapper, Vector3 position)
         {
-            var cameraPosition = camera.transform.position;
-            var cameraTargetPosition = new Vector3(position.x, position.y, cameraPosition.z);
-            var cameraMoveTime = 0.5f;
-            var cameraMoveTimeElapsed = 0f;
-            while (cameraMoveTimeElapsed < cameraMoveTime)
-            {
-                cameraMoveTimeElapsed += Time.deltaTime;
-                camera.transform.position = Vector3.Lerp(cameraPosition, cameraTargetPosition, cameraMoveTimeElapsed / cameraMoveTime);
-                await Task.Yield();
-            }
+            await cameraWrapper.MoveCameraToAsync(position);
         }
 
         

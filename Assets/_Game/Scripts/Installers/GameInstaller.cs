@@ -1,6 +1,7 @@
 ﻿using _Game.Scripts.Console;
 using _Game.Scripts.GameLoop;
 using _Game.Scripts.GameState;
+using _Game.Scripts.Map;
 using _Game.Scripts.Message;
 using _Game.Scripts.Story;
 using _Game.Scripts.Story.Ending;
@@ -27,6 +28,7 @@ namespace _Game.Scripts.Installers
             Container.BindInterfacesAndSelfTo<GameplayEventsChecker>().AsSingle().NonLazy();
             Container.Bind<EndingService>().AsSingle();
             Container.Bind<MessageService>().AsSingle();
+            Container.Bind<RoomSwitcher>().AsSingle();
         }
     }
 }

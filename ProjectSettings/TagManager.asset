@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ship
   - asteroid
+  - Interactable
   layers:
   - Default
   - TransparentFX

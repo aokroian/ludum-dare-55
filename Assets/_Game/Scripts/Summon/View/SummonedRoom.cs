@@ -8,6 +8,8 @@ namespace _Game.Scripts.Summon.View
     public class SummonedRoom : SummonedObject
     {
         [field: SerializeField] public RoomType RoomType { get; private set; }
+        [field: SerializeField] public Transform entrance { get; private set; }
+        [field: SerializeField] public Transform exit { get; private set; }
         
         public IReadOnlyList<SummonedObject> Objects => _objects;
         

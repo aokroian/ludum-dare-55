@@ -19,7 +19,7 @@ namespace _Game.Scripts.Summon.Data
             rooms.Add(room);
         }
 
-        public SummonedRoom GetCurrentPlayerRoom()
+        public SummonedRoom GetPlayerRoom()
         {
             foreach (var room in rooms)
             {
@@ -28,6 +28,17 @@ namespace _Game.Scripts.Summon.Data
             }
 
             return null;
+        }
+        
+        public int GetPlayerRoomIndex()
+        {
+            for (int i = 0; i < rooms.Count; i++)
+            {
+                if (rooms[i].Objects.FirstOrDefault(it => it == _summonedPlayer) != null)
+                    return i;
+            }
+
+            return -1;
         }
 
         public void SetPlayerRef(SummonedPlayer player)
