@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _Game.Scripts.Common;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
@@ -166,6 +164,9 @@ namespace _Game.Scripts.Console
                 SetInputText(_animationInputText);
                 return;
             }
+
+            if (!inputField.interactable) // if player controls are on
+                return;
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
                 GoThroughHistory(-1);
