@@ -223,7 +223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1589641647981970136, guid: ba54ab08c5ef34b32ba5278e860cc181, type: 3}
       propertyPath: skipInitAnimation
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1589641647981970136, guid: ba54ab08c5ef34b32ba5278e860cc181, type: 3}
       propertyPath: 'pointerDownHandlers.Array.data[0]'
@@ -247,7 +247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3076485202348300731, guid: ba54ab08c5ef34b32ba5278e860cc181, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -419.00006
+      value: -418.99957
       objectReference: {fileID: 0}
     - target: {fileID: 3161624269542567285, guid: ba54ab08c5ef34b32ba5278e860cc181, type: 3}
       propertyPath: m_SizeDelta.x

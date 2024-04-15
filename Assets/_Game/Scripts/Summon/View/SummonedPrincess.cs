@@ -36,7 +36,9 @@ namespace _Game.Scripts.Summon.View
                 return new ManyPrincessesGameplayEvent(this, MessageService);
             }
 
-            if (_roomIndex < 2 && Vector3.Distance(transform.position, ObjectsHolder.GetPlayer().transform.position) < 1.5f)
+            var player = ObjectsHolder.GetPlayer();
+            if (_roomIndex < 2 && player != null &&
+                Vector3.Distance(transform.position, ObjectsHolder.GetPlayer().transform.position) < 1.5f)
             {
                 var p = new TextGameplayEvent.TextEventParams()
                 {
@@ -70,7 +72,8 @@ namespace _Game.Scripts.Summon.View
 
             if (_roomIndex >= 2 &&
                 ObjectsHolder.Rooms[_roomIndex].Objects.FirstOrDefault(it => it is SummonedEnemy) == null &&
-                Vector3.Distance(transform.position, ObjectsHolder.GetPlayer().transform.position) < 1.5f)
+                player != null &&
+                Vector3.Distance(transform.position, player.transform.position) < 1.5f)
             {
                 var p = new TextGameplayEvent.TextEventParams()
                 {
@@ -94,7 +97,7 @@ namespace _Game.Scripts.Summon.View
         
         private void OnEnding()
         {
-            _princessWandering.TogglePause(true);
+            _princessWandering?.TogglePause(true);
         }
     }
 }

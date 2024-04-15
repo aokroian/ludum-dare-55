@@ -44,7 +44,7 @@ namespace _Game.Scripts.Summon.View
                 return ev;
             }
             
-            if (!_warningSaid && ObjectsHolder.GetPlayerRoomIndex() == _roomIndex)
+            if (!_warningSaid && ObjectsHolder.GetPlayer() != null && ObjectsHolder.GetPlayerRoomIndex() == _roomIndex)
             {
                 Say("Hey, don't come any closer!");
                 _warningSaid = true;
