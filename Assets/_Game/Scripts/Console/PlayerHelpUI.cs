@@ -12,6 +12,7 @@ namespace _Game.Scripts.Console
         [SerializeField] private GameObject playerWeaponControlsHelp;
         [SerializeField] private CanvasGroup consoleControlsHelp;
 
+        private bool _areConsoleControlsAllowed;
         private bool _arePlayerControlsAllowed;
         private bool _areWeaponControlsAllowed;
         private bool _isConsoleInputOn;

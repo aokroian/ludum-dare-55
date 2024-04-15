@@ -28,7 +28,7 @@ namespace _Game.Scripts
         {
             if (_consoleView == null)
                 return;
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
             {
                 if (_isPlayerInputActive)
                     SwitchToConsole();
