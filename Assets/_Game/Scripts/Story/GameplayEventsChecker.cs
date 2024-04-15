@@ -40,13 +40,13 @@ namespace _Game.Scripts.Story
                     break;
             }
             
-            var currentRoom = _objectsHolder.GetPlayerRoomOrFirst();
-            if (currentRoom == null)
+            if (_objectsHolder.RealRoomCount == 0)
             {
                 _isEventInProgress = false;
                 return;
             }
                 
+            var currentRoom = _objectsHolder.GetPlayerRoomOrFirst();
             foreach (var obj in currentRoom.Objects)
             {
                 var isEnding = await CheckAndStartEvent(obj);
