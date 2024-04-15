@@ -42,6 +42,7 @@ namespace _Game.Scripts.Console
         {
             if (isConsoleInputOn)
             {
+                inputField.interactable = true;
                 SetInputText(inputField.text);
             }
             else
