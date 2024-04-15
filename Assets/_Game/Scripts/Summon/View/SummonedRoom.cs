@@ -17,14 +17,14 @@ namespace _Game.Scripts.Summon.View
         
         public IReadOnlyList<SummonedObject> Objects => _objects;
         
-        private readonly List<SummonedObject> _objects = new();
+        protected List<SummonedObject> _objects = new();
 
         public override IGameplayEvent GetEventIfAny()
         {
             throw new System.NotImplementedException();
         }
 
-        public void AddObject(SummonedObject summonedObject)
+        public virtual void AddObject(SummonedObject summonedObject)
         {
             _objects.Add(summonedObject);
             summonedObject.OnMovedToRoom(this);

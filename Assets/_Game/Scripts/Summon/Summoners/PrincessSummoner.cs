@@ -8,8 +8,8 @@ namespace _Game.Scripts.Summon.Summoners
         public override async Task Summon(SummonParams summonParams)
         {
             var startPosition = summonParams.camera.transform.position;
-            var roomIndex = _objectsHolder.rooms.Count - 1;
-            var room = _objectsHolder.rooms[roomIndex];
+            var roomIndex = _objectsHolder.Rooms.Count - 1;
+            var room = _objectsHolder.Rooms[roomIndex];
             var prefab = GetPrincessPrefab(room);
 
             var spawnPosition = room.PrincessSpawnPoint != null

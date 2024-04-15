@@ -1,42 +1,61 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using _Game.Scripts.Summon.View;
-using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 
 namespace _Game.Scripts.Summon.Data
 {
     public class SummonedObjectsHolder
     {
-        public List<SummonedRoom> rooms = new();
-
-        public List<SummonedObject> objectsOutOfRoom = new();
+        public IReadOnlyList<SummonedRoom> Rooms => _rooms.Count > 0 ? _rooms : _placeholderRooms;
+        public readonly List<SummonedObject> ObjectsOutOfRoom = new();
+        public int RealRoomCount => _rooms.Count;
 
         private SummonedPlayer _summonedPlayer;
+        
+        private List<SummonedRoom> _placeholderRooms;
+
+        private readonly List<SummonedRoom> _rooms = new();
+        
+        public void Init(SummonedRoomPlaceholder roomPlaceholder)
+        {
+            roomPlaceholder.InitPlaceholder(ObjectsOutOfRoom);
+            _placeholderRooms = new List<SummonedRoom> {roomPlaceholder};
+        }
 
         public void AddRoom(SummonedRoom room)
         {
-            rooms.Add(room);
+            if (_rooms.Count == 0)
+            {
+                foreach (var obj in ObjectsOutOfRoom)
+                {
+                    room.AddObject(obj);
+                }
+                ObjectsOutOfRoom.Clear();
+            }
+                
+            _rooms.Add(room);
         }
 
         public SummonedRoom GetPlayerRoomOrFirst()
         {
-            foreach (var room in rooms)
+            foreach (var room in _rooms)
             {
                 if (room.Objects.FirstOrDefault(it => it == _summonedPlayer) != null)
                     return room;
             }
-            if (rooms.Count > 0)
-                return rooms[0];
+            if (Rooms.Count > 0)
+                return Rooms[0];
 
             return null;
         }
         
         public int GetPlayerRoomIndex()
         {
-            for (int i = 0; i < rooms.Count; i++)
+            for (int i = 0; i < _rooms.Count; i++)
             {
-                if (rooms[i].Objects.FirstOrDefault(it => it == _summonedPlayer) != null)
+                if (_rooms[i].Objects.FirstOrDefault(it => it == _summonedPlayer) != null)
                     return i;
             }
 
@@ -58,13 +77,13 @@ namespace _Game.Scripts.Summon.Data
             Object.Destroy(_summonedPlayer);
             _summonedPlayer = null;
             
-            foreach (var obj in objectsOutOfRoom)
+            foreach (var obj in ObjectsOutOfRoom)
             {
                 Object.Destroy(obj.gameObject);
             }
-            objectsOutOfRoom.Clear();
+            ObjectsOutOfRoom.Clear();
             
-            foreach (var room in rooms)
+            foreach (var room in _rooms)
             {
                 foreach (var obj in room.Objects)
                 {
@@ -72,7 +91,7 @@ namespace _Game.Scripts.Summon.Data
                 }
                 Object.Destroy(room.gameObject);
             }
-            rooms.Clear();
+            _rooms.Clear();
         }
     }
 }

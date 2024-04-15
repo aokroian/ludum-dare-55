@@ -34,7 +34,7 @@ namespace _Game.Scripts.Summon.View
                 return new PlayerDiedEvent(this, MessageService, "What a miserable death...");
             }
 
-            if (ObjectsHolder.rooms.Count == 0)
+            if (ObjectsHolder.RealRoomCount == 0)
             {
                 return new PlayerInSpaceGameplayEvent(this, MessageService);
             }

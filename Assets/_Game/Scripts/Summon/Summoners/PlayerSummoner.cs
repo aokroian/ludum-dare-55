@@ -17,10 +17,10 @@ namespace _Game.Scripts.Summon.Summoners
         {
             var player = _diContainer.InstantiatePrefabForComponent<SummonedPlayer>(prefabs[0]);
 
-            if (_objectsHolder.rooms.Count > 0)
-                _objectsHolder.rooms[0].AddObject(player);
-            else
-                _objectsHolder.objectsOutOfRoom.Add(player);
+            // if (_objectsHolder.Rooms.Count > 0)
+                _objectsHolder.Rooms[0].AddObject(player);
+            // else
+            //     _objectsHolder.objectsOutOfRoom.Add(player);
 
             _objectsHolder.SetPlayerRef(player);
 

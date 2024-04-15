@@ -29,15 +29,15 @@ namespace _Game.Scripts.Map
                 return;
             }
 
-            var room = _objectsHolder.rooms[roomIndex];
+            var room = _objectsHolder.Rooms[roomIndex];
             var nextRoomIndex = forward ? roomIndex + 1 : roomIndex - 1;
-            if (nextRoomIndex < 0 || nextRoomIndex >= _objectsHolder.rooms.Count)
+            if (nextRoomIndex < 0 || nextRoomIndex >= _objectsHolder.Rooms.Count)
             {
                 await ToEmptyRoom(room, forward);
             }
             else
             {
-                await ToRoomExists(room, _objectsHolder.rooms[nextRoomIndex], forward);
+                await ToRoomExists(room, _objectsHolder.Rooms[nextRoomIndex], forward);
             }
         }
 
@@ -60,8 +60,7 @@ namespace _Game.Scripts.Map
             player.transform.position = newPosition;
             await _cameraWrapper.MoveCameraToAsync(newPosition);
             prevRoom.RemoveObject(player);
-            _objectsHolder.objectsOutOfRoom.Add(player);
-            
+            _objectsHolder.ObjectsOutOfRoom.Add(player);
         }
     }
 }

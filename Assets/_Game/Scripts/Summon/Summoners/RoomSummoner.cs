@@ -15,7 +15,7 @@ namespace _Game.Scripts.Summon.Summoners
             // TODO: try..catch. We need to enable input even if something goes wrong
             var startPosition = summonParams.camera.transform.position;
             var position = CalcRoomPosition();
-            var isFirstRoom = _objectsHolder.rooms.Count == 0;
+            var isFirstRoom = _objectsHolder.RealRoomCount == 0;
             
             if (!isFirstRoom)
                 await MoveCameraToAsync(summonParams.camera, position);
@@ -33,7 +33,7 @@ namespace _Game.Scripts.Summon.Summoners
 
         private SummonedRoom SummonRoom(Vector3 position)
         {
-            var prefabIndex = Mathf.Min(_objectsHolder.rooms.Count, prefabs.Count - 1);
+            var prefabIndex = Mathf.Min(_objectsHolder.RealRoomCount, prefabs.Count - 1);
 
             var room = _diContainer.InstantiatePrefabForComponent<SummonedRoom>(prefabs[prefabIndex],
                 position,
@@ -47,7 +47,7 @@ namespace _Game.Scripts.Summon.Summoners
         {
             var tileMap = prefabs[0].GetComponentInChildren<Tilemap>();
             var roomSize = tileMap.cellBounds.size.y * tileMap.cellSize.y;
-            var roomPosition = (roomSize + roomMargin) * _objectsHolder.rooms.Count * Vector3.up;
+            var roomPosition = (roomSize + roomMargin) * _objectsHolder.RealRoomCount * Vector3.up;
             return roomPosition;
         }
     }

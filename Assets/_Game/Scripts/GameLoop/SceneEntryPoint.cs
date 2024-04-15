@@ -2,6 +2,9 @@
 using _Game.Scripts.Console;
 using _Game.Scripts.GameState;
 using _Game.Scripts.Summon;
+using _Game.Scripts.Summon.Data;
+using _Game.Scripts.Summon.View;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +14,8 @@ namespace _Game.Scripts.GameLoop
     {
         [SerializeField] private ConsoleView consoleView;
         [SerializeField] private ControlsHelpUI controlsHelpUI;
+        [SerializeField] private SummonedRoomPlaceholder roomPlaceholder;
+        
 
         [Inject]
         private IGameStateProvider _gameStateProvider;
@@ -20,11 +25,14 @@ namespace _Game.Scripts.GameLoop
         private ConsoleCommandsHandler _consoleCommmandsHandler;
         [Inject]
         private GlobalInputSwitcher _globalInputSwitcher;
+        [Inject]
+        private SummonedObjectsHolder _objectsHolder;
 
         private void Start()
         {
             _gameStateProvider.Load();
             _globalInputSwitcher.Init(consoleView, controlsHelpUI);
+            _objectsHolder.Init(roomPlaceholder);
 
             _consoleCommmandsHandler.InjectKnownCommands(_gameStateProvider.PermanentGameState);
             InitSummonerService();

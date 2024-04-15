@@ -8,9 +8,9 @@ namespace _Game.Scripts.Summon.Summoners
     {
         public override async Task Summon(SummonParams summonParams)
         {
-            for (var i = 0; i < _objectsHolder.rooms.Count; i++)
+            for (var i = 0; i < _objectsHolder.Rooms.Count; i++)
             {
-                var room = _objectsHolder.rooms[i];
+                var room = _objectsHolder.Rooms[i];
                 var enemyPrefab = GetEnemyForRoom(i);
                 var enemy = _diContainer.InstantiatePrefabForComponent<SummonedEnemy>(enemyPrefab);
                 enemy.transform.position = room.transform.position + Vector3.up * 2.5f;
