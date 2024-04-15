@@ -59,7 +59,7 @@ namespace _Game.Scripts.Common
             var notAllowed = _consoleView == null || _isLockedToConsole || !TogglePlayerInput(true);
             if (notAllowed)
             {
-                _consoleView.Invoke(nameof(ConsoleView.SimulatePointerDown), .2f);
+                _consoleView.Invoke(nameof(ConsoleView.SwitchToConsoleControlsWithoutSound), .2f);
                 return;
             }
 

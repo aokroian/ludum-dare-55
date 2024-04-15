@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using Zenject;
 
 namespace _Game.Scripts.Console
 {
-    public class ConsoleView : MonoBehaviour, IPointerDownHandler
+    public class ConsoleView : MonoBehaviour
     {
         [SerializeField] private bool skipInitAnimation;
         [SerializeField] private TMP_InputField inputField;
@@ -19,6 +20,7 @@ namespace _Game.Scripts.Console
         [SerializeField] private ContentSizeFitter[] contentSizeFitters;
         [SerializeField] private ConsoleOutputEntry outputEntryPrefab;
         [SerializeField] private int maxOutputEntries = 100;
+        [SerializeField] private PointerDownHandler pointerDownHandler;
 
         [Inject] private ConsoleCommandsHandler _commandsHandler;
         [Inject] private SoundManager _soundManager;
@@ -29,12 +31,22 @@ namespace _Game.Scripts.Console
         private string _inputBeforeUsingHistory;
         private string _animationInputText;
 
-        public void OnPointerDown(PointerEventData eventData)
+        private void Awake()
+        {
+            pointerDownHandler.OnPointerDownEvent += OnPointerDown;
+        }
+
+        private void OnDestroy()
+        {
+            pointerDownHandler.OnPointerDownEvent -= OnPointerDown;
+        }
+
+        private void OnPointerDown()
         {
             _globalInputSwitcher.SwitchToConsoleControls();
         }
 
-        public void SimulatePointerDown()
+        public void SwitchToConsoleControlsWithoutSound()
         {
             _globalInputSwitcher.SwitchToConsoleControls(false);
         }
@@ -45,10 +57,12 @@ namespace _Game.Scripts.Console
             {
                 inputField.interactable = true;
                 SetInputText(inputField.text);
+                pointerDownHandler.gameObject.SetActive(false);
             }
             else
             {
                 inputField.interactable = false;
+                pointerDownHandler.gameObject.SetActive(true);
             }
         }
 
