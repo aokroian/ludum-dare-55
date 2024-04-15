@@ -1,7 +1,9 @@
 using System;
 using _Game.Scripts.GameLoop.Events;
+using _Game.Scripts.Map.Events;
 using _Game.Scripts.Story.Events;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -19,6 +21,8 @@ namespace _Game.Scripts.Common
         [Header("Characters")]
         [SerializeField] private AudioClip playerDamageSound;
         [SerializeField] private AudioClip playerGunPickupSound;
+        [SerializeField] private AudioClip playerCoinPickupSound;
+        [SerializeField] private AudioClip playerKeyPickupSound;
         [SerializeField] private AudioClip playerDeathSound;
         [SerializeField] private AudioClip bulletShotSound;
         [SerializeField] private AudioClip bulletHitSound;
@@ -32,6 +36,7 @@ namespace _Game.Scripts.Common
         [SerializeField] private AudioSource musicAudioSource2;
         [Header("GameLoop")]
         [SerializeField] private AudioSource gameEndAudioSource;
+        [SerializeField] private AudioClip doorOpenSound;
         [SerializeField] private AudioClip[] happyEndSounds;
         [SerializeField] private AudioClip[] sadEndSounds;
         [Space]
@@ -64,6 +69,9 @@ namespace _Game.Scripts.Common
             });
             _signalBus.Subscribe<PlayerWeaponPickupEvent>(PlayPlayerGunPickupSound);
             _signalBus.Subscribe<GameStartEvent>(PlayDefaultMusic);
+            _signalBus.Subscribe<PlayerCoinPickupEvent>(PlayPlayerCoinPickupSound);
+            _signalBus.Subscribe<PlayerKeyPickupEvent>(PlayPlayerKeyPickupSound);
+            _signalBus.Subscribe<PlayerDoorOpenEvent>(PlayDoorOpenSound);
         }
 
         private void PlayDefaultMusic()
@@ -145,6 +153,24 @@ namespace _Game.Scripts.Common
         {
             consoleAudioSource.transform.position = CamPosition;
             consoleAudioSource.PlayOneShot(playerGunPickupSound);
+        }
+
+        private void PlayPlayerCoinPickupSound()
+        {
+            consoleAudioSource.transform.position = CamPosition;
+            consoleAudioSource.PlayOneShot(playerCoinPickupSound);
+        }
+
+        private void PlayPlayerKeyPickupSound()
+        {
+            consoleAudioSource.transform.position = CamPosition;
+            consoleAudioSource.PlayOneShot(playerKeyPickupSound);
+        }
+
+        private void PlayDoorOpenSound()
+        {
+            consoleAudioSource.transform.position = CamPosition;
+            consoleAudioSource.PlayOneShot(doorOpenSound);
         }
 
         public void PlayTypeSound()

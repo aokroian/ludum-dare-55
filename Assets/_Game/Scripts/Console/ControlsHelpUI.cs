@@ -1,5 +1,6 @@
 using _Game.Scripts.Common;
 using _Game.Scripts.GameLoop.Events;
+using _Game.Scripts.Map.Events;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;

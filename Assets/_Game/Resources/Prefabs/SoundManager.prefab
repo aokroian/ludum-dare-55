@@ -314,6 +314,8 @@ MonoBehaviour:
   consoleAudioSource: {fileID: 2788177437409126413}
   playerDamageSound: {fileID: 8300000, guid: ddeb40e07fbbe4aec9aad446be337c3f, type: 3}
   playerGunPickupSound: {fileID: 8300000, guid: fe69fa4fe06ef46cd8c9066cb1d2db19, type: 3}
+  playerCoinPickupSound: {fileID: 8300000, guid: 0b2f025fcd2e14cb4871bcb8887bf0a3, type: 3}
+  playerKeyPickupSound: {fileID: 8300000, guid: 90ed18e7585c54c339832e9af0b5a0b1, type: 3}
   playerDeathSound: {fileID: 8300000, guid: 95734c7aea2804992ac4612bb0d8f464, type: 3}
   bulletShotSound: {fileID: 8300000, guid: 3f361b70621a24847b915f3cdabf0bd5, type: 3}
   bulletHitSound: {fileID: 8300000, guid: a858999b300d144028411d98d3e87168, type: 3}
@@ -324,6 +326,7 @@ MonoBehaviour:
   musicAudioSource1: {fileID: 4728240325872759723}
   musicAudioSource2: {fileID: 3017056178974920158}
   gameEndAudioSource: {fileID: 1397032128885565388}
+  doorOpenSound: {fileID: 8300000, guid: 4d533b013012444d5a45b19aa35e4851, type: 3}
   happyEndSounds:
   - {fileID: 8300000, guid: 0415a10c670514525b027470d02116cd, type: 3}
   - {fileID: 8300000, guid: eccad0f0217d647fb87de1a36281f312, type: 3}

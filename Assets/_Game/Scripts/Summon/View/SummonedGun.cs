@@ -1,6 +1,6 @@
 ﻿using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
 using _Game.Scripts.CharacterRelated.Actors.Combat;
-using _Game.Scripts.GameLoop.Events;
+using _Game.Scripts.Map.Events;
 using _Game.Scripts.Story;
 using _Game.Scripts.Summon.Data;
 using UnityEngine;

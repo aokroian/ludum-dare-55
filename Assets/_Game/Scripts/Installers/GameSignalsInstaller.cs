@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using _Game.Scripts.GameLoop.Events;
+﻿using _Game.Scripts.GameLoop.Events;
+using _Game.Scripts.Map.Events;
 using _Game.Scripts.Story.Events;
 using Zenject;
 
@@ -14,8 +14,12 @@ namespace _Game.Scripts.Installers
             Container.DeclareSignal<GameStartEvent>();
             Container.DeclareSignal<GameEndEvent>();
             Container.DeclareSignal<SummonPlayerEvent>();
-            Container.DeclareSignal<PlayerWeaponPickupEvent>();
             Container.DeclareSignal<EndingStartedEvent>();
+            
+            Container.DeclareSignal<PlayerWeaponPickupEvent>();
+            Container.DeclareSignal<PlayerCoinPickupEvent>();
+            Container.DeclareSignal<PlayerKeyPickupEvent>();
+            Container.DeclareSignal<PlayerDoorOpenEvent>();
         }
     }
 }

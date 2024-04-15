@@ -1,4 +1,4 @@
-namespace _Game.Scripts.GameLoop.Events
+namespace _Game.Scripts.Map.Events
 {
     public class PlayerWeaponPickupEvent
     {

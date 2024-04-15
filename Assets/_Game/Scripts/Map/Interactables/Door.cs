@@ -1,4 +1,5 @@
-﻿using _Game.Scripts.Summon.View;
+﻿using _Game.Scripts.Map.Events;
+using _Game.Scripts.Summon.View;
 using UnityEngine;
 using Zenject;
 
@@ -10,9 +11,12 @@ namespace _Game.Scripts.Map.Interactables
 
         [Inject]
         private RoomSwitcher _roomSwitcher;
+        [Inject]
+        private SignalBus _signalBus;
         
         public override async void Interact(SummonedPlayer player)
         {
+            _signalBus.Fire(new PlayerDoorOpenEvent());
             await _roomSwitcher.SwitchRoom(forward);
         }
     }
