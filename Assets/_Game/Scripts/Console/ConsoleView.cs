@@ -25,8 +25,8 @@ namespace _Game.Scripts.Console
         [Inject] private ConsoleCommandsHandler _commandsHandler;
         [Inject] private SoundManager _soundManager;
         [Inject] private GlobalInputSwitcher _globalInputSwitcher;
-
         private readonly List<string> _commandsHistory = new();
+        private bool IsInHistoryMode => _currentHistoryIndex != -1;
         private int _currentHistoryIndex = -1;
         private string _inputBeforeUsingHistory;
         private string _animationInputText;
@@ -172,8 +172,14 @@ namespace _Game.Scripts.Console
             else if (Input.GetKeyDown(KeyCode.DownArrow))
                 GoThroughHistory(1);
 
-            if (_currentHistoryIndex != -1)
+            if (IsInHistoryMode)
             {
+                if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    _currentHistoryIndex = -1;
+                    return;
+                }
+
                 SetInputText(_commandsHistory[_currentHistoryIndex]);
                 return;
             }
@@ -188,7 +194,7 @@ namespace _Game.Scripts.Console
         {
             if (direction == -1)
             {
-                if (_currentHistoryIndex == -1)
+                if (!IsInHistoryMode)
                 {
                     _inputBeforeUsingHistory = inputField.text;
                     _currentHistoryIndex = _commandsHistory.Count - 1;
@@ -198,11 +204,11 @@ namespace _Game.Scripts.Console
             }
             else
             {
-                if (_currentHistoryIndex != -1)
+                if (IsInHistoryMode)
                     _currentHistoryIndex++;
                 if (_currentHistoryIndex >= _commandsHistory.Count)
                     _currentHistoryIndex = -1;
-                if (_currentHistoryIndex == -1)
+                if (!IsInHistoryMode)
                     SetInputText(_inputBeforeUsingHistory);
             }
         }
