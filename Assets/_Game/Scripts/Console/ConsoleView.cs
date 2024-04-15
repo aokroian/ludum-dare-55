@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _Game.Scripts.Common;
+using _Game.Scripts.Summon.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ namespace _Game.Scripts.Console
     public class ConsoleView : MonoBehaviour
     {
         [SerializeField] private bool skipInitAnimation;
+        [SerializeField] private TextMeshProUGUI inputFieldSenderPart;
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private ScrollRect outputScrollRect;
         [SerializeField] private Transform outputContainer;
@@ -23,16 +25,25 @@ namespace _Game.Scripts.Console
         [Inject] private ConsoleCommandsHandler _commandsHandler;
         [Inject] private SoundManager _soundManager;
         [Inject] private GlobalInputSwitcher _globalInputSwitcher;
+        [Inject] private SummonedObjectsHolder _summonedObjectsHolder;
+
+        private float _lastSummonGameCommandTime;
+        private float _lastHelpTime;
+
         private readonly List<string> _commandsHistory = new();
         private bool IsInHistoryMode => _currentHistoryIndex != -1;
         private int _currentHistoryIndex = -1;
         private string _inputBeforeUsingHistory;
         private string _animationInputText;
 
+        private const string YouSenderText = "you@ld55:<cspace=.3em><voffset=-.3em>~</voffset>$";
+        private const string DevsSenderText = "devs@ld55:<cspace=.3em><voffset=-.3em>~</voffset>$";
+
         private void Awake()
         {
             foreach (var pointerDownHandler in pointerDownHandlers)
                 pointerDownHandler.OnPointerDownEvent += OnPointerDown;
+            _lastHelpTime = Time.time - 1000;
         }
 
         private void OnDestroy()
@@ -83,6 +94,7 @@ namespace _Game.Scripts.Console
             if (skipInitAnimation)
             {
                 inputField.SetTextWithoutNotify("summon game");
+                inputFieldSenderPart.text = YouSenderText;
                 OnCommandSubmit(inputField.text);
             }
             else
@@ -112,6 +124,9 @@ namespace _Game.Scripts.Console
 
         private void OnCommandProcessed(ConsoleOutputData data, string originalInputText)
         {
+            if (originalInputText == "summon game")
+                _lastSummonGameCommandTime = Time.time;
+
             DisplayNewOutputEntry(data);
             if (originalInputText != "")
                 _commandsHistory.Add(originalInputText);
@@ -167,6 +182,8 @@ namespace _Game.Scripts.Console
 
             if (!inputField.interactable) // if player controls are on
                 return;
+
+            CheckIfPlayerDoesntGetItAndHelp();
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
                 GoThroughHistory(-1);
@@ -251,6 +268,7 @@ namespace _Game.Scripts.Console
 
         private IEnumerator GameInitAnimation()
         {
+            inputFieldSenderPart.text = DevsSenderText;
             const string initMessage = "summon game";
             var delays = new[] { .25f, .25f, .1f, .35f, .3f, .7f, .15f, .25f, .28f, .2f, .2f };
             inputField.ActivateInputField();
@@ -267,6 +285,31 @@ namespace _Game.Scripts.Console
             yield return new WaitForSeconds(2.5f);
             _animationInputText = null;
             OnCommandSubmit(initMessage);
+            inputFieldSenderPart.text = YouSenderText;
+        }
+
+
+        private void CheckIfPlayerDoesntGetItAndHelp()
+        {
+            if (Mathf.Abs(Time.time - _lastHelpTime) > 20)
+            {
+                if (Time.time - _lastSummonGameCommandTime > 10 && _summonedObjectsHolder?.rooms.Count == 0)
+                {
+                    HelpWithRoomCommand();
+                }
+            }
+        }
+
+        private void HelpWithRoomCommand()
+        {
+            var outputData = new ConsoleOutputData
+            {
+                senderText = "[devs]: ",
+                messageText =
+                    $"not that there's a {"room".WrapInColor(Colors.KeywordMessageColor)} to actually play....",
+            };
+            DisplayNewOutputEntry(outputData);
+            _lastHelpTime = Time.time;
         }
     }
 }
