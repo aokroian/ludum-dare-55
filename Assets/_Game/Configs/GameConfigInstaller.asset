@@ -47,6 +47,6 @@ MonoBehaviour:
       CustomObjectId: 
     - EndingId: rejectedByPrincess
       EndingName: '"Premature Prince"'
-      EndingDescription: Easy come, easy go.
+      EndingDescription: You were supposed to fight for me!
       IsGoodEnding: 0
       CustomObjectId: 
