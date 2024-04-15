@@ -15,10 +15,20 @@ namespace _Game.Scripts.Summon.Summoners
             // TODO: try..catch. We need to enable input even if something goes wrong
             var startPosition = summonParams._camera.transform.position;
             var position = CalcRoomPosition();
-            await MoveCameraToAsync(summonParams._camera, position);
+            var isFirstRoom = _objectsHolder.rooms.Count == 0;
+            
+            if (!isFirstRoom)
+                await MoveCameraToAsync(summonParams._camera, position);
+            
+            await Task.Delay(100);
             var room = SummonRoom(position);
             Summoned(room);
-            await MoveCameraToAsync(summonParams._camera, startPosition);
+            
+            // TODO: Animate spawn instead
+            await Task.Delay(300);
+            
+            if (!isFirstRoom)
+                await MoveCameraToAsync(summonParams._camera, startPosition);
         }
 
         private SummonedRoom SummonRoom(Vector3 position)
