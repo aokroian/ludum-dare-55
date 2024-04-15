@@ -65,7 +65,7 @@ namespace _Game.Scripts.Story
                 var ending = await ev.StartEvent(_diContainer);
                 if (ending != null)
                 {
-                    _endingService.ShowEnding(ending);
+                    await _endingService.ShowEnding(ending);
                     return true;
                 }
             }

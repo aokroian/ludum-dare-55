@@ -7,5 +7,6 @@ namespace _Game.Scripts.GameState.Data
     public class PermanentGameState
     {
         public List<string> knownCommands;
+        public List<string> knownEndings;
     }
 }

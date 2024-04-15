@@ -39,7 +39,7 @@ namespace _Game.Scripts.GameLoop
             // TODO: Restart everything
             _objectsHolder.ClearEverything();
             
-            _cameraWrapper.ResetPosition();
+            _cameraWrapper.ResetCamera();
             
             _eventsChecker.CheckingEnabled = true;
             _inputSwitcher.ToggleLockToConsole(false);

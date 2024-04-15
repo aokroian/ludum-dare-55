@@ -1,6 +1,7 @@
 ﻿using _Game.Scripts.Common;
 using _Game.Scripts.Console;
 using _Game.Scripts.GameState;
+using _Game.Scripts.Story.Ending;
 using _Game.Scripts.Summon;
 using _Game.Scripts.Summon.Data;
 using _Game.Scripts.Summon.View;
@@ -16,7 +17,6 @@ namespace _Game.Scripts.GameLoop
         [SerializeField] private ControlsHelpUI controlsHelpUI;
         [SerializeField] private SummonedRoomPlaceholder roomPlaceholder;
         
-
         [Inject]
         private IGameStateProvider _gameStateProvider;
         [Inject]
@@ -29,6 +29,8 @@ namespace _Game.Scripts.GameLoop
         private GameLoopController _gameLoopController;
         [Inject]
         private SummonedObjectsHolder _objectsHolder;
+        [Inject]
+        private EndingService _endingService;
 
         private void Start()
         {
@@ -38,6 +40,7 @@ namespace _Game.Scripts.GameLoop
 
             _consoleCommmandsHandler.Inject(_gameStateProvider.PermanentGameState, _gameLoopController);
             InitSummonerService();
+            InitEndingService();
             InitViews();
         }
 
@@ -46,6 +49,11 @@ namespace _Game.Scripts.GameLoop
             // Init dungeon with default data
             var summoners = FindObjectsByType<Summoner>(FindObjectsSortMode.None);
             _summonerService.Init(summoners, _globalInputSwitcher);
+        }
+
+        private void InitEndingService()
+        {
+            _endingService.Init(_gameStateProvider.PermanentGameState);
         }
 
         private void InitViews()
