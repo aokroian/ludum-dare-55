@@ -31,10 +31,6 @@ MonoBehaviour:
       EndingName: '"Double the Damsel"'
       EndingDescription: Twice the princess, twice the confusion!
       IsGoodEnding: 0
-    - EndingId: manyPrincesses
-      EndingName: '"Double the Damsel"'
-      EndingDescription: Twice the princess, twice the confusion!
-      IsGoodEnding: 0
     - EndingId: tooManyRooms
       EndingName: '"Architect''s Agony"'
       EndingDescription: Built a dungeon so big, you couldn't afford the light bulbs!
