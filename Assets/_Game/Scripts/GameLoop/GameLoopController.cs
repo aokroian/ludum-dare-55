@@ -43,6 +43,7 @@ namespace _Game.Scripts.GameLoop
         {
             IsGameEnded = true;
             _eventsChecker.CheckingEnabled = false;
+            _inputSwitcher.EnableAllInput();
             _inputSwitcher.ToggleLockToConsole(true);
         }
 
