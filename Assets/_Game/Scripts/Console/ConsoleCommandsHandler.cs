@@ -1,6 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.Common;
+using _Game.Scripts.GameLoop;
 using _Game.Scripts.GameState.Data;
 using _Game.Scripts.Summon;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace _Game.Scripts.Console
     {
         private readonly ConsoleCommand[] _allCommands = ConsoleHelpers.GetAllCommands();
         private readonly SummonerService _summonerService;
+        private GameLoopController _gameLoopController;
         public PermanentGameState PermanentGameState { get; private set; }
 
         public ConsoleCommandsHandler(SummonerService summonerService)
@@ -42,8 +44,9 @@ namespace _Game.Scripts.Console
         }
 
 
-        public void InjectKnownCommands(PermanentGameState permanentGameState)
+        public void Inject(PermanentGameState permanentGameState, GameLoopController gameLoopController)
         {
+            _gameLoopController = gameLoopController;
             PermanentGameState = permanentGameState;
         }
 
@@ -82,17 +85,13 @@ namespace _Game.Scripts.Console
                 return new ConsoleOutputData
                 {
                     senderText = "[game]: ",
-                    messageText = "Command Failed. Try summoning help or something...",
+                    messageText =
+                        $"Cannot execute command.\nTry {"summon help".WrapInColor(Colors.KeywordMessageColor)} or something...",
                     type = ConsoleOutputType.Info
                 };
             }
 
             var isHelpCommand = command.mainWord == "help";
-            if (!PermanentGameState.knownCommands.IsContainsCommand(command))
-            {
-                PermanentGameState.knownCommands.Add(command.mainWord);
-                SaveKnownCommands();
-            }
 
             var outputData = new ConsoleOutputData
             {
@@ -100,6 +99,23 @@ namespace _Game.Scripts.Console
                 messageText = $"{inputText} command executed",
                 type = ConsoleOutputType.Info
             };
+
+            var isHelpFromDevs = false;
+            if (!isHelpCommand && _gameLoopController.IsGameEnded &&
+                inputText != "summon game")
+            {
+                outputData.senderText = "[devs]: ";
+                outputData.messageText = "Dude, in a situation like this, " +
+                                         $"\nthe only thing you can do is {"summon game".WrapInColor(Colors.KeywordMessageColor)}";
+                isHelpFromDevs = true;
+            }
+
+            if (!PermanentGameState.knownCommands.IsContainsCommand(command))
+            {
+                PermanentGameState.knownCommands.Add(command.mainWord);
+                SaveKnownCommands();
+            }
+
 
             if (isHelpCommand)
             {
@@ -112,7 +128,7 @@ namespace _Game.Scripts.Console
                     outputData.messageText += $"summon {knownCommand}";
                 }
             }
-            else
+            else if (!isHelpFromDevs)
             {
                 var summonResponse = _summonerService.Summon(command.mainWord);
                 if (summonResponse != null)

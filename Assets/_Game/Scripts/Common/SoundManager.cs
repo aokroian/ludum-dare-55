@@ -1,9 +1,7 @@
-using System;
 using _Game.Scripts.GameLoop.Events;
 using _Game.Scripts.Map.Events;
 using _Game.Scripts.Story.Events;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;

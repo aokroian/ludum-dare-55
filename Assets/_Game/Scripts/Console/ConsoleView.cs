@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _Game.Scripts.Common;
+using _Game.Scripts.GameLoop;
 using _Game.Scripts.Summon.Data;
 using TMPro;
 using UnityEngine;
@@ -26,6 +27,7 @@ namespace _Game.Scripts.Console
         [Inject] private SoundManager _soundManager;
         [Inject] private GlobalInputSwitcher _globalInputSwitcher;
         [Inject] private SummonedObjectsHolder _summonedObjectsHolder;
+        [Inject] private GameLoopController _gameLoopController;
 
         private float _lastSummonGameCommandTime;
         private float _lastHelpTime;
@@ -293,7 +295,8 @@ namespace _Game.Scripts.Console
         {
             if (Mathf.Abs(Time.time - _lastHelpTime) > 20)
             {
-                if (Time.time - _lastSummonGameCommandTime > 10 && _summonedObjectsHolder?.rooms.Count == 0)
+                if (!_gameLoopController.IsGameEnded && Time.time - _lastSummonGameCommandTime > 10 &&
+                    _summonedObjectsHolder?.RealRoomCount == 0)
                 {
                     HelpWithRoomCommand();
                 }

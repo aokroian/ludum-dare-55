@@ -26,6 +26,8 @@ namespace _Game.Scripts.GameLoop
         [Inject]
         private GlobalInputSwitcher _globalInputSwitcher;
         [Inject]
+        private GameLoopController _gameLoopController;
+        [Inject]
         private SummonedObjectsHolder _objectsHolder;
 
         private void Start()
@@ -34,7 +36,7 @@ namespace _Game.Scripts.GameLoop
             _globalInputSwitcher.Init(consoleView, controlsHelpUI);
             _objectsHolder.Init(roomPlaceholder);
 
-            _consoleCommmandsHandler.InjectKnownCommands(_gameStateProvider.PermanentGameState);
+            _consoleCommmandsHandler.Inject(_gameStateProvider.PermanentGameState, _gameLoopController);
             InitSummonerService();
             InitViews();
         }
