@@ -105,7 +105,7 @@ namespace _Game.Scripts.Console
                 inputText != "summon game")
             {
                 outputData.senderText = "[devs]: ";
-                outputData.messageText = "Dude, in a situation like this, " +
+                outputData.messageText = "In a situation like this, " +
                                          $"\nthe only thing you can do is {"summon game".WrapInColor(Colors.KeywordMessageColor)}";
                 isHelpFromDevs = true;
             }

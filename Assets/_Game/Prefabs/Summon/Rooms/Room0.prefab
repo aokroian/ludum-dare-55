@@ -245,6 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Message>k__BackingField: Open door
   forward: 1
+  isLocked: 0
 --- !u!61 &5997222265651241631
 BoxCollider2D:
   m_ObjectHideFlags: 0
