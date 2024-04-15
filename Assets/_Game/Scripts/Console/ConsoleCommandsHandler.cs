@@ -59,7 +59,7 @@ namespace _Game.Scripts.Console
             {
                 outputData = new ConsoleOutputData
                 {
-                    senderText = "game@ld-55:$ ",
+                    senderText = "[game]: ",
                     messageText = $"Unknown error: {e.Message}",
                     type = ConsoleOutputType.Error
                 };
@@ -81,8 +81,8 @@ namespace _Game.Scripts.Console
             {
                 return new ConsoleOutputData
                 {
-                    senderText = "game@ld-55:$ ",
-                    messageText = "Invalid command format. Try summoning help",
+                    senderText = "[game]: ",
+                    messageText = "Command Failed. Try summoning help or something...",
                     type = ConsoleOutputType.Info
                 };
             }
@@ -96,8 +96,8 @@ namespace _Game.Scripts.Console
 
             var outputData = new ConsoleOutputData
             {
-                senderText = "game@ld-55:$ ",
-                messageText = $"summon {command.mainWord} command executed successfully",
+                senderText = "[game]: ",
+                messageText = $"{inputText} command executed",
                 type = ConsoleOutputType.Info
             };
 
@@ -107,7 +107,9 @@ namespace _Game.Scripts.Console
                 for (var i = 0; i < PermanentGameState.knownCommands.Count; i++)
                 {
                     var knownCommand = PermanentGameState.knownCommands[i];
-                    outputData.messageText += $"\nsummon {knownCommand}";
+                    if (i != 0)
+                        outputData.messageText += "\n";
+                    outputData.messageText += $"summon {knownCommand}";
                 }
             }
             else
