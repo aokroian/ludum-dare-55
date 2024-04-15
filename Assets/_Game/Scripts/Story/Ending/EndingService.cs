@@ -52,14 +52,24 @@ namespace _Game.Scripts.Story.Ending
             
             _signalBus.Fire(new EndingStartedEvent(ending));
             Debug.LogWarning("Ending " + endingId);
-            await ShowEndingAnimation();
+            await ShowEndingAnimation(ending);
             await ShowEndingInfo(ending);
             _signalBus.Fire(new GameEndEvent(endingId));
         }
 
-        private async Task ShowEndingAnimation()
+        private async Task ShowEndingAnimation(EndingData endingData)
         {
-            await _cameraWrapper.ZoomIn(_objectsHolder.GetPlayer().transform.position);
+            if (string.IsNullOrWhiteSpace(endingData.CustomObjectId))
+            {
+                var target = _objectsHolder.GetPlayer()?.transform.position ?? Vector3.zero;
+                await _cameraWrapper.ZoomIn(target);
+            }
+            else
+            {
+                var target = _objectsHolder.GetObjectById(endingData.CustomObjectId)?.transform.position ??
+                             Vector3.zero;
+                await _cameraWrapper.ZoomIn(target);
+            }
         }
 
         private async Task ShowEndingInfo(EndingData endingData)
@@ -91,6 +101,7 @@ namespace _Game.Scripts.Story.Ending
             public string EndingName;
             public string EndingDescription;
             public bool IsGoodEnding;
+            public string CustomObjectId;
         }
     }
 }

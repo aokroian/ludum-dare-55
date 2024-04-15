@@ -2,6 +2,7 @@
 using _Game.Scripts.Common;
 using _Game.Scripts.GameLoop.Events;
 using _Game.Scripts.Summon.View;
+using UnityEngine;
 using Zenject;
 
 namespace _Game.Scripts.Summon.Summoners
@@ -17,10 +18,18 @@ namespace _Game.Scripts.Summon.Summoners
         {
             var player = _diContainer.InstantiatePrefabForComponent<SummonedPlayer>(prefabs[0]);
 
-            // if (_objectsHolder.Rooms.Count > 0)
-                _objectsHolder.Rooms[0].AddObject(player);
-            // else
-            //     _objectsHolder.objectsOutOfRoom.Add(player);
+            var createdPlayer = _objectsHolder.GetPlayer();
+            if (createdPlayer != null)
+            {
+                player.transform.position = createdPlayer.transform.position -
+                                            (createdPlayer.transform.position.normalized * 1.2f);
+            }
+            else
+            {
+                player.transform.position = _objectsHolder.Rooms[0].transform.position + Vector3.down * 2f;
+            }
+
+            _objectsHolder.Rooms[0].AddObject(player);
 
             _objectsHolder.SetPlayerRef(player);
 

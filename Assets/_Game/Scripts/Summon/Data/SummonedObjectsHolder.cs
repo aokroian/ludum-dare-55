@@ -13,6 +13,7 @@ namespace _Game.Scripts.Summon.Data
         public int RealRoomCount => _rooms.Count;
 
         private SummonedPlayer _summonedPlayer;
+        private SummonedPrincess _summonedPrincess;
         
         private List<SummonedRoom> _placeholderRooms;
 
@@ -66,16 +67,43 @@ namespace _Game.Scripts.Summon.Data
         {
             _summonedPlayer = player;
         }
+        
+        public void SetPrincessRef(SummonedPrincess princess)
+        {
+            _summonedPrincess = princess;
+        }
 
         public SummonedPlayer GetPlayer()
         {
             return _summonedPlayer;
         }
 
+        public SummonedPrincess GetPrincess()
+        {
+            return _summonedPrincess;
+        }
+
+        public SummonedObject GetObjectById(string id)
+        {
+            foreach (var room in Rooms)
+            {
+                foreach (var obj in room.Objects)
+                {
+                    if (obj.Id == id)
+                        return obj;
+                }
+            }
+
+            return null;
+        }
+
         public void ClearEverything()
         {
             Object.Destroy(_summonedPlayer);
             _summonedPlayer = null;
+            
+            Object.Destroy(_summonedPrincess);
+            _summonedPrincess = null;
             
             foreach (var obj in ObjectsOutOfRoom)
             {
