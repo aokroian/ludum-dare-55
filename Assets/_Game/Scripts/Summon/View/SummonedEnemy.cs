@@ -49,6 +49,7 @@ namespace _Game.Scripts.Summon.View
                 return;
             var spawned = Instantiate(lootOptions[lootIndex], _room.transform);
             spawned.Init(_playerInventoryService);
+            spawned.transform.position = transform.position;
         }
 
         public void Say(string message)
