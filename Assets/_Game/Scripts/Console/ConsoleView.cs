@@ -33,9 +33,9 @@ namespace _Game.Scripts.Console
             _globalInputSwitcher.SwitchToConsole();
         }
 
-        public void ToggleConsoleInput(bool isOn)
+        public void OnGlobalInputSwitch(bool isConsoleInputOn)
         {
-            if (isOn)
+            if (isConsoleInputOn)
             {
                 inputField.interactable = true;
                 inputField.ActivateInputField();

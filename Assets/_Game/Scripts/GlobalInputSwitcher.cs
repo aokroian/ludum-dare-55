@@ -43,8 +43,9 @@ namespace _Game.Scripts
                 return;
             if (_isLockedToConsole)
                 return;
-            TogglePlayerInput(true);
-            _consoleView.ToggleConsoleInput(false);
+            if (!TogglePlayerInput(true))
+                return;
+            _consoleView.OnGlobalInputSwitch(false);
             _isPlayerInputActive = true;
         }
 
@@ -59,8 +60,9 @@ namespace _Game.Scripts
         {
             if (_consoleView == null)
                 return;
-            TogglePlayerInput(false);
-            _consoleView.ToggleConsoleInput(true);
+            if (!TogglePlayerInput(false))
+                return;
+            _consoleView.OnGlobalInputSwitch(true);
             _isPlayerInputActive = false;
         }
 
@@ -77,13 +79,14 @@ namespace _Game.Scripts
             TogglePlayerInput(false);
         }
 
-        private void TogglePlayerInput(bool isOn)
+        private bool TogglePlayerInput(bool isOn)
         {
             var player = _objectsHolder.GetPlayer();
             if (player == null)
-                return;
+                return false;
 
             player.gameObject.GetComponent<PlayerActorInput>().ToggleInput(isOn);
+            return true;
         }
     }
 }
