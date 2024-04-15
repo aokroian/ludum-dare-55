@@ -40,11 +40,11 @@ namespace _Game.Scripts.Summon
         
         public struct SummonParams
         {
-            public readonly CameraWrapper _camera;
+            public readonly CameraWrapper camera;
 
             public SummonParams(CameraWrapper camera)
             {
-                _camera = camera;
+                this.camera = camera;
             }
         }
         

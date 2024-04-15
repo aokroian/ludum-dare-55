@@ -42,7 +42,7 @@ namespace _Game.Scripts.Summon
             _inputEnabledHandler.DisableAllInput();
 
             var task = summoner.Summon(GetSummonParams());
-            var startCameraPosition = GetSummonParams()._camera.transform.position;
+            var startCameraPosition = GetSummonParams().camera.transform.position;
             task.GetAwaiter().OnCompleted(() => SummonCompleted(task, startCameraPosition));
 
             return result;
@@ -58,7 +58,7 @@ namespace _Game.Scripts.Summon
             if (task.IsFaulted)
             {
                 Debug.LogError(task.Exception);
-                GetSummonParams()._camera.transform.position = cameraPosition;
+                GetSummonParams().camera.transform.position = cameraPosition;
             }
             else if (task.IsCanceled)
             {
@@ -70,7 +70,7 @@ namespace _Game.Scripts.Summon
 
         private Summoner.SummonParams GetSummonParams()
         {
-            if (_summonParams._camera == null)
+            if (_summonParams.camera == null)
                 _summonParams = new Summoner.SummonParams(_cameraWrapper);
 
             return _summonParams;

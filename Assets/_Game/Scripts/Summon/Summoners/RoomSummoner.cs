@@ -13,12 +13,12 @@ namespace _Game.Scripts.Summon.Summoners
         public override async Task Summon(SummonParams summonParams)
         {
             // TODO: try..catch. We need to enable input even if something goes wrong
-            var startPosition = summonParams._camera.transform.position;
+            var startPosition = summonParams.camera.transform.position;
             var position = CalcRoomPosition();
             var isFirstRoom = _objectsHolder.rooms.Count == 0;
             
             if (!isFirstRoom)
-                await MoveCameraToAsync(summonParams._camera, position);
+                await MoveCameraToAsync(summonParams.camera, position);
             
             await Task.Delay(100);
             var room = SummonRoom(position);
@@ -28,7 +28,7 @@ namespace _Game.Scripts.Summon.Summoners
             await Task.Delay(300);
             
             if (!isFirstRoom)
-                await MoveCameraToAsync(summonParams._camera, startPosition);
+                await MoveCameraToAsync(summonParams.camera, startPosition);
         }
 
         private SummonedRoom SummonRoom(Vector3 position)

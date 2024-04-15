@@ -7,7 +7,8 @@ namespace _Game.Scripts.Summon.View
 {
     public class SummonedRoom : SummonedObject
     {
-        [field: SerializeField] public  Collider2D WalkArea { get; private set; }
+        [field: SerializeField] public Transform PrincessSpawnPoint { get; private set; }
+        [field: SerializeField] public Collider2D WalkArea { get; private set; }
         [field: SerializeField] public Collider2D PatrolArea { get; private set; }
         
         [field: SerializeField] public RoomType RoomType { get; private set; }
