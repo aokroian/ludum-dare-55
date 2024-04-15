@@ -271,7 +271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Id>k__BackingField: princess
-  prefabs: []
+  prefabs:
+  - {fileID: 6962412621536817185, guid: ab9559ba84f219a47978365a30199f98, type: 3}
 --- !u!1 &8813114400094327124
 GameObject:
   m_ObjectHideFlags: 0

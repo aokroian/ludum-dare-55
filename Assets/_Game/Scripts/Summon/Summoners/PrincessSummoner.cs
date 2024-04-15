@@ -15,16 +15,22 @@ namespace _Game.Scripts.Summon.Summoners
             var spawnPosition = room.PrincessSpawnPoint != null
                 ? room.PrincessSpawnPoint.position
                 : room.transform.position;
-            await MoveCameraToAsync(summonParams.camera, spawnPosition);
+            
+            if (roomIndex > 0)
+                await MoveCameraToAsync(summonParams.camera, spawnPosition);
+            
             var princess = _diContainer.InstantiatePrefabForComponent<SummonedPrincess>(prefab);
             princess.transform.position = spawnPosition;
+            room.AddObject(princess);
             await Task.Delay(300);
-            await MoveCameraToAsync(summonParams.camera, startPosition);
+            
+            if (roomIndex > 0)
+                await MoveCameraToAsync(summonParams.camera, startPosition);
         }
 
         private SummonedPrincess GetPrincessPrefab(SummonedRoom room)
         {
-            return _diContainer.InstantiatePrefabForComponent<SummonedPrincess>(prefabs[0]);
+            return prefabs[0] as SummonedPrincess;
         }
     }
 }
