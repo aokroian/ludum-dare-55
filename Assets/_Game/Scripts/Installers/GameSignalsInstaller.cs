@@ -1,9 +1,10 @@
-﻿using _Game.Scripts.GameLoop.Events;
+﻿using System.ComponentModel;
+using _Game.Scripts.GameLoop.Events;
 using Zenject;
 
 namespace _Game.Scripts.Installers
 {
-    public class GameSignalsInstaller: Installer<GameSignalsInstaller>
+    public class GameSignalsInstaller : Installer<GameSignalsInstaller>
     {
         public override void InstallBindings()
         {
@@ -11,6 +12,8 @@ namespace _Game.Scripts.Installers
 
             Container.DeclareSignal<GameStartEvent>();
             Container.DeclareSignal<GameEndEvent>();
+            Container.DeclareSignal<SummonPlayerEvent>();
+            Container.DeclareSignal<SummonPlayerWeaponEvent>();
         }
     }
 }

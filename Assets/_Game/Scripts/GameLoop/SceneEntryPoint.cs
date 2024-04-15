@@ -9,6 +9,7 @@ namespace _Game.Scripts.GameLoop
     public class SceneEntryPoint : MonoBehaviour
     {
         [SerializeField] private ConsoleView consoleView;
+        [SerializeField] private ControlsHelpUI controlsHelpUI;
 
         [Inject]
         private IGameStateProvider _gameStateProvider;
@@ -22,7 +23,7 @@ namespace _Game.Scripts.GameLoop
         private void Start()
         {
             _gameStateProvider.Load();
-            _globalInputSwitcher.Init(consoleView);
+            _globalInputSwitcher.Init(consoleView, controlsHelpUI);
 
             _consoleCommmandsHandler.InjectKnownCommands(_gameStateProvider.PermanentGameState);
             InitSummonerService();

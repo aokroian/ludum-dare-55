@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using _Game.Scripts.GameLoop.Events;
 using _Game.Scripts.Summon.View;
 using Zenject;
 
@@ -8,6 +9,8 @@ namespace _Game.Scripts.Summon.Summoners
     {
         [Inject]
         private GlobalInputSwitcher _globalInputSwitcher;
+        [Inject] 
+        private SignalBus _signalBus;
 
         public override async Task Summon(SummonParams summonParams)
         {
@@ -21,7 +24,8 @@ namespace _Game.Scripts.Summon.Summoners
             _objectsHolder.SetPlayerRef(player);
 
             Summoned(player);
-            _globalInputSwitcher.SwitchToPlayerInput();
+            _signalBus.Fire(new SummonPlayerEvent());
+            _globalInputSwitcher.SwitchToPlayerControls();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace _Game.Scripts.Console
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            _globalInputSwitcher.SwitchToConsole();
+            _globalInputSwitcher.SwitchToConsoleControls();
         }
 
         public void OnGlobalInputSwitch(bool isConsoleInputOn)

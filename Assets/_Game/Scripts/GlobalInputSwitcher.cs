@@ -10,17 +10,19 @@ namespace _Game.Scripts
     {
         private SummonedObjectsHolder _objectsHolder;
         private ConsoleView _consoleView;
+        private ControlsHelpUI _controlsHelpUI;
         private bool _isPlayerInputActive;
         private bool _isLockedToConsole;
 
         public GlobalInputSwitcher(SummonedObjectsHolder objectsHolder)
         {
             _objectsHolder = objectsHolder;
-            SwitchToConsole();
+            SwitchToConsoleControls();
         }
 
-        public void Init(ConsoleView consoleView)
+        public void Init(ConsoleView consoleView, ControlsHelpUI controlsHelpUI)
         {
+            _controlsHelpUI = controlsHelpUI;
             _consoleView = consoleView;
         }
 
@@ -28,16 +30,17 @@ namespace _Game.Scripts
         {
             if (_consoleView == null)
                 return;
-            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+            var isSwitchingInput = false;
+            if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown(KeyCode.RightAlt))
             {
                 if (_isPlayerInputActive)
-                    SwitchToConsole();
+                    SwitchToConsoleControls();
                 else
-                    SwitchToPlayerInput();
+                    SwitchToPlayerControls();
             }
         }
 
-        public void SwitchToPlayerInput()
+        public void SwitchToPlayerControls()
         {
             if (_consoleView == null)
                 return;
@@ -46,23 +49,25 @@ namespace _Game.Scripts
             if (!TogglePlayerInput(true))
                 return;
             _consoleView.OnGlobalInputSwitch(false);
+            _controlsHelpUI.OnGlobalInputSwitch(false);
             _isPlayerInputActive = true;
         }
 
         public void ToggleLockToConsole(bool isLocked)
         {
             if (isLocked)
-                SwitchToConsole();
+                SwitchToConsoleControls();
             _isLockedToConsole = isLocked;
         }
 
-        public void SwitchToConsole()
+        public void SwitchToConsoleControls()
         {
             if (_consoleView == null)
                 return;
             if (!TogglePlayerInput(false))
                 return;
             _consoleView.OnGlobalInputSwitch(true);
+            _controlsHelpUI.OnGlobalInputSwitch(true);
             _isPlayerInputActive = false;
         }
 
