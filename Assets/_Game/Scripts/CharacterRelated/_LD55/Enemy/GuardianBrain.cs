@@ -46,6 +46,11 @@ namespace _Game.Scripts.CharacterRelated._LD55.Enemy
             
             _isChaserInit = true;
         }
+
+        public void CalmDown()
+        {
+            _isInit = false;
+        }
         
         private void Update()
         {

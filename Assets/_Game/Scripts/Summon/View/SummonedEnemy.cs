@@ -4,16 +4,21 @@ using _Game.Scripts.CharacterRelated._LD55.Enemy;
 using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
 using _Game.Scripts.Map;
 using _Game.Scripts.Story;
+using _Game.Scripts.Story.Events;
 using _Game.Scripts.Story.GameplayEvents;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace _Game.Scripts.Summon.View
 {
     public class SummonedEnemy : SummonedObject
     {
         [SerializeField] private SimpleLoot[] lootOptions;
-        [Inject] private PlayerInventoryService _playerInventoryService;
+        [Inject]
+        private PlayerInventoryService _playerInventoryService;
+        [Inject]
+        private SignalBus _signalBus;
 
         private IGameplayEvent _currentEvent;
         private SummonedRoom _room;
@@ -21,6 +26,7 @@ namespace _Game.Scripts.Summon.View
         private void Start()
         {
             GetComponent<ActorHealth>().OnDeath += _ => OnDeath();
+            _signalBus.Subscribe<EndingStartedEvent>(OnEnding);
         }
 
         public override IGameplayEvent GetEventIfAny()
@@ -40,6 +46,11 @@ namespace _Game.Scripts.Summon.View
             CurrentRoom.RemoveObject(this);
             DropLoot();
             Destroy(gameObject);
+        }
+
+        private void OnEnding()
+        {
+            GetComponent<GuardianBrain>().CalmDown();
         }
 
         private void DropLoot()
@@ -69,6 +80,11 @@ namespace _Game.Scripts.Summon.View
             base.OnMovedToRoom(room);
             _room = room;
             GetComponent<GuardianBrain>().Init(this, room.WalkArea, room.PatrolArea);
+        }
+
+        private void OnDestroy()
+        {
+            _signalBus.TryUnsubscribe<EndingStartedEvent>(OnEnding);
         }
     }
 }

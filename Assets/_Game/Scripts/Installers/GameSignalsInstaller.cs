@@ -21,7 +21,7 @@ namespace _Game.Scripts.Installers
             Container.DeclareSignal<PlayerCoinPickupEvent>();
             Container.DeclareSignal<PlayerKeyPickupEvent>();
             Container.DeclareSignal<PlayerDoorOpenEvent>();
-            Container.DeclareSignal<PlayerInventoryChangedEvent>();
+            Container.DeclareSignal<PlayerInventoryChangedEvent>().OptionalSubscriber();
         }
     }
 }
