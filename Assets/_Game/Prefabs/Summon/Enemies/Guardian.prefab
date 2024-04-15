@@ -209,7 +209,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Id>k__BackingField: enemy
   lootOptions:
-  - {fileID: 5600986168886087248, guid: 28af52e5d84cf460688998e024fcc7eb, type: 3}
   - {fileID: 2276652278234549168, guid: ebdebb9c17717455b8c4241685eaad7c, type: 3}
 --- !u!1 &2076148241642960808
 GameObject:
