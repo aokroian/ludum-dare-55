@@ -63,20 +63,9 @@ namespace _Game.Scripts.Summon.View
                 return new ManyPlayersGameplayEvent(this, MessageService);
             }
             
-            if (playerRoomIndex > 3 && _triggeredEventRoomIndex <= 3)
+            if (ObjectsHolder.RealRoomCount > 3)
             {
-                _triggeredEventRoomIndex = playerRoomIndex;
-                return new TextGameplayEvent(PrepareMessage("Am I lost?"), null);
-            }
-            if (playerRoomIndex > 4 && _triggeredEventRoomIndex <= 4)
-            {
-                _triggeredEventRoomIndex = playerRoomIndex;
-                return new TextGameplayEvent(PrepareMessage("So tired..."), null);
-            }
-            if (playerRoomIndex > 5 && _triggeredEventRoomIndex <= 5)
-            {
-                _triggeredEventRoomIndex = playerRoomIndex;
-                return new TextGameplayEvent(PrepareMessage("I'm definitely lost"), "tooManyRooms");
+                return new TextGameplayEvent(PrepareMessage("This is too many rooms"), "tooManyRooms");
             }
 
             if (!_objectiveSaid)
