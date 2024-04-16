@@ -57,7 +57,8 @@ namespace _Game.Scripts.Common
             }
         }
 
-        private float _lastConsoleSoundTime;
+        private float _lastConsoleTypingSoundTime;
+        private float _lastNotificationSoundTime;
 
         private void Awake()
         {
@@ -113,6 +114,9 @@ namespace _Game.Scripts.Common
 
         public void PlayNotificationSound()
         {
+            if (Time.time - _lastNotificationSoundTime < .2f)
+                return;
+            _lastNotificationSoundTime = Time.time;
             consoleAudioSource.transform.position = CamPosition;
             consoleAudioSource.PlayOneShot(notificationSound);
         }
@@ -173,7 +177,7 @@ namespace _Game.Scripts.Common
 
         public void PlayTypeSound()
         {
-            if (Time.time - _lastConsoleSoundTime < 0.05f)
+            if (Time.time - _lastConsoleTypingSoundTime < 0.05f)
                 return;
             // slightly randomize pitch to make typing sound more natural
             var pitch = Random.Range(0.93f, 1.07f);
@@ -181,16 +185,16 @@ namespace _Game.Scripts.Common
             consoleAudioSource.transform.position = CamPosition;
             consoleAudioSource.pitch = pitch;
             consoleAudioSource.PlayOneShot(typingSounds[rand]);
-            _lastConsoleSoundTime = Time.time;
+            _lastConsoleTypingSoundTime = Time.time;
         }
 
         public void PlaySubmitKeySound()
         {
-            if (Time.time - _lastConsoleSoundTime < 0.05f)
+            if (Time.time - _lastConsoleTypingSoundTime < 0.05f)
                 return;
             consoleAudioSource.transform.position = CamPosition;
             consoleAudioSource.PlayOneShot(submitKeySound);
-            _lastConsoleSoundTime = Time.time;
+            _lastConsoleTypingSoundTime = Time.time;
         }
     }
 }
