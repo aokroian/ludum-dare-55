@@ -12,6 +12,7 @@ TagManager:
   - AI_Walk_Area
   - Fit_Player_To_Door_Area
   - UICamera
+  - Walls
   layers:
   - Default
   - TransparentFX

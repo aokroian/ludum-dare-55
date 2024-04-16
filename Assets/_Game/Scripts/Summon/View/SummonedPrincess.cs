@@ -4,6 +4,7 @@ using _Game.Scripts.Story;
 using _Game.Scripts.Story.Characters.Princess;
 using _Game.Scripts.Story.Events;
 using _Game.Scripts.Story.GameplayEvents;
+using _Game.Scripts.Summon.Enums;
 using NUnit.Framework;
 using UnityEngine;
 using Zenject;
@@ -93,6 +94,8 @@ namespace _Game.Scripts.Summon.View
             base.OnMovedToRoom(room);
             _princessWandering = GetComponent<PrincessWandering>();
             _princessWandering.Init(room.WalkArea);
+            if (room.RoomType == RoomType.Prison)
+                _princessWandering.TogglePause(true);
         }
         
         private void OnEnding()
