@@ -9,22 +9,18 @@ namespace _Game.Scripts.Common
 
         public static string WrapInColor(this string text, string colorHex)
         {
-            return $"<color=#{colorHex}>{text}</color>";
+            return colorHex != null ? $"<color=#{colorHex}>{text}</color>" : text;
         }
 
         public static string GetSpeakerColor(string speakerId)
         {
-            switch (speakerId)
+            return speakerId switch
             {
-                case "hero":
-                    return HeroMessageColor;
-                case "princess":
-                    return PrincessMessageColor;
-                case "enemy":
-                    return EnemyMessageColor;
-                default:
-                    return "FFFFFF";
-            }
+                "hero" => HeroMessageColor,
+                "princess" => PrincessMessageColor,
+                "enemy" => EnemyMessageColor,
+                _ => null
+            };
         }
     }
 }

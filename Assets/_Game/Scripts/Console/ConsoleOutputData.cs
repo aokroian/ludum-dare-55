@@ -4,6 +4,6 @@ namespace _Game.Scripts.Console
     {
         public string senderText;
         public string messageText;
-        public ConsoleOutputType type;
+        public ConsoleOutputType type = ConsoleOutputType.Info;
     }
 }

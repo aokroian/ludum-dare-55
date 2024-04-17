@@ -8,6 +8,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using static _Game.Scripts.Common.ConsoleStrings;
 
 namespace _Game.Scripts.Console
 {
@@ -37,9 +38,6 @@ namespace _Game.Scripts.Console
         private int _currentHistoryIndex = -1;
         private string _inputBeforeUsingHistory;
         private string _animationInputText;
-
-        private const string YouSenderText = "you@ld55:<cspace=.3em><voffset=-.3em>~</voffset>$";
-        private const string DevsSenderText = "devs@ld55:<cspace=.3em><voffset=-.3em>~</voffset>$";
 
         private void Awake()
         {
@@ -71,6 +69,7 @@ namespace _Game.Scripts.Console
             }
             else
             {
+                outputScrollRect.verticalNormalizedPosition = 0;
                 inputField.interactable = false;
                 foreach (var pointerDownHandler in pointerDownHandlers)
                     pointerDownHandler.gameObject.SetActive(true);
@@ -95,8 +94,8 @@ namespace _Game.Scripts.Console
 
             if (skipInitAnimation)
             {
-                inputField.SetTextWithoutNotify("summon game");
-                inputFieldSenderPart.text = YouSenderText;
+                inputField.SetTextWithoutNotify(GameRestartCommand);
+                inputFieldSenderPart.text = YouMainInputSenderText;
                 OnCommandSubmit(inputField.text);
             }
             else
@@ -126,7 +125,7 @@ namespace _Game.Scripts.Console
 
         private void OnCommandProcessed(ConsoleOutputData data, string originalInputText)
         {
-            if (originalInputText == "summon game")
+            if (originalInputText == GameRestartCommand)
                 _lastSummonGameCommandTime = Time.time;
 
             DisplayNewOutputEntry(data);
@@ -270,24 +269,23 @@ namespace _Game.Scripts.Console
 
         private IEnumerator GameInitAnimation()
         {
-            inputFieldSenderPart.text = DevsSenderText;
-            const string initMessage = "summon game";
+            inputFieldSenderPart.text = DevsMainInputSenderText;
             var delays = new[] { .25f, .25f, .1f, .35f, .3f, .7f, .15f, .25f, .28f, .2f, .2f };
             inputField.ActivateInputField();
             inputField.Select();
             _animationInputText = "";
             yield return new WaitForSeconds(2.5f);
-            for (var i = 0; i < initMessage.Length; i++)
+            for (var i = 0; i < GameRestartCommand.Length; i++)
             {
                 _soundManager.PlayTypeSound();
-                _animationInputText = initMessage.Take(i + 1).Aggregate("", (current, c) => current + c);
+                _animationInputText = GameRestartCommand.Take(i + 1).Aggregate("", (current, c) => current + c);
                 yield return new WaitForSeconds(delays[i]);
             }
 
             yield return new WaitForSeconds(2.5f);
             _animationInputText = null;
-            OnCommandSubmit(initMessage);
-            inputFieldSenderPart.text = YouSenderText;
+            OnCommandSubmit(GameRestartCommand);
+            inputFieldSenderPart.text = YouMainInputSenderText;
         }
 
 
@@ -307,9 +305,8 @@ namespace _Game.Scripts.Console
         {
             var outputData = new ConsoleOutputData
             {
-                senderText = "[devs]: ",
-                messageText =
-                    $"not that there's a {"room".WrapInColor(Colors.KeywordMessageColor)} to actually play....",
+                senderText = GetSpeakerString(DevsSpeakerName),
+                messageText = GetHintAboutSummoningRoomMessage()
             };
             DisplayNewOutputEntry(outputData);
             _lastHelpTime = Time.time;
