@@ -1224,7 +1224,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 6214791599492821762, guid: 41e3485b91e314a33a1647203df9e891, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1355,7 +1355,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2735085158337305575}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99751925
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2087,6 +2087,7 @@ MonoBehaviour:
   inputFieldSenderPart: {fileID: 7394520738134079949}
   inputField: {fileID: 173090450246272171}
   output: {fileID: 1402979652212061526}
+  maxConsoleOutputLines: 100
   consoleScrollRect: {fileID: 1498206715183586601}
   contentSizeFitters:
   - {fileID: 1762292551063045000}
@@ -2221,7 +2222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -418.9999}
+  m_AnchoredPosition: {x: 0, y: -418.9997}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &3668390463260757237

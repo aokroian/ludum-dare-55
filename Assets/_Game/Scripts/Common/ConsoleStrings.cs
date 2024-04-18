@@ -15,6 +15,8 @@ namespace _Game.Scripts.Common
         public const string GameSpeakerName = "game";
         public const string DevsSpeakerName = "devs";
 
+        public const string OutputEndInvisibleSymbol = "\u200e ";
+
         public const string UnknownErrorMessage = "Unknown error: ";
 
         public static string GetDiscoveredCommandsMessage(PermanentGameState permanentGameState)

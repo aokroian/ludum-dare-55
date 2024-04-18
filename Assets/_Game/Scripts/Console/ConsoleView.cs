@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace _Game.Scripts.Console
         [SerializeField] private TextMeshProUGUI inputFieldSenderPart;
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private TMP_InputField output;
+        [SerializeField] private int maxConsoleOutputLines = 150;
         [SerializeField] private ScrollRect consoleScrollRect;
         [SerializeField] private ContentSizeFitter[] contentSizeFitters;
         [SerializeField] private PointerDownHandler[] pointerDownHandlers;
@@ -36,6 +38,7 @@ namespace _Game.Scripts.Console
         private int _currentHistoryIndex = -1;
         private string _inputBeforeUsingHistory;
         private string _animationInputText;
+        private int _outputsCount;
 
         private void Awake()
         {
@@ -111,6 +114,11 @@ namespace _Game.Scripts.Console
                 return;
             _currentHistoryIndex = -1;
             _soundManager.PlaySubmitKeySound();
+
+            text = text.Trim();
+            // delete \u200E symbol 
+            text = text.Replace("\u200E", "");
+
             _commandsHandler.SubmitCommand(text.ToLower(), OnCommandProcessed);
 
             inputField.caretPosition = inputField.text.Length;
@@ -131,11 +139,21 @@ namespace _Game.Scripts.Console
 
         public void DisplayNewOutputEntry(ConsoleOutputData data, bool isFromSpeaker = false)
         {
-            var addedText = $"\n{data.senderText}{data.messageText}";
+            var addedText = $"\n{data.senderText}{data.messageText}{OutputEndInvisibleSymbol}";
             output.text += addedText;
             consoleScrollRect.verticalNormalizedPosition = 0;
+            _outputsCount++;
             Invoke(nameof(ToggleUI), .05f);
-            // todo: delete first entry if toot many
+
+            if (_outputsCount > maxConsoleOutputLines)
+            {
+                // remove text from the beginning of output.text to the first ConsoleOutputEndInvisibleSymbol symbol
+                var firstInvisibleSymbolIndex =
+                    output.text.IndexOf(OutputEndInvisibleSymbol, StringComparison.Ordinal) +
+                    OutputEndInvisibleSymbol.Length;
+                output.text = output.text[firstInvisibleSymbolIndex..];
+                _outputsCount--;
+            }
         }
 
         private void ToggleUI()
@@ -199,6 +217,15 @@ namespace _Game.Scripts.Console
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 AutoComplete();
+            }
+
+            // clear output
+            if ((Input.GetKey(KeyCode.LeftCommand) || Input.GetKey(KeyCode.RightCommand)) &&
+                Input.GetKeyDown(KeyCode.K))
+            {
+                output.text = "";
+                _outputsCount = 0;
+                SetInputText(inputField.text);
             }
         }
 
