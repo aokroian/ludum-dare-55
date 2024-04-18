@@ -17,11 +17,9 @@ namespace _Game.Scripts.Console
         [SerializeField] private bool skipInitAnimation;
         [SerializeField] private TextMeshProUGUI inputFieldSenderPart;
         [SerializeField] private TMP_InputField inputField;
-        [SerializeField] private ScrollRect outputScrollRect;
-        [SerializeField] private Transform outputContainer;
+        [SerializeField] private TMP_InputField output;
+        [SerializeField] private ScrollRect consoleScrollRect;
         [SerializeField] private ContentSizeFitter[] contentSizeFitters;
-        [SerializeField] private ConsoleOutputEntry outputEntryPrefab;
-        [SerializeField] private int maxOutputEntries = 100;
         [SerializeField] private PointerDownHandler[] pointerDownHandlers;
 
         [Inject] private ConsoleCommandsHandler _commandsHandler;
@@ -69,7 +67,7 @@ namespace _Game.Scripts.Console
             }
             else
             {
-                outputScrollRect.verticalNormalizedPosition = 0;
+                consoleScrollRect.verticalNormalizedPosition = 0;
                 inputField.interactable = false;
                 foreach (var pointerDownHandler in pointerDownHandlers)
                     pointerDownHandler.gameObject.SetActive(true);
@@ -86,11 +84,8 @@ namespace _Game.Scripts.Console
             inputField.onValueChanged.RemoveAllListeners();
             inputField.onValueChanged.AddListener(OnInputValueChanged);
 
-            outputScrollRect.verticalNormalizedPosition = 0;
-            foreach (Transform c in outputContainer)
-            {
-                Destroy(c.gameObject);
-            }
+            consoleScrollRect.verticalNormalizedPosition = 0;
+            output.text = "";
 
             if (skipInitAnimation)
             {
@@ -106,7 +101,7 @@ namespace _Game.Scripts.Console
 
         private void OnInputValueChanged(string currentInputValue)
         {
-            outputScrollRect.verticalNormalizedPosition = 0;
+            consoleScrollRect.verticalNormalizedPosition = 0;
             _currentHistoryIndex = -1;
         }
 
@@ -136,13 +131,11 @@ namespace _Game.Scripts.Console
 
         public void DisplayNewOutputEntry(ConsoleOutputData data, bool isFromSpeaker = false)
         {
-            var spawnedOutputEntry = Instantiate(outputEntryPrefab, outputContainer);
-            ((RectTransform)spawnedOutputEntry.transform).pivot = new Vector2(0, 1);
-            spawnedOutputEntry.Init(data, isFromSpeaker);
-            if (outputContainer.childCount > maxOutputEntries)
-                Destroy(outputContainer.GetChild(0).gameObject);
-            outputScrollRect.verticalNormalizedPosition = 0;
+            var addedText = $"\n{data.senderText}{data.messageText}";
+            output.text += addedText;
+            consoleScrollRect.verticalNormalizedPosition = 0;
             Invoke(nameof(ToggleUI), .05f);
+            // todo: delete first entry if toot many
         }
 
         private void ToggleUI()
