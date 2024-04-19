@@ -16,7 +16,7 @@ namespace _Game.Scripts.Summon.View
         [Inject]
         public MessageService MessageService;
 
-        protected SummonedRoom CurrentRoom;
+        public SummonedRoom CurrentRoom { get; protected set; }
 
         private Vector3 _initialScale;
 

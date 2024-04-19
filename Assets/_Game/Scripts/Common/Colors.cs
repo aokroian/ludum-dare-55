@@ -6,6 +6,7 @@ namespace _Game.Scripts.Common
         public const string PrincessMessageColor = "00FF33";
         public const string KeywordMessageColor = "FFEF00";
         public const string EnemyMessageColor = "D600FF";
+        public const string BardMessageColor = "D7A1A1";
 
         public static string WrapInColor(this string text, string colorHex)
         {
@@ -19,6 +20,7 @@ namespace _Game.Scripts.Common
                 "hero" => HeroMessageColor,
                 "princess" => PrincessMessageColor,
                 "enemy" => EnemyMessageColor,
+                "bard" => BardMessageColor,
                 _ => null
             };
         }

@@ -57,7 +57,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -71,11 +71,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.025215209, y: -0.36713687}
+  m_Offset: {x: -0.018609762, y: -0.27277422}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -85,7 +85,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.06683242, y: 0.08253032}
+  m_Size: {x: 0.34425855, y: 0.27125558}
   m_EdgeRadius: 0
 --- !u!50 &5994238476079842234
 Rigidbody2D:
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76299955ba7b44ba8437288c0696acdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 
+  <Id>k__BackingField: bard
   brain: {fileID: 8165662233331576401}
   musicClip: {fileID: 0}
 --- !u!114 &8165662233331576401

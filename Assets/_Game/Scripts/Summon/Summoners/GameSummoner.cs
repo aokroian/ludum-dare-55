@@ -6,7 +6,6 @@ namespace _Game.Scripts.Summon.Summoners
 {
     public class GameSummoner: Summoner
     {
-        
         [Inject]
         private SignalBus _signalBus;
 

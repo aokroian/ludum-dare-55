@@ -22,6 +22,7 @@ namespace _Game.Scripts.Installers
             Container.DeclareSignal<PlayerKeyPickupEvent>();
             Container.DeclareSignal<PlayerDoorOpenEvent>();
             Container.DeclareSignal<PlayerInventoryChangedEvent>().OptionalSubscriber();
+            Container.DeclareSignal<BardSummonedEvent>().OptionalSubscriber();
         }
     }
 }

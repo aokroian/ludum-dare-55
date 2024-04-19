@@ -7,7 +7,6 @@ using _Game.Scripts.GameLoop;
 using _Game.Scripts.Summon.Data;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 using Zenject;
 using static _Game.Scripts.Common.ConsoleStrings;
@@ -45,7 +44,7 @@ namespace _Game.Scripts.Console
         private int _currentOutputCaretPosition;
 
         private bool IsListeningToConsoleInputShortcuts => !_isFocusedOnOutput && _isGlobalConsoleInput;
-        private bool _isGlobalConsoleInput;
+        private bool _isGlobalConsoleInput = true;
         private bool _isFocusedOnOutput;
 
         private void Awake()
@@ -82,6 +81,7 @@ namespace _Game.Scripts.Console
 
         public void Init()
         {
+            _isFocusedOnOutput = false;
             _commandsHistory.Clear();
             inputField.onSubmit.RemoveAllListeners();
             inputField.onSubmit.AddListener(OnCommandSubmit);
@@ -91,7 +91,10 @@ namespace _Game.Scripts.Console
             inputField.onValueChanged.AddListener(OnInputValueChanged);
 
             inputField.onSelect.RemoveAllListeners();
-            inputField.onSelect.AddListener(_ => { _isFocusedOnOutput = false; });
+            inputField.onSelect.AddListener(_ =>
+            {
+                _isFocusedOnOutput = false;
+            });
 
             output.onSelect.RemoveAllListeners();
             output.onSelect.AddListener(_ =>

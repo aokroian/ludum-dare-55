@@ -14,7 +14,7 @@ namespace _Game.Scripts.CharacterRelated.Actors.InputThings.AI
 
         private void Init()
         {
-            _wanderState = new WanderState(WalkArea,transform, SetMovement, SetLook, timeToWander, timeToIdle);
+            _wanderState = new WanderState(WalkArea,transform, SetMovement, SetLook, timeToIdle);
             _isInit = true;
         }
 

@@ -26,7 +26,7 @@ namespace _Game.Scripts.CharacterRelated._LD55.Enemy
         {
             _summonedEnemy = summonedEnemy;
             WalkArea = walkArea;
-            _wanderState = new WanderState(patrolArea, transform, SetMovement, SetLook, 1f, 0.5f);
+            _wanderState = new WanderState(patrolArea, transform, SetMovement, SetLook, 0.5f);
             
             _isInit = true;
         }

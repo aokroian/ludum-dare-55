@@ -73,7 +73,12 @@ namespace _Game.Scripts.Common
             _signalBus.Subscribe<PlayerDoorOpenEvent>(PlayDoorOpenSound);
         }
 
-        private void PlayDefaultMusic()
+        public void PlayBardMusic(AudioClip musicClip)
+        {
+            FadeInMusic(musicClip, 1f);
+        }
+
+        public void PlayDefaultMusic()
         {
             FadeInMusic(defaultMusic, 0.6f);
         }

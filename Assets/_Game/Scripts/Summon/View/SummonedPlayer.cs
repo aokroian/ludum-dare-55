@@ -13,6 +13,7 @@ namespace _Game.Scripts.Summon.View
     public class SummonedPlayer : SummonedObject
     {
         [SerializeField] private Canvas hudCanvas;
+        [field: SerializeField] public Collider2D bardWalkArea;
         private bool _died;
         [Inject]
         private SignalBus _signalBus;
@@ -62,7 +63,7 @@ namespace _Game.Scripts.Summon.View
             {
                 return new ManyPlayersGameplayEvent(this, MessageService);
             }
-            
+
             if (ObjectsHolder.RealRoomCount > 3)
             {
                 return new TextGameplayEvent(PrepareMessage("This is too many rooms"), "tooManyRooms");
@@ -76,11 +77,11 @@ namespace _Game.Scripts.Summon.View
                         $"I must save the {"princess".WrapInColor(Colors.KeywordMessageColor)}! this is my duty!"),
                     null);
             }
-            
+
 
             return null;
         }
-        
+
         private List<TextGameplayEvent.TextEventParams> PrepareMessage(string message)
         {
             var p = new TextGameplayEvent.TextEventParams()
@@ -90,7 +91,7 @@ namespace _Game.Scripts.Summon.View
                 Speaker = this,
                 Text = message
             };
-            return new List<TextGameplayEvent.TextEventParams>() {p};
+            return new List<TextGameplayEvent.TextEventParams>() { p };
         }
     }
 }

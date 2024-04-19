@@ -10,13 +10,13 @@ namespace _Game.Scripts.Summon.View
         [field: SerializeField] public Transform PrincessSpawnPoint { get; private set; }
         [field: SerializeField] public Collider2D WalkArea { get; private set; }
         [field: SerializeField] public Collider2D PatrolArea { get; private set; }
-        
+
         [field: SerializeField] public RoomType RoomType { get; private set; }
         [field: SerializeField] public Transform entrance { get; private set; }
         [field: SerializeField] public Transform exit { get; private set; }
-        
+
         public IReadOnlyList<SummonedObject> Objects => _objects;
-        
+
         protected List<SummonedObject> _objects = new();
 
         public override IGameplayEvent GetEventIfAny()
@@ -29,20 +29,33 @@ namespace _Game.Scripts.Summon.View
             _objects.Add(summonedObject);
             summonedObject.OnMovedToRoom(this);
         }
-        
+
         public void RemoveObject(SummonedObject summonedObject)
         {
             _objects.Remove(summonedObject);
         }
-        
+
         public void DestroyObjects()
         {
             foreach (var summonedObject in _objects)
             {
                 Destroy(summonedObject.gameObject);
             }
+
             _objects.Clear();
         }
-        
+
+        public Vector3 GetRandomPointInsideWalkArea()
+        {
+            Vector2 point;
+            do
+            {
+                var x = Random.Range(WalkArea.bounds.min.x, WalkArea.bounds.max.x);
+                var y = Random.Range(WalkArea.bounds.min.y, WalkArea.bounds.max.y);
+                point = new Vector2(x, y);
+            } while (!WalkArea.OverlapPoint(point));
+
+            return point;
+        }
     }
 }
