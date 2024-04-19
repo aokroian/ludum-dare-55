@@ -125,6 +125,7 @@ namespace _Game.Scripts.Console
 
         private void OnInputValueChanged(string currentInputValue)
         {
+            _isFocusedOnOutput = false;
             consoleScrollRect.verticalNormalizedPosition = 0;
             _currentHistoryIndex = -1;
         }
