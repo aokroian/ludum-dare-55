@@ -168,7 +168,7 @@ MonoBehaviour:
     gamewdasummon gamewdasummon gamewdasummon game
   m_CaretBlinkRate: 0.48
   m_CaretWidth: 3
-  m_ReadOnly: 1
+  m_ReadOnly: 0
   m_RichText: 1
   m_GlobalFontAsset: {fileID: 0}
   m_OnFocusSelectAll: 0
@@ -1355,7 +1355,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2735085158337305575}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99751925
+  m_Size: 0.9998422
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2222,7 +2222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -418.9997}
+  m_AnchoredPosition: {x: 0, y: -418.99994}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &3668390463260757237

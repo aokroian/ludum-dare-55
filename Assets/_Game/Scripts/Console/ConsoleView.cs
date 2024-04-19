@@ -7,6 +7,7 @@ using _Game.Scripts.GameLoop;
 using _Game.Scripts.Summon.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 using Zenject;
 using static _Game.Scripts.Common.ConsoleStrings;
@@ -40,6 +41,13 @@ namespace _Game.Scripts.Console
         private string _animationInputText;
         private int _outputsCount;
 
+        private string _currentOutputText = "";
+        private int _currentOutputCaretPosition;
+
+        private bool IsListeningToConsoleInputShortcuts => !_isFocusedOnOutput && _isGlobalConsoleInput;
+        private bool _isGlobalConsoleInput;
+        private bool _isFocusedOnOutput;
+
         private void Awake()
         {
             foreach (var pointerDownHandler in pointerDownHandlers)
@@ -58,23 +66,18 @@ namespace _Game.Scripts.Console
             _globalInputSwitcher.SwitchToConsoleControls();
         }
 
-
         public void OnGlobalInputSwitch(bool isConsoleInputOn)
         {
+            _isFocusedOnOutput = false;
+            _isGlobalConsoleInput = isConsoleInputOn;
+            inputField.interactable = isConsoleInputOn;
+            foreach (var pointerDownHandler in pointerDownHandlers)
+                pointerDownHandler.gameObject.SetActive(!isConsoleInputOn);
+
             if (isConsoleInputOn)
-            {
-                inputField.interactable = true;
                 SetInputText(inputField.text);
-                foreach (var pointerDownHandler in pointerDownHandlers)
-                    pointerDownHandler.gameObject.SetActive(false);
-            }
             else
-            {
                 consoleScrollRect.verticalNormalizedPosition = 0;
-                inputField.interactable = false;
-                foreach (var pointerDownHandler in pointerDownHandlers)
-                    pointerDownHandler.gameObject.SetActive(true);
-            }
         }
 
         public void Init()
@@ -87,8 +90,26 @@ namespace _Game.Scripts.Console
             inputField.onValueChanged.RemoveAllListeners();
             inputField.onValueChanged.AddListener(OnInputValueChanged);
 
+            inputField.onSelect.RemoveAllListeners();
+            inputField.onSelect.AddListener(_ => { _isFocusedOnOutput = false; });
+
+            output.onSelect.RemoveAllListeners();
+            output.onSelect.AddListener(_ =>
+            {
+                _currentOutputCaretPosition = output.caretPosition;
+                _isFocusedOnOutput = true;
+            });
+
+            output.onValueChanged.RemoveAllListeners();
+            output.onValueChanged.AddListener(_ =>
+            {
+                output.SetTextWithoutNotify(_currentOutputText);
+                output.caretPosition = _currentOutputCaretPosition;
+                _isFocusedOnOutput = true;
+            });
+
             consoleScrollRect.verticalNormalizedPosition = 0;
-            output.text = "";
+            output.SetTextWithoutNotify(_currentOutputText);
 
             if (skipInitAnimation)
             {
@@ -140,7 +161,8 @@ namespace _Game.Scripts.Console
         public void DisplayNewOutputEntry(ConsoleOutputData data, bool isFromSpeaker = false)
         {
             var addedText = $"\n{data.senderText}{data.messageText}{OutputEndInvisibleSymbol}";
-            output.text += addedText;
+            _currentOutputText += addedText;
+            output.SetTextWithoutNotify(_currentOutputText);
             consoleScrollRect.verticalNormalizedPosition = 0;
             _outputsCount++;
             Invoke(nameof(ToggleUI), .05f);
@@ -149,9 +171,9 @@ namespace _Game.Scripts.Console
             {
                 // remove text from the beginning of output.text to the first ConsoleOutputEndInvisibleSymbol symbol
                 var firstInvisibleSymbolIndex =
-                    output.text.IndexOf(OutputEndInvisibleSymbol, StringComparison.Ordinal) +
+                    _currentOutputText.IndexOf(OutputEndInvisibleSymbol, StringComparison.Ordinal) +
                     OutputEndInvisibleSymbol.Length;
-                output.text = output.text[firstInvisibleSymbolIndex..];
+                output.SetTextWithoutNotify(_currentOutputText[firstInvisibleSymbolIndex..]);
                 _outputsCount--;
             }
         }
@@ -192,7 +214,7 @@ namespace _Game.Scripts.Console
                 return;
             }
 
-            if (!inputField.interactable) // if player controls are on
+            if (!IsListeningToConsoleInputShortcuts) // if player controls are on
                 return;
 
             CheckIfPlayerDoesntGetItAndHelp();
@@ -223,7 +245,8 @@ namespace _Game.Scripts.Console
             if ((Input.GetKey(KeyCode.LeftCommand) || Input.GetKey(KeyCode.RightCommand)) &&
                 Input.GetKeyDown(KeyCode.K))
             {
-                output.text = "";
+                _currentOutputText = "";
+                output.SetTextWithoutNotify(_currentOutputText);
                 _outputsCount = 0;
                 SetInputText(inputField.text);
             }
