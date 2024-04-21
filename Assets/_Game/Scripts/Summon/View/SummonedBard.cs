@@ -5,6 +5,7 @@ using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
 using _Game.Scripts.Common;
 using _Game.Scripts.Story;
 using _Game.Scripts.Story.GameplayEvents;
+using _Game.Scripts.Summon.Data;
 using UnityEngine;
 using Zenject;
 
@@ -16,15 +17,18 @@ namespace _Game.Scripts.Summon.View
         [SerializeField] private AudioClip musicClip;
 
         [Inject] private SoundManager _soundManager;
+        [Inject] private SummonedObjectsHolder _objectsHolder;
         [Inject] private SignalBus _signalBus;
         private IGameplayEvent _currentEvent;
         private bool _summonedEventMessageSaid;
         private int _roomIndex;
+        private ActorHealth _actorHealth;
 
         protected override void Start()
         {
             base.Start();
-            GetComponent<ActorHealth>().OnDeath += _ => OnDeath();
+            _actorHealth = GetComponent<ActorHealth>();
+            _actorHealth.OnDeath += _ => OnDeath();
             _signalBus.Subscribe<BardSummonedEvent>(OnAnotherBardSpawned);
         }
 
@@ -37,6 +41,8 @@ namespace _Game.Scripts.Summon.View
                 return ev;
             }
 
+            // if (_actorHealth.IsDead)
+            // return null;
             if (!_summonedEventMessageSaid && ObjectsHolder.GetPlayer() != null)
             {
                 Say("Listen to my beautiful music!");
@@ -55,15 +61,19 @@ namespace _Game.Scripts.Summon.View
             if (bardSummonedEvent.Bard == this)
                 return;
             Say("...why did you need another one");
-            GetComponent<ActorHealth>().TakeDamage(100000);
+            _actorHealth.TakeDamage(100000);
         }
 
         private void OnDeath()
         {
             // stop music here
-            _signalBus.TryUnsubscribe<BardSummonedEvent>(OnAnotherBardSpawned);
+            _signalBus.Unsubscribe<BardSummonedEvent>(OnAnotherBardSpawned);
+
             if (CurrentRoom != null)
                 CurrentRoom.RemoveObject(this);
+            else
+                _objectsHolder.ObjectsOutOfRoom.Remove(this);
+
             _soundManager.PlayDefaultMusic();
             Destroy(gameObject);
         }
