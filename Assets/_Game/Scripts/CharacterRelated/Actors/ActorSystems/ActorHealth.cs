@@ -95,7 +95,6 @@ namespace _Game.Scripts.CharacterRelated.Actors.ActorSystems
                 if (isPlayer)
                     _soundManager.PlayPlayerDeathSound(audioSource);
                 OnDeath?.Invoke(this);
-                return;
             }
 
             OnHealthChanged?.Invoke(_currentHealth, _currentMaxHealth);

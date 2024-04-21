@@ -75,7 +75,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.018609762, y: -0.27277422}
+  m_Offset: {x: -0.007887453, y: -0.032010227}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -85,7 +85,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.34425855, y: 0.27125558}
+  m_Size: {x: 0.5489567, y: 0.7527836}
   m_EdgeRadius: 0
 --- !u!50 &5994238476079842234
 Rigidbody2D:
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer: 0
   invincibilityTime: 0
-  defaultMaxHealth: 100
+  defaultMaxHealth: 50
   actorStatsController: {fileID: 0}
   audioSource: {fileID: 0}
 --- !u!114 &-7800894590172054192
@@ -196,7 +196,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Id>k__BackingField: bard
   brain: {fileID: 8165662233331576401}
-  musicClip: {fileID: 0}
+  musicClip: {fileID: 8300000, guid: 5c99157496be4453aa93e1971add84ea, type: 3}
+  deathSound: {fileID: 8300000, guid: 174d8bc367c2a4b0c9615fe88f72a614, type: 3}
 --- !u!114 &8165662233331576401
 MonoBehaviour:
   m_ObjectHideFlags: 0

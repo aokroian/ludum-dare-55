@@ -14,15 +14,15 @@ namespace _Game.Scripts.Summon.Data
 
         private SummonedPlayer _summonedPlayer;
         private SummonedPrincess _summonedPrincess;
-        
+
         private List<SummonedRoom> _placeholderRooms;
 
         private readonly List<SummonedRoom> _rooms = new();
-        
+
         public void Init(SummonedRoomPlaceholder roomPlaceholder)
         {
             roomPlaceholder.InitPlaceholder(ObjectsOutOfRoom);
-            _placeholderRooms = new List<SummonedRoom> {roomPlaceholder};
+            _placeholderRooms = new List<SummonedRoom> { roomPlaceholder };
         }
 
         public void AddRoom(SummonedRoom room)
@@ -33,9 +33,10 @@ namespace _Game.Scripts.Summon.Data
                 {
                     room.AddObject(obj);
                 }
+
                 ObjectsOutOfRoom.Clear();
             }
-                
+
             _rooms.Add(room);
         }
 
@@ -46,12 +47,13 @@ namespace _Game.Scripts.Summon.Data
                 if (room.Objects.FirstOrDefault(it => it == _summonedPlayer) != null)
                     return room;
             }
+
             if (Rooms.Count > 0)
                 return Rooms[0];
 
             return null;
         }
-        
+
         public int GetPlayerRoomIndex()
         {
             for (int i = 0; i < _rooms.Count; i++)
@@ -67,7 +69,7 @@ namespace _Game.Scripts.Summon.Data
         {
             _summonedPlayer = player;
         }
-        
+
         public void SetPrincessRef(SummonedPrincess princess)
         {
             _summonedPrincess = princess;
@@ -111,7 +113,7 @@ namespace _Game.Scripts.Summon.Data
 
             return result;
         }
-        
+
         public int GetRoomIndexForObject(SummonedObject obj)
         {
             for (int i = 0; i < _rooms.Count; i++)
@@ -127,25 +129,36 @@ namespace _Game.Scripts.Summon.Data
         {
             Object.Destroy(_summonedPlayer);
             _summonedPlayer = null;
-            
+
             Object.Destroy(_summonedPrincess);
             _summonedPrincess = null;
-            
+
             foreach (var obj in ObjectsOutOfRoom)
             {
                 Object.Destroy(obj.gameObject);
             }
+
             ObjectsOutOfRoom.Clear();
-            
+
             foreach (var room in _rooms)
             {
                 foreach (var obj in room.Objects)
                 {
                     Object.Destroy(obj.gameObject);
                 }
+
                 Object.Destroy(room.gameObject);
             }
+
             _rooms.Clear();
+        }
+
+        public bool HasSummonedObjectOfType<T>(bool onlyInRooms = false)
+        {
+            var hasInRooms = Rooms.Any(r => r != null && r.Objects.Any(obj => obj is T));
+            return onlyInRooms
+                ? hasInRooms
+                : ObjectsOutOfRoom.Any(obj => obj is T) || hasInRooms;
         }
     }
 }

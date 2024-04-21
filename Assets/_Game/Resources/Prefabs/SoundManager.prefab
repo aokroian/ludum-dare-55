@@ -312,6 +312,8 @@ MonoBehaviour:
   universalSummonSound: {fileID: 8300000, guid: 50e23fdb7f91e466db3678e69eaa9767, type: 3}
   notificationSound: {fileID: 8300000, guid: 5d525a1bb27df4722b88962872778e45, type: 3}
   consoleAudioSource: {fileID: 2788177437409126413}
+  bardMusic: {fileID: 8300000, guid: 5c99157496be4453aa93e1971add84ea, type: 3}
+  bardDeathSound: {fileID: 8300000, guid: 174d8bc367c2a4b0c9615fe88f72a614, type: 3}
   playerDamageSound: {fileID: 8300000, guid: ddeb40e07fbbe4aec9aad446be337c3f, type: 3}
   playerGunPickupSound: {fileID: 8300000, guid: fe69fa4fe06ef46cd8c9066cb1d2db19, type: 3}
   playerCoinPickupSound: {fileID: 8300000, guid: 0b2f025fcd2e14cb4871bcb8887bf0a3, type: 3}

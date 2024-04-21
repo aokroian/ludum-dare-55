@@ -1,6 +1,10 @@
+using System;
+using _Game.Scripts.CharacterRelated._LD55.Events;
 using _Game.Scripts.GameLoop.Events;
 using _Game.Scripts.Map.Events;
 using _Game.Scripts.Story.Events;
+using _Game.Scripts.Summon.Data;
+using _Game.Scripts.Summon.View;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
@@ -17,6 +21,8 @@ namespace _Game.Scripts.Common
         [SerializeField] private AudioClip notificationSound;
         [SerializeField] private AudioSource consoleAudioSource;
         [Header("Characters")]
+        [SerializeField] private AudioClip bardMusic;
+        [SerializeField] private AudioClip bardDeathSound;
         [SerializeField] private AudioClip playerDamageSound;
         [SerializeField] private AudioClip playerGunPickupSound;
         [SerializeField] private AudioClip playerCoinPickupSound;
@@ -43,6 +49,8 @@ namespace _Game.Scripts.Common
 
         [Inject]
         private SignalBus _signalBus;
+        [Inject]
+        private SummonedObjectsHolder _objectsHolder;
 
         private AudioSource _activeMusicSource;
 
@@ -60,30 +68,106 @@ namespace _Game.Scripts.Common
         private float _lastConsoleTypingSoundTime;
         private float _lastNotificationSoundTime;
 
+        private bool _isMusicChangeNeeded;
+        private bool _isGameRunning;
+        private bool _isBardSummoned;
+        private bool _isPlayerInStore;
+        private bool _isPlayerSummoned;
+        private bool _isPlayingDefaultMusic;
+
         private void Awake()
         {
             _signalBus.Subscribe<EndingStartedEvent>(eventData =>
             {
+                _isMusicChangeNeeded = true;
+                _isGameRunning = false;
                 PlayGameEndingSound(eventData.EndingData.IsGoodEnding);
             });
             _signalBus.Subscribe<PlayerWeaponPickupEvent>(PlayPlayerGunPickupSound);
-            _signalBus.Subscribe<GameStartEvent>(PlayDefaultMusic);
+            _signalBus.Subscribe<GameStartEvent>(_ =>
+            {
+                _isMusicChangeNeeded = true;
+                _isGameRunning = true;
+            });
+            _signalBus.Subscribe<BardSummonedEvent>(_ =>
+            {
+                _isBardSummoned = true;
+                _isMusicChangeNeeded = true;
+            });
             _signalBus.Subscribe<PlayerCoinPickupEvent>(PlayPlayerCoinPickupSound);
             _signalBus.Subscribe<PlayerKeyPickupEvent>(PlayPlayerKeyPickupSound);
             _signalBus.Subscribe<PlayerDoorOpenEvent>(PlayDoorOpenSound);
         }
 
-        public void PlayBardMusic(AudioClip musicClip)
+        private void Update()
         {
-            FadeInMusic(musicClip, 1f);
+            MusicTick();
         }
 
-        public void PlayDefaultMusic()
+        private void MusicTick()
+        {
+            var isAnyBardAliveInRoom = _objectsHolder.HasSummonedObjectOfType<SummonedBard>(true);
+            if (_isBardSummoned && !isAnyBardAliveInRoom)
+            {
+                _isBardSummoned = false;
+                _isMusicChangeNeeded = true;
+            }
+
+            var isPlayerSummoned = _objectsHolder.HasSummonedObjectOfType<SummonedPlayer>(true);
+            if (_isPlayerSummoned != isPlayerSummoned)
+            {
+                _isPlayerSummoned = isPlayerSummoned;
+                _isMusicChangeNeeded = true;
+            }
+
+            if (!_isMusicChangeNeeded)
+                return;
+            PlayMusicForCurrentState();
+            _isMusicChangeNeeded = false;
+        }
+
+        private void PlayMusicForCurrentState()
+        {
+            if (!_isGameRunning)
+            {
+                FadeInMusic(null);
+                return;
+            }
+
+
+            if (_isBardSummoned && _isPlayerSummoned)
+            {
+                PlayBardMusic();
+                return;
+            }
+
+            if (_isPlayerInStore)
+            {
+                PlayStoreMusic();
+            }
+            else if (!_isPlayingDefaultMusic)
+            {
+                PlayDefaultMusic();
+            }
+        }
+
+        private void PlayBardMusic()
+        {
+            FadeInMusic(bardMusic);
+        }
+
+        public void PlayBardDeathSound()
+        {
+            consoleAudioSource.transform.position = CamPosition;
+            consoleAudioSource.PlayOneShot(bardDeathSound);
+        }
+
+        private void PlayDefaultMusic()
         {
             FadeInMusic(defaultMusic, 0.6f);
         }
 
-        public void PlayStoreMusic()
+        private void PlayStoreMusic()
         {
             FadeInMusic(storeMusic, 0.5f);
         }
@@ -99,6 +183,7 @@ namespace _Game.Scripts.Common
                 nextAudioSource.Play();
                 nextAudioSource.DOFade(vol, .7f);
             }
+            _isPlayingDefaultMusic = musicClip == defaultMusic;
 
             _activeMusicSource = nextAudioSource;
         }
@@ -130,7 +215,6 @@ namespace _Game.Scripts.Common
         {
             var rand = Random.Range(0, isGoodEnding ? happyEndSounds.Length : sadEndSounds.Length);
             var clip = isGoodEnding ? happyEndSounds[rand] : sadEndSounds[rand];
-            FadeInMusic(null);
             gameEndAudioSource.transform.position = CamPosition;
             gameEndAudioSource.volume = .25f;
             gameEndAudioSource.PlayOneShot(clip);

@@ -14,13 +14,13 @@ namespace _Game.Scripts.Summon.View
     public class SummonedBard : SummonedObject
     {
         [SerializeField] private BardBrain brain;
-        [SerializeField] private AudioClip musicClip;
+        [SerializeField] private AudioClip deathSound;
 
         [Inject] private SoundManager _soundManager;
         [Inject] private SummonedObjectsHolder _objectsHolder;
         [Inject] private SignalBus _signalBus;
         private IGameplayEvent _currentEvent;
-        private bool _summonedEventMessageSaid;
+        private bool _isPerformedOnSummonEffects;
         private int _roomIndex;
         private ActorHealth _actorHealth;
 
@@ -32,6 +32,11 @@ namespace _Game.Scripts.Summon.View
             _signalBus.Subscribe<BardSummonedEvent>(OnAnotherBardSpawned);
         }
 
+        private void OnDestroy()
+        {
+            _signalBus.TryUnsubscribe<BardSummonedEvent>(OnAnotherBardSpawned);
+        }
+
         public override IGameplayEvent GetEventIfAny()
         {
             if (_currentEvent != null)
@@ -41,18 +46,14 @@ namespace _Game.Scripts.Summon.View
                 return ev;
             }
 
-            // if (_actorHealth.IsDead)
-            // return null;
-            if (!_summonedEventMessageSaid && ObjectsHolder.GetPlayer() != null)
+            var player = ObjectsHolder.GetPlayer();
+            if (!_isPerformedOnSummonEffects && player != null)
             {
                 Say("Listen to my beautiful music!");
-                _summonedEventMessageSaid = true;
+                _isPerformedOnSummonEffects = true;
+                brain.Init(player.bardWalkArea);
             }
 
-            var player = ObjectsHolder.GetPlayer();
-            if (player != null)
-                brain.Init(player.bardWalkArea);
-            _soundManager.PlayBardMusic(musicClip);
             return null;
         }
 
@@ -60,21 +61,29 @@ namespace _Game.Scripts.Summon.View
         {
             if (bardSummonedEvent.Bard == this)
                 return;
-            Say("...why did you need another one");
+            Say("...why did you need another one"); // need one frame delay to process the event
+            Invoke(nameof(KillOneself), 0.1f);
+        }
+
+        private void KillOneself()
+        {
             _actorHealth.TakeDamage(100000);
         }
 
         private void OnDeath()
         {
-            // stop music here
-            _signalBus.Unsubscribe<BardSummonedEvent>(OnAnotherBardSpawned);
+            _signalBus.TryUnsubscribe<BardSummonedEvent>(OnAnotherBardSpawned);
 
             if (CurrentRoom != null)
                 CurrentRoom.RemoveObject(this);
             else
                 _objectsHolder.ObjectsOutOfRoom.Remove(this);
 
-            _soundManager.PlayDefaultMusic();
+            if (_isPerformedOnSummonEffects)
+            {
+                _soundManager.PlayBardDeathSound();
+            }
+
             Destroy(gameObject);
         }
 
