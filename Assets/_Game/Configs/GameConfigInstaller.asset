@@ -55,3 +55,8 @@ MonoBehaviour:
       EndingDescription: And they lived happily ever after...
       IsGoodEnding: 0
       CustomObjectId: 
+    - EndingId: deadPrincess
+      EndingName: '"Princess Oops-a-daisy"'
+      EndingDescription: Next time, try saving the princess, not slaying!
+      IsGoodEnding: 0
+      CustomObjectId: 

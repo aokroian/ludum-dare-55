@@ -99,9 +99,12 @@ GameObject:
   - component: {fileID: 3110054894835689248}
   - component: {fileID: 6521310862161214282}
   - component: {fileID: 8009634051219832352}
+  - component: {fileID: 78907008286247533}
+  - component: {fileID: 4002331843517460568}
+  - component: {fileID: 7948366718177410012}
   m_Layer: 0
   m_Name: Princess
-  m_TagString: Untagged
+  m_TagString: Princess
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,3 +226,45 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &78907008286247533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4974337122748100960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b42004af44f24c859ba2617bbc0b4b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 0
+  invincibilityTime: 0
+  defaultMaxHealth: 30
+  actorStatsController: {fileID: 0}
+  audioSource: {fileID: 0}
+--- !u!114 &4002331843517460568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4974337122748100960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84fcbc8edd38412d92223c790a6ded67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathEffectPrefab: {fileID: 5962918912480743457, guid: e846776bcbb324013b471db118a0d0a7, type: 3}
+--- !u!114 &7948366718177410012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4974337122748100960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68283b00ed44e1fb98cc616df3750f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

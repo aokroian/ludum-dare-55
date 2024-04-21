@@ -1,33 +1,48 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
 using _Game.Scripts.Story;
 using _Game.Scripts.Story.Characters.Princess;
 using _Game.Scripts.Story.Events;
 using _Game.Scripts.Story.GameplayEvents;
 using _Game.Scripts.Summon.Enums;
-using NUnit.Framework;
 using UnityEngine;
 using Zenject;
 
 namespace _Game.Scripts.Summon.View
 {
-    public class SummonedPrincess: SummonedObject
+    public class SummonedPrincess : SummonedObject
     {
         private PrincessWandering _princessWandering;
-        
+
         [Inject]
         private SignalBus _signalBus;
 
         private int _roomIndex;
-        
+
         private bool _helpSaid;
+        private ActorHealth _actorHealth;
+        private bool _isDead;
 
         protected override void Start()
         {
             base.Start();
             _signalBus.Subscribe<EndingStartedEvent>(OnEnding);
-            
+            _actorHealth = GetComponent<ActorHealth>();
+            _actorHealth.OnDeath += OnDeath;
+
             _roomIndex = ObjectsHolder.GetRoomIndexForObject(this);
+        }
+
+        private void OnDestroy()
+        {
+            _actorHealth.OnDeath -= OnDeath;
+        }
+
+        private void OnDeath(ActorHealth actorHealth)
+        {
+            _isDead = true;
         }
 
         public override IGameplayEvent GetEventIfAny()
@@ -55,7 +70,8 @@ namespace _Game.Scripts.Summon.View
                     Speaker = this,
                     Text = "What do you mean, I am just wandering around!"
                 };
-                return new TextGameplayEvent(new List<TextGameplayEvent.TextEventParams>() { p, p2 }, "rejectedByPrincess");
+                return new TextGameplayEvent(new List<TextGameplayEvent.TextEventParams>() { p, p2 },
+                    "rejectedByPrincess");
             }
 
             if (!_helpSaid && _roomIndex >= 2)
@@ -69,6 +85,18 @@ namespace _Game.Scripts.Summon.View
                     Text = "Help me!"
                 };
                 return new TextGameplayEvent(new List<TextGameplayEvent.TextEventParams>() { p }, null);
+            }
+
+            if (_isDead)
+            {
+                var p = new TextGameplayEvent.TextEventParams()
+                {
+                    disableInput = true,
+                    Duration = 0.5f,
+                    Speaker = this,
+                    Text = "Oh dear, this wasn't in the script!"
+                };
+                return new TextGameplayEvent(new List<TextGameplayEvent.TextEventParams>() { p }, "deadPrincess");
             }
 
             if (_roomIndex >= 2 &&
@@ -97,7 +125,7 @@ namespace _Game.Scripts.Summon.View
             if (room.RoomType == RoomType.Prison)
                 _princessWandering.TogglePause(true);
         }
-        
+
         private void OnEnding()
         {
             _princessWandering?.TogglePause(true);

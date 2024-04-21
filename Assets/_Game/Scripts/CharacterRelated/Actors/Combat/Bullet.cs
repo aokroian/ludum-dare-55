@@ -84,7 +84,10 @@ namespace _Game.Scripts.CharacterRelated.Actors.Combat
                 return;
             }
 
-            if (other.CompareTag("Enemy") || other.CompareTag("Player"))
+            if (other.CompareTag("Enemy")
+                || other.CompareTag("Player")
+                || other.CompareTag("Bard")
+                || other.CompareTag("Princess"))
             {
                 var actorHealth = other.GetComponentInChildren<ActorHealth>();
                 if (actorHealth != null)

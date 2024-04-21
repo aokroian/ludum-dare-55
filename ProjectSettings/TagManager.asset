@@ -13,6 +13,8 @@ TagManager:
   - Fit_Player_To_Door_Area
   - UICamera
   - Walls
+  - Princess
+  - Bard
   layers:
   - Default
   - TransparentFX
