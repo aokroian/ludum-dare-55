@@ -160,5 +160,26 @@ namespace _Game.Scripts.Summon.Data
                 ? hasInRooms
                 : ObjectsOutOfRoom.Any(obj => obj is T) || hasInRooms;
         }
+
+        public List<T> GetSummonedObjectsOfType<T>()
+        {
+            var result = new List<T>();
+            foreach (var room in Rooms)
+            {
+                foreach (var obj in room.Objects)
+                {
+                    if (obj is T t)
+                        result.Add(t);
+                }
+            }
+
+            foreach (var obj in ObjectsOutOfRoom)
+            {
+                if (obj is T t)
+                    result.Add(t);
+            }
+
+            return result;
+        }
     }
 }

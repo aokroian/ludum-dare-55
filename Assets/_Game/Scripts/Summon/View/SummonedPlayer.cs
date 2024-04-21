@@ -93,5 +93,18 @@ namespace _Game.Scripts.Summon.View
             };
             return new List<TextGameplayEvent.TextEventParams>() { p };
         }
+        
+        public Vector3 GetRandomPointInsideBardWalkArea()
+        {
+            Vector2 point;
+            do
+            {
+                var x = Random.Range(bardWalkArea.bounds.min.x, bardWalkArea.bounds.max.x);
+                var y = Random.Range(bardWalkArea.bounds.min.y, bardWalkArea.bounds.max.y);
+                point = new Vector2(x, y);
+            } while (!bardWalkArea.OverlapPoint(point));
+
+            return point;
+        }
     }
 }

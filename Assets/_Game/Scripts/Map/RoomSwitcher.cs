@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using _Game.Scripts.Common;
 using _Game.Scripts.Summon.Data;
 using _Game.Scripts.Summon.View;
@@ -13,7 +14,7 @@ namespace _Game.Scripts.Map
         private GlobalInputSwitcher _globalInputSwitcher;
 
         public RoomSwitcher(SummonedObjectsHolder objectsHolder, CameraWrapper cameraWrapper,
-             GlobalInputSwitcher globalInputSwitcher)
+            GlobalInputSwitcher globalInputSwitcher)
         {
             _objectsHolder = objectsHolder;
             _cameraWrapper = cameraWrapper;
@@ -50,6 +51,16 @@ namespace _Game.Scripts.Map
             room.AddObject(player);
             player.transform.position = forward ? room.entrance.position : room.exit.position;
             _globalInputSwitcher.EnableAllInput();
+
+            // move bard to the same room
+            var bard = _objectsHolder.GetSummonedObjectsOfType<SummonedBard>()?
+                .FirstOrDefault(b => b != null && !b.IsKillOneselfScheduled);
+            if (bard != null)
+            {
+                prevRoom.RemoveObject(bard);
+                room.AddObject(bard);
+                bard.transform.position = forward ? room.entrance.position : room.exit.position;
+            }
         }
 
         private async Task ToEmptyRoom(SummonedRoom prevRoom, bool forward)

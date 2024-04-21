@@ -23,6 +23,8 @@ namespace _Game.Scripts.Summon.View
         private bool _isPerformedOnSummonEffects;
         private int _roomIndex;
         private ActorHealth _actorHealth;
+        
+        public bool IsKillOneselfScheduled { get; private set; }
 
         protected override void Start()
         {
@@ -62,6 +64,7 @@ namespace _Game.Scripts.Summon.View
             if (bardSummonedEvent.Bard == this)
                 return;
             Say("...why did you need another one"); // need one frame delay to process the event
+            IsKillOneselfScheduled = true;
             Invoke(nameof(KillOneself), 0.1f);
         }
 
