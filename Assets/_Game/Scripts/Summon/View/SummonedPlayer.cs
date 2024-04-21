@@ -22,6 +22,7 @@ namespace _Game.Scripts.Summon.View
 
         private int _triggeredEventRoomIndex;
         private bool _objectiveSaid;
+        private NewActorAnimations actorAnimations;
 
         protected override void Start()
         {
@@ -34,6 +35,8 @@ namespace _Game.Scripts.Summon.View
                 hudCanvas.renderMode = RenderMode.ScreenSpaceCamera;
                 hudCanvas.worldCamera = uiCamera.GetComponent<Camera>();
             }
+            
+            actorAnimations = GetComponent<NewActorAnimations>();
         }
 
         private void OnDeath()
@@ -45,17 +48,20 @@ namespace _Game.Scripts.Summon.View
         {
             if (_died)
             {
+                actorAnimations.SetDead();
                 return new PlayerDiedEvent(this, MessageService, "What a miserable death...");
             }
 
             if (ObjectsHolder.RealRoomCount == 0)
             {
+                actorAnimations.SetStayStill();
                 return new PlayerInSpaceGameplayEvent(this, MessageService, true);
             }
 
             var playerRoomIndex = ObjectsHolder.GetPlayerRoomIndex();
             if (playerRoomIndex == -1)
             {
+                actorAnimations.SetStayStill();
                 return new PlayerInSpaceGameplayEvent(this, MessageService, false);
             }
 
