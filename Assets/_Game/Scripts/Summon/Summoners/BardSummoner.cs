@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using _Game.Scripts.CharacterRelated._LD55.Events;
+using _Game.Scripts.GameLoop.Events;
 using _Game.Scripts.Summon.View;
 using Zenject;
 
@@ -19,7 +20,7 @@ namespace _Game.Scripts.Summon.Summoners
                 ? player.GetRandomPointInsideBardWalkArea()
                 : room.GetRandomPointInsideWalkArea();
             room.AddObject(spawned);
-            _signalBus.Fire(new BardSummonedEvent(spawned));
+            _signalBus.Fire(new SummonBardEvent(spawned));
             return Task.CompletedTask;
         }
     }

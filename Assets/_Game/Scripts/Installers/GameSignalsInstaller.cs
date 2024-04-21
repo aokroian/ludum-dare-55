@@ -15,6 +15,7 @@ namespace _Game.Scripts.Installers
             Container.DeclareSignal<GameStartEvent>();
             Container.DeclareSignal<GameEndEvent>();
             Container.DeclareSignal<SummonPlayerEvent>();
+            Container.DeclareSignal<SummonPrincessEvent>().OptionalSubscriber();
             Container.DeclareSignal<EndingStartedEvent>();
             
             Container.DeclareSignal<PlayerWeaponPickupEvent>();
@@ -22,7 +23,7 @@ namespace _Game.Scripts.Installers
             Container.DeclareSignal<PlayerKeyPickupEvent>();
             Container.DeclareSignal<PlayerDoorOpenEvent>();
             Container.DeclareSignal<PlayerInventoryChangedEvent>().OptionalSubscriber();
-            Container.DeclareSignal<BardSummonedEvent>().OptionalSubscriber();
+            Container.DeclareSignal<SummonBardEvent>().OptionalSubscriber();
         }
     }
 }

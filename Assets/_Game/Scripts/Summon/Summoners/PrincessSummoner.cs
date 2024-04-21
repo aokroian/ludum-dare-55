@@ -1,12 +1,17 @@
 ﻿using System.Threading.Tasks;
+using _Game.Scripts.GameLoop.Events;
 using _Game.Scripts.Summon.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace _Game.Scripts.Summon.Summoners
 {
     public class PrincessSummoner: Summoner
     {
+        [Inject]
+        private SignalBus _signalBus;
+        
         public override async Task Summon(SummonParams summonParams)
         {
             try
@@ -49,6 +54,7 @@ namespace _Game.Scripts.Summon.Summoners
             princess.transform.position = spawnPosition;
             room.AddObject(princess);
             _objectsHolder.SetPrincessRef(princess);
+            _signalBus.Fire(new SummonPrincessEvent(princess));
             
             await UniTask.Delay(300);
             

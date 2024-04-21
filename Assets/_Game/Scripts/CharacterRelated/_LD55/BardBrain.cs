@@ -14,33 +14,36 @@ namespace _Game.Scripts.CharacterRelated._LD55
         private State _movementState;
 
         private bool _isInit;
-        private bool _isMovementStateInit;
         private SummonedPlayer _player;
-        private SummonedPrincess _princess;
+        private Transform _princess;
 
         [Inject]
         private SummonedObjectsHolder _objectsHolder;
+        
+        public bool IsChasingPrincess { get; private set; }
 
-        public void Init(Collider2D walkArea)
+        public void WanderAroundPlayer(Collider2D walkArea)
         {
-            WalkArea = walkArea;
             _isInit = true;
+            IsChasingPrincess = false;
+            InitWanderState(walkArea);
         }
 
-        public void ChasePrincess(SummonedPrincess princess, Collider2D walkArea)
+        public void ChasePrincess(Transform princess, Collider2D walkArea)
         {
+            _isInit = true;
             _princess = princess;
+            IsChasingPrincess = true;
             InitChaseState(walkArea);
         }
 
-        private void InitWanderState()
+        private void InitWanderState(Collider2D walkArea)
         {
             _movementState = new WanderState(
-                WalkArea,
+                walkArea,
                 transform,
                 SetMovement,
                 SetLook);
-            _isMovementStateInit = true;
         }
 
         private void InitChaseState(Collider2D walkArea)
@@ -51,26 +54,14 @@ namespace _Game.Scripts.CharacterRelated._LD55
                 _princess.transform,
                 SetMovement,
                 SetLook);
-            _isMovementStateInit = true;
         }
 
         private void Update()
         {
             if (!_isInit)
                 return;
-
-            if (!_isMovementStateInit)
-            {
-                InitWanderState();
-            }
-            else
-            {
-                if (StateMachine.CurrentState != _movementState)
-                {
-                    StateMachine.NextState = _movementState;
-                }
-            }
-
+            if (StateMachine.CurrentState != _movementState)
+                StateMachine.NextState = _movementState;
             StateMachine.ExecuteCurrentState();
         }
     }

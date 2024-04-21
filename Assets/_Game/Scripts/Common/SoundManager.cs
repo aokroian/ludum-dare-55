@@ -89,7 +89,7 @@ namespace _Game.Scripts.Common
                 _isMusicChangeNeeded = true;
                 _isGameRunning = true;
             });
-            _signalBus.Subscribe<BardSummonedEvent>(_ =>
+            _signalBus.Subscribe<SummonBardEvent>(_ =>
             {
                 _isBardSummoned = true;
                 _isMusicChangeNeeded = true;

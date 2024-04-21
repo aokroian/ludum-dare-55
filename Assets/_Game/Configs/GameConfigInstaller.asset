@@ -50,3 +50,8 @@ MonoBehaviour:
       EndingDescription: You were supposed to fight for me!
       IsGoodEnding: 0
       CustomObjectId: 
+    - EndingId: bardSavesPrincess
+      EndingName: '"Sidekick Spotlight"'
+      EndingDescription: And they lived happily ever after...
+      IsGoodEnding: 0
+      CustomObjectId: 
