@@ -6,9 +6,11 @@ namespace _Game.Scripts.Console
 {
     public static class ConsoleHelpers
     {
+        private static ConsoleCommand[] _allCommands;
+
         public static ConsoleCommand[] GetAllCommands()
         {
-            return Resources.LoadAll<ConsoleCommand>("ConsoleCommands");
+            return _allCommands ??= Resources.LoadAll<ConsoleCommand>("ConsoleCommands");
         }
 
         public static bool IsContainsCommand(this List<string> commands, ConsoleCommand commandObj)

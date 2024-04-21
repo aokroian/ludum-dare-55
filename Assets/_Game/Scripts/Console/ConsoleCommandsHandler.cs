@@ -74,7 +74,7 @@ namespace _Game.Scripts.Console
                 return new ConsoleOutputData
                 {
                     senderText = GetSpeakerString(GameSpeakerName),
-                    messageText = GetDiscoveredCommandsMessage(PermanentGameState)
+                    messageText = GetHelpMessage(PermanentGameState)
                 };
             }
 

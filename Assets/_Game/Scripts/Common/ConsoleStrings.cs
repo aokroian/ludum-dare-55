@@ -1,3 +1,4 @@
+using _Game.Scripts.Console;
 using _Game.Scripts.GameState.Data;
 
 namespace _Game.Scripts.Common
@@ -19,16 +20,18 @@ namespace _Game.Scripts.Common
 
         public const string UnknownErrorMessage = "Unknown error: ";
 
-        public static string GetDiscoveredCommandsMessage(PermanentGameState permanentGameState)
+        public static string GetHelpMessage(PermanentGameState permanentGameState)
         {
-            var result = "";
-            result = "Discovered commands so far:\n";
-            for (var i = 0; i < permanentGameState.knownCommands.Count; i++)
+            var result = "HELP MESSAGE\n";
+            result += "Usage: summon [command]\n";
+            result += "Known commands:\n";
+            var allCommands = ConsoleHelpers.GetAllCommands();
+            for (var i = 0; i < allCommands.Length; i++)
             {
-                var knownCommand = permanentGameState.knownCommands[i];
+                var knownCommand = allCommands[i];
                 if (i != 0)
                     result += "\n";
-                result += $"{SummonWord} {knownCommand}";
+                result += $"{SummonWord} {knownCommand.mainWord}";
             }
 
             return result;
