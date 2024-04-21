@@ -47,6 +47,11 @@ namespace _Game.Scripts.Console
         private bool _isGlobalConsoleInput = true;
         private bool _isFocusedOnOutput;
 
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            OnPointerDown();
+        }
+
         private void Awake()
         {
             foreach (var pointerDownHandler in pointerDownHandlers)
@@ -91,10 +96,7 @@ namespace _Game.Scripts.Console
             inputField.onValueChanged.AddListener(OnInputValueChanged);
 
             inputField.onSelect.RemoveAllListeners();
-            inputField.onSelect.AddListener(_ =>
-            {
-                _isFocusedOnOutput = false;
-            });
+            inputField.onSelect.AddListener(_ => { _isFocusedOnOutput = false; });
 
             output.onSelect.RemoveAllListeners();
             output.onSelect.AddListener(_ =>
