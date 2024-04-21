@@ -16,6 +16,7 @@ namespace _Game.Scripts.CharacterRelated._LD55
         private bool _isInit;
         private bool _isMovementStateInit;
         private SummonedPlayer _player;
+        private SummonedPrincess _princess;
 
         [Inject]
         private SummonedObjectsHolder _objectsHolder;
@@ -26,11 +27,28 @@ namespace _Game.Scripts.CharacterRelated._LD55
             _isInit = true;
         }
 
-        private void InitMovementState()
+        public void ChasePrincess(SummonedPrincess princess, Collider2D walkArea)
+        {
+            _princess = princess;
+            InitChaseState(walkArea);
+        }
+
+        private void InitWanderState()
         {
             _movementState = new WanderState(
                 WalkArea,
                 transform,
+                SetMovement,
+                SetLook);
+            _isMovementStateInit = true;
+        }
+
+        private void InitChaseState(Collider2D walkArea)
+        {
+            _movementState = new ChaseState(
+                walkArea,
+                transform,
+                _princess.transform,
                 SetMovement,
                 SetLook);
             _isMovementStateInit = true;
@@ -43,7 +61,7 @@ namespace _Game.Scripts.CharacterRelated._LD55
 
             if (!_isMovementStateInit)
             {
-                InitMovementState();
+                InitWanderState();
             }
             else
             {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using _Game.Scripts.CharacterRelated._LD55;
 using _Game.Scripts.CharacterRelated._LD55.Events;
 using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
@@ -23,7 +24,7 @@ namespace _Game.Scripts.Summon.View
         private bool _isPerformedOnSummonEffects;
         private int _roomIndex;
         private ActorHealth _actorHealth;
-        
+
         public bool IsKillOneselfScheduled { get; private set; }
 
         protected override void Start()
@@ -67,6 +68,18 @@ namespace _Game.Scripts.Summon.View
             IsKillOneselfScheduled = true;
             Invoke(nameof(KillOneself), 0.1f);
         }
+
+        public override void OnMovedToRoom(SummonedRoom room)
+        {
+            base.OnMovedToRoom(room);
+            var princessInRoom = room.Objects.FirstOrDefault(obj => obj is SummonedPrincess);
+            if (princessInRoom != null)
+            {
+                Say("I will protect you, my princess!");
+                brain.ChasePrincess(princessInRoom as SummonedPrincess, room.WalkArea);
+            }
+        }
+
 
         private void KillOneself()
         {
