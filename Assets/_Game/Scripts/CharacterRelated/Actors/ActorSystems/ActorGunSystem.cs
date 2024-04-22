@@ -94,5 +94,10 @@ namespace _Game.Scripts.CharacterRelated.Actors.ActorSystems
             _currentActiveGun.transform.rotation = Quaternion.Euler(0, 0, angle);
             _currentActiveGun.FlipSprite(angle);
         }
+
+        public bool HasGun()
+        {
+            return _currentActiveGun != null;
+        }
     }
 }

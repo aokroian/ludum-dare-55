@@ -2,6 +2,7 @@
 using _Game.Scripts.GameLoop.Events;
 using _Game.Scripts.Map.Events;
 using _Game.Scripts.Story.Events;
+using _Game.Scripts.Story.GameplayEvents;
 using Zenject;
 
 namespace _Game.Scripts.Installers
@@ -24,6 +25,7 @@ namespace _Game.Scripts.Installers
             Container.DeclareSignal<PlayerDoorOpenEvent>();
             Container.DeclareSignal<PlayerInventoryChangedEvent>().OptionalSubscriber();
             Container.DeclareSignal<SummonBardEvent>().OptionalSubscriber();
+            Container.DeclareSignal<PlayerDiedEvent>();
         }
     }
 }

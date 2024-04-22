@@ -4,6 +4,7 @@ using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
 using _Game.Scripts.CharacterRelated.UI.Hud;
 using _Game.Scripts.Common;
 using _Game.Scripts.Story;
+using _Game.Scripts.Story.Events;
 using _Game.Scripts.Story.GameplayEvents;
 using UnityEngine;
 using Zenject;
@@ -19,6 +20,8 @@ namespace _Game.Scripts.Summon.View
         private SignalBus _signalBus;
         [Inject]
         private PlayerInventoryService _playerInventoryService;
+        [Inject]
+        private GlobalInputSwitcher _inputSwitcher;
 
         private int _triggeredEventRoomIndex;
         private bool _objectiveSaid;
@@ -42,6 +45,8 @@ namespace _Game.Scripts.Summon.View
         private void OnDeath()
         {
             _died = true;
+            _inputSwitcher.DisableAllInput();
+            _signalBus.Fire(new PlayerDiedEvent());
         }
 
         public override IGameplayEvent GetEventIfAny()
@@ -49,7 +54,10 @@ namespace _Game.Scripts.Summon.View
             if (_died)
             {
                 actorAnimations.SetDead();
-                return new PlayerDiedEvent(this, MessageService, "What a miserable death...");
+                var message = GetComponent<ActorGunSystem>().HasGun()
+                    ? "What a miserable death..."
+                    : $"If only I had a {"weapon".WrapInColor(Colors.KeywordMessageColor)}...";
+                return new PlayerDiedGameplayEvent(this, MessageService, message);
             }
 
             if (ObjectsHolder.RealRoomCount == 0)

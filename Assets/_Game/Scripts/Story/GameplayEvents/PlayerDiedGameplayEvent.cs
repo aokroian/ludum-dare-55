@@ -5,7 +5,7 @@ using Zenject;
 
 namespace _Game.Scripts.Story.GameplayEvents
 {
-    public class PlayerDiedEvent: IGameplayEvent
+    public class PlayerDiedGameplayEvent: IGameplayEvent
     {
         public string EventId => "player_died_event";
 
@@ -14,7 +14,7 @@ namespace _Game.Scripts.Story.GameplayEvents
         private string _message;
 
 
-        public PlayerDiedEvent(SummonedPlayer player, MessageService messageService, string message)
+        public PlayerDiedGameplayEvent(SummonedPlayer player, MessageService messageService, string message)
         {
             _player = player;
             _messageService = messageService;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.CharacterRelated._LD55;
 using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
 using _Game.Scripts.Story;
 using _Game.Scripts.Story.Characters.Princess;
@@ -24,12 +25,14 @@ namespace _Game.Scripts.Summon.View
         private bool _helpSaid;
         private ActorHealth _actorHealth;
         private bool _isDead;
+        private NpcAnimations _animations;
 
         protected override void Start()
         {
             base.Start();
             _signalBus.Subscribe<EndingStartedEvent>(OnEnding);
             _actorHealth = GetComponent<ActorHealth>();
+            _animations = GetComponent<NpcAnimations>();
             _actorHealth.OnDeath += OnDeath;
 
             _roomIndex = ObjectsHolder.GetRoomIndexForObject(this);
@@ -43,6 +46,7 @@ namespace _Game.Scripts.Summon.View
         private void OnDeath(ActorHealth actorHealth)
         {
             _isDead = true;
+            _animations.SetDead();
         }
 
         public override IGameplayEvent GetEventIfAny()

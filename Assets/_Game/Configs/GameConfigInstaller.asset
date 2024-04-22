@@ -59,4 +59,4 @@ MonoBehaviour:
       EndingName: '"Princess Oops-a-daisy"'
       EndingDescription: Next time, try saving the princess, not slaying!
       IsGoodEnding: 0
-      CustomObjectId: 
+      CustomObjectId: princess

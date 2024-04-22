@@ -24,7 +24,10 @@ namespace _Game.Scripts.CharacterRelated._LD55
         private void Update()
         {
             Vector2 direction = CalcCurrentDirection();
-            _previousPosition = transform.position;
+            
+            // Take difference within 5 frames
+            if (Time.frameCount % 5 == 0)
+                _previousPosition = transform.position;
             
             if (direction.y > 0)
                 _upDirection = true;

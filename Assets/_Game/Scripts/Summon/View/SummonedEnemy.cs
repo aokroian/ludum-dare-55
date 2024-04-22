@@ -30,7 +30,7 @@ namespace _Game.Scripts.Summon.View
         {
             base.Start();
             GetComponent<ActorHealth>().OnDeath += _ => OnDeath();
-            _signalBus.Subscribe<EndingStartedEvent>(OnEnding);
+            _signalBus.Subscribe<PlayerDiedEvent>(OnPlayerDied);
 
             _roomIndex = ObjectsHolder.GetRoomIndexForObject(this);
         }
@@ -60,7 +60,7 @@ namespace _Game.Scripts.Summon.View
             Destroy(gameObject);
         }
 
-        private void OnEnding()
+        private void OnPlayerDied()
         {
             GetComponent<GuardianBrain>().CalmDown();
         }
@@ -99,7 +99,7 @@ namespace _Game.Scripts.Summon.View
 
         private void OnDestroy()
         {
-            _signalBus.TryUnsubscribe<EndingStartedEvent>(OnEnding);
+            _signalBus.TryUnsubscribe<PlayerDiedEvent>(OnPlayerDied);
         }
     }
 }
