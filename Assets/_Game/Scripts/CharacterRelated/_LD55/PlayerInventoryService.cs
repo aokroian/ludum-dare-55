@@ -19,6 +19,11 @@ namespace _Game.Scripts.CharacterRelated._LD55
             _signalBus.Subscribe<GameStartEvent>(ClearInventory);
             ClearInventory();
         }
+        
+        public int GetItemCount(LootType type)
+        {
+            return Inventory.GetValueOrDefault(type, 0);
+        }
 
         private void ClearInventory()
         {

@@ -67,7 +67,10 @@ namespace _Game.Scripts.Summon.View
 
         private void DropLoot()
         {
-            var lootIndex = Random.Range(-4, lootOptions.Length);
+            var currentKeysCount = _playerInventoryService.GetItemCount(LootType.Key);
+            var lootIndex = 0;
+            if (currentKeysCount > 0)
+                lootIndex = Random.Range(-4, lootOptions.Length);
             if (lootIndex <= -1)
                 return;
             var spawned = Instantiate(lootOptions[lootIndex], _room.transform);
