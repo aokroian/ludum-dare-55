@@ -78,11 +78,6 @@ namespace _Game.Scripts.Summon.View
                 return new ManyPlayersGameplayEvent(this, MessageService);
             }
 
-            if (ObjectsHolder.RealRoomCount > 3)
-            {
-                return new TextGameplayEvent(PrepareMessage("This is too many rooms"), "tooManyRooms");
-            }
-
             if (!_objectiveSaid)
             {
                 _objectiveSaid = true;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using _Game.Scripts.Story;
+using _Game.Scripts.Story.GameplayEvents;
 using _Game.Scripts.Summon.Enums;
 using UnityEngine;
 
@@ -21,7 +22,24 @@ namespace _Game.Scripts.Summon.View
 
         public override IGameplayEvent GetEventIfAny()
         {
-            throw new System.NotImplementedException();
+            if (ObjectsHolder.RealRoomCount > 3)
+            {
+                return new TextGameplayEvent(PrepareMessage("This is too many rooms"), "tooManyRooms");
+            }
+
+            return null;
+        }
+        
+        private List<TextGameplayEvent.TextEventParams> PrepareMessage(string message)
+        {
+            var p = new TextGameplayEvent.TextEventParams()
+            {
+                disableInput = false,
+                Duration = 0,
+                Speaker = this,
+                Text = message
+            };
+            return new List<TextGameplayEvent.TextEventParams>() { p };
         }
 
         public virtual void AddObject(SummonedObject summonedObject)

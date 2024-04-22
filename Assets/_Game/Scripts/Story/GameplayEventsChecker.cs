@@ -33,6 +33,13 @@ namespace _Game.Scripts.Story
                 return;
             
             _isEventInProgress = true;
+            foreach (var room in _objectsHolder.Rooms)
+            {
+                var isEnding = await CheckAndStartEvent(room);
+                if (isEnding)
+                    break;
+            }
+            
             foreach (var obj in _objectsHolder.ObjectsOutOfRoom)
             {
                 var isEnding = await CheckAndStartEvent(obj);

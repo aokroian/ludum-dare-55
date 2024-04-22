@@ -27,5 +27,16 @@ namespace _Game.Scripts.Message
             }, true);
             _soundManager.PlayNotificationSound();
         }
+
+        public void SpeakSystem(string message)
+        {
+            _consoleView.DisplayNewOutputEntry(new ConsoleOutputData()
+            {
+                messageText = message,
+                senderText = "game",
+                type = ConsoleOutputType.Info
+            }, true);
+            _soundManager.PlayNotificationSound();
+        }
     }
 }
