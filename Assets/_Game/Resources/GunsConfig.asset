@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunBindings:
   - gunType: 0
-    gunPrefab: {fileID: 5685811395722452794, guid: da0efb232a0064f2c9431d86fe9ca3e5, type: 3}
+    gunPrefab: {fileID: 5685811395722452794, guid: bd738da00de36df408d278d589aa0fa5, type: 3}
     scopePrefab: {fileID: 4503803084617128272, guid: b233f83b168a648fbb5257de060b4807, type: 3}
   - gunType: 1
     gunPrefab: {fileID: 5685811395722452794, guid: 724e259158dffa44380678d422cf0982, type: 3}

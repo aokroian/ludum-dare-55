@@ -1,47 +1,57 @@
-using _Game.Scripts.CharacterRelated.Actors.ActorSystems;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace _Game.Scripts.CharacterRelated._LD55
 {
-    public class NewActorAnimations : ActorSystem
+    public class NpcAnimations : MonoBehaviour
     {
+        
         private Animator _animator;
         private static readonly int AnimPlayerMove = Animator.StringToHash("AminPlayerMove");
-
+        
+        private Vector2 _previousPosition;
+        
         private bool _upDirection;
         private bool _leftDirection;
 
         private bool _stayStill;
         private bool _dead;
-        
-        
-        protected override void Awake()
+
+        private void Start()
         {
-            base.Awake();
             _animator = GetComponentInChildren<Animator>();
         }
 
-        public void Update()
+        private void Update()
         {
-            if (ActorInput.Movement.y > 0)
+            Vector2 direction = CalcCurrentDirection();
+            _previousPosition = transform.position;
+            
+            if (direction.y > 0)
                 _upDirection = true;
             else
                 _upDirection = false;
             
-            if (_leftDirection && ActorInput.Movement.x > 0)
+            if (_leftDirection && direction.x > 0)
                 _animator.transform.Rotate(Vector3.up, 180f);
-            else if (!_leftDirection && ActorInput.Movement.x < 0)
+            else if (!_leftDirection && direction.x < 0)
                 _animator.transform.Rotate(Vector3.up, -180f);
             
-            if (ActorInput.Movement.x > 0)
+            if (direction.x > 0)
                 _leftDirection = false;
-            else if (ActorInput.Movement.x < 0)
+            else if (direction.x < 0)
                 _leftDirection = true;
-
-            Animate();
+            
+            Animate(direction);
         }
 
-        private void Animate()
+        private Vector2 CalcCurrentDirection()
+        {
+            Vector2 currentPosition = transform.position;
+            Vector2 deltaPosition = currentPosition - _previousPosition;
+            return deltaPosition;
+        }
+        
+        private void Animate(Vector2 direction)
         {
             if (_dead)
             {
@@ -54,20 +64,9 @@ namespace _Game.Scripts.CharacterRelated._LD55
                 return;
             }
             
-            // var direction = _upDirection ? 2 : 1;
-            //
-            // if (_upDirection && ActorInput.Movement.x > 0)
-            //     direction = 5;
-            // else if (_upDirection && ActorInput.Movement.x < 0)
-            //     direction = 4;
-            // else if (ActorInput.Movement.x > 0)
-            //     direction = 2;
-            // else if (ActorInput.Movement.x < 0)
-            //     direction = 1;
-
             var animIndex = 0;
 
-            if (ActorInput.Movement != Vector2.zero)
+            if (direction != Vector2.zero)
             {
                 animIndex = _upDirection ? 2 : 1;
             }

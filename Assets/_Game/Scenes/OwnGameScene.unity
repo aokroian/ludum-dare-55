@@ -241,13 +241,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2735085158337305575, guid: ba54ab08c5ef34b32ba5278e860cc181, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3076485202348300731, guid: ba54ab08c5ef34b32ba5278e860cc181, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3076485202348300731, guid: ba54ab08c5ef34b32ba5278e860cc181, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -418.99942
+      value: -419
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161624269542567285, guid: ba54ab08c5ef34b32ba5278e860cc181, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3396213356093949447, guid: ba54ab08c5ef34b32ba5278e860cc181, type: 3}
       propertyPath: m_AnchorMax.y
@@ -352,6 +360,18 @@ PrefabInstance:
     - target: {fileID: 6824435914108751431, guid: ba54ab08c5ef34b32ba5278e860cc181, type: 3}
       propertyPath: m_Name
       value: ConsoleView
+      objectReference: {fileID: 0}
+    - target: {fileID: 8876487791265047236, guid: ba54ab08c5ef34b32ba5278e860cc181, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8876487791265047236, guid: ba54ab08c5ef34b32ba5278e860cc181, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8876487791265047236, guid: ba54ab08c5ef34b32ba5278e860cc181, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1081,6 +1101,10 @@ PrefabInstance:
       propertyPath: m_ClearFlags
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2629104821932756387, guid: a4725993ba7e94c4688aacb2f46ed9df, type: 3}
+      propertyPath: orthographic size
+      value: 9.375
+      objectReference: {fileID: 0}
     - target: {fileID: 2730084916212488270, guid: a4725993ba7e94c4688aacb2f46ed9df, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
@@ -1688,10 +1712,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3285910367845692487, guid: 70ab303c77ec4464fa7988e7cbbd5487, type: 3}
+      propertyPath: 'prefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6962412621536817185, guid: 3241e5ea97ac37046b825e905dac969c, type: 3}
     - target: {fileID: 5087427556787597973, guid: 70ab303c77ec4464fa7988e7cbbd5487, type: 3}
       propertyPath: m_Name
       value: Summoners
       objectReference: {fileID: 0}
+    - target: {fileID: 5455394041961456236, guid: 70ab303c77ec4464fa7988e7cbbd5487, type: 3}
+      propertyPath: 'prefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6459209866764325263, guid: 924461976d4da3f4d85486fcb0af2a60, type: 3}
+    - target: {fileID: 6060354701737542597, guid: 70ab303c77ec4464fa7988e7cbbd5487, type: 3}
+      propertyPath: 'prefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2424249451628501384, guid: dbfb9724e5515f14692ee81af0e7fe50, type: 3}
     - target: {fileID: 6772859867320753062, guid: 70ab303c77ec4464fa7988e7cbbd5487, type: 3}
       propertyPath: 'prefabs.Array.data[0]'
       value: 
@@ -1712,6 +1748,10 @@ PrefabInstance:
       propertyPath: 'prefabs.Array.data[2]'
       value: 
       objectReference: {fileID: 3645989656591352843, guid: ad2ea568238720e4ea5d85cedf073bab, type: 3}
+    - target: {fileID: 9106498265062071142, guid: 70ab303c77ec4464fa7988e7cbbd5487, type: 3}
+      propertyPath: 'prefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: -3546543753783935341, guid: a255de245953e9d4d93dc2dd5f9d1ca3, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
