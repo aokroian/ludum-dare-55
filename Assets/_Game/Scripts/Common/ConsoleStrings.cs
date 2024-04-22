@@ -23,7 +23,6 @@ namespace _Game.Scripts.Common
         public static string GetHelpMessage(PermanentGameState permanentGameState)
         {
             var result = "HELP MESSAGE\n";
-            result += "Usage: summon [command]\n";
             result += "Known commands:\n";
             var allCommands = ConsoleHelpers.GetAllCommands();
             for (var i = 0; i < allCommands.Length; i++)
@@ -31,7 +30,7 @@ namespace _Game.Scripts.Common
                 var knownCommand = allCommands[i];
                 if (i != 0)
                     result += "\n";
-                result += $"{SummonWord} {knownCommand.mainWord}";
+                result += $"{knownCommand.mainWord}";
             }
 
             return result;

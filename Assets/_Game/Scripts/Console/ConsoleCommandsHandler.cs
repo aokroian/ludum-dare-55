@@ -26,13 +26,12 @@ namespace _Game.Scripts.Console
         {
             input = input.Trim();
             var inputParts = input.Split(' ');
-            if (inputParts.Length != 2)
-                return null;
-            var summonWord = inputParts[0];
-            if (summonWord != SummonWord)
-                return null;
+            var commandWord = "";
+            if (inputParts.Length != 2 || inputParts[0] != SummonWord)
+                commandWord = inputParts[0];
+            else
+                commandWord = inputParts[1];
 
-            var commandWord = inputParts[1];
             var command = _allCommands.FirstOrDefault(c =>
                 c.mainWord == commandWord || c.aliases.Contains(commandWord));
 
