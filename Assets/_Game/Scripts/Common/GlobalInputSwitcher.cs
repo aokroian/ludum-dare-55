@@ -32,7 +32,6 @@ namespace _Game.Scripts.Common
         {
             if (_consoleView == null)
                 return;
-            var isSwitchingInput = false;
             if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown(KeyCode.RightAlt))
             {
                 if (_isPlayerInputActive)

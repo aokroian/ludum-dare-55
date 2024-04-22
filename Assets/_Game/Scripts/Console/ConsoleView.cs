@@ -47,11 +47,6 @@ namespace _Game.Scripts.Console
         private bool _isGlobalConsoleInput = true;
         private bool _isFocusedOnOutput;
 
-        private void OnApplicationFocus(bool hasFocus)
-        {
-            OnPointerDown();
-        }
-
         private void Awake()
         {
             foreach (var pointerDownHandler in pointerDownHandlers)
