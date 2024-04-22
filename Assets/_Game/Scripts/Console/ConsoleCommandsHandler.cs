@@ -87,7 +87,7 @@ namespace _Game.Scripts.Console
                 };
             }
 
-            if (_gameLoopController.IsGameEnded && inputText != GameRestartCommand)
+            if (_gameLoopController.IsGameEnded && inputText != GameRestartCommand && inputText != GameRestartShortCommand)
             {
                 return new ConsoleOutputData
                 {

@@ -13,6 +13,7 @@ namespace _Game.Scripts.Common
 
         public const string SummonWord = "summon";
         public const string GameRestartCommand = "summon game";
+        public const string GameRestartShortCommand = "game";
         public const string GameSpeakerName = "game";
         public const string DevsSpeakerName = "devs";
 
