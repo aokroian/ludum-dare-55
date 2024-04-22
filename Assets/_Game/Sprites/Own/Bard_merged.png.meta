@@ -1,22 +1,25 @@
 fileFormatVersion: 2
-guid: cd3cca23f41b7594dad9860f14c4df6d
+guid: 249361fc978ac1e4dbd9593c52eed2b7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9125631172747539593
-    second: Knight-Sheet_0
+      213: -172634405678826248
+    second: Bard_merged_0
   - first:
-      213: -2317372448271502208
-    second: Knight-Sheet_1
+      213: 4242186400245460787
+    second: Bard_merged_1
   - first:
-      213: 252363743074589952
-    second: Knight-Sheet_2
+      213: -5199252823565139638
+    second: Bard_merged_2
   - first:
-      213: -3335374122022782640
-    second: Knight-Sheet_3
+      213: -4420191350473258117
+    second: Bard_merged_3
   - first:
-      213: -6031727949532310936
-    second: Knight-Sheet_4
+      213: 5936810921300251120
+    second: Bard_merged_4
+  - first:
+      213: -6547954463213943004
+    second: Bard_merged_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -125,82 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Knight-Sheet_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 7, y: 6}
-        - {x: -7, y: 6}
-        - {x: -7, y: -16}
-        - {x: 7, y: -16}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 98439d2b331c4ae70800000000000000
-      internalID: 9125631172747539593
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Knight-Sheet_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 7, y: 6}
-        - {x: -7, y: 6}
-        - {x: -7, y: -16}
-        - {x: 7, y: -16}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 084ff78490a07dfd0800000000000000
-      internalID: -2317372448271502208
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Knight-Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 7, y: 6}
-        - {x: -7, y: 6}
-        - {x: -7, y: -16}
-        - {x: 7, y: -16}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 00d162cbc73908300800000000000000
-      internalID: 252363743074589952
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Knight-Sheet_3
+      name: Bard_merged_0
       rect:
         serializedVersion: 2
         x: 0
@@ -212,20 +140,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 12, y: -2}
-        - {x: -11, y: -2}
-        - {x: -11, y: -16}
+      - - {x: 12, y: 11}
+        - {x: -12, y: 11}
+        - {x: -12, y: -16}
         - {x: 12, y: -16}
       tessellationDetail: 0
       bones: []
-      spriteID: 0593dc758ee56b1d0800000000000000
-      internalID: -3335374122022782640
+      spriteID: 8fcb0853cedaa9df0800000000000000
+      internalID: -172634405678826248
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Knight-Sheet_4
+      name: Bard_merged_1
       rect:
         serializedVersion: 2
         x: 32
@@ -237,20 +165,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 7, y: 6}
-        - {x: -7, y: 6}
-        - {x: -7, y: -16}
-        - {x: 7, y: -16}
+      - - {x: 12, y: 11}
+        - {x: -12, y: 11}
+        - {x: -12, y: -16}
+        - {x: 12, y: -16}
       tessellationDetail: 0
       bones: []
-      spriteID: 862d45a236ffa4ca0800000000000000
-      internalID: -6031727949532310936
+      spriteID: 33faf911e064fda30800000000000000
+      internalID: 4242186400245460787
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Knight-Sheet_5
+      name: Bard_merged_2
       rect:
         serializedVersion: 2
         x: 64
@@ -262,20 +190,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 7, y: 6}
-        - {x: -7, y: 6}
-        - {x: -7, y: -16}
-        - {x: 7, y: -16}
+      - - {x: 12, y: 11}
+        - {x: -12, y: 11}
+        - {x: -12, y: -16}
+        - {x: 12, y: -16}
       tessellationDetail: 0
       bones: []
-      spriteID: 8b70a01f1d4b7d246a8aa34ced5dcf8a
-      internalID: 860662505
+      spriteID: a4104f19a1b88d7b0800000000000000
+      internalID: -5199252823565139638
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Knight-Sheet_6
+      name: Bard_merged_3
       rect:
         serializedVersion: 2
         x: 0
@@ -287,14 +215,64 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 7, y: 6}
-        - {x: -7, y: 6}
-        - {x: -7, y: -16}
-        - {x: 7, y: -16}
+      - - {x: 12, y: 11}
+        - {x: -12, y: 11}
+        - {x: -12, y: -16}
+        - {x: 12, y: -16}
       tessellationDetail: 0
       bones: []
-      spriteID: 87f3f446109344e40b8bc66b0be9a2bc
-      internalID: -838352447
+      spriteID: b7b89cbc26358a2c0800000000000000
+      internalID: -4420191350473258117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bard_merged_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 12, y: 11}
+        - {x: -12, y: 11}
+        - {x: -12, y: -16}
+        - {x: 12, y: -16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f1d2ce041ac36250800000000000000
+      internalID: 5936810921300251120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bard_merged_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 12, y: 11}
+        - {x: -12, y: 11}
+        - {x: -12, y: -16}
+        - {x: 12, y: -16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42703b6bb1ef025a0800000000000000
+      internalID: -6547954463213943004
       vertices: []
       indices: 
       edges: []
@@ -302,7 +280,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 9666d6f0391f51a4f873c8aad7c826f4
+    spriteID: 18bd919a606f28b4aaa6e17f302fffdd
     internalID: 0
     vertices: []
     indices: 
@@ -310,13 +288,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Knight-Sheet_0: 9125631172747539593
-      Knight-Sheet_1: -2317372448271502208
-      Knight-Sheet_2: 252363743074589952
-      Knight-Sheet_3: -3335374122022782640
-      Knight-Sheet_4: -6031727949532310936
-      Knight-Sheet_5: 860662505
-      Knight-Sheet_6: -838352447
+      Bard_merged_0: -172634405678826248
+      Bard_merged_1: 4242186400245460787
+      Bard_merged_2: -5199252823565139638
+      Bard_merged_3: -4420191350473258117
+      Bard_merged_4: 5936810921300251120
+      Bard_merged_5: -6547954463213943004
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

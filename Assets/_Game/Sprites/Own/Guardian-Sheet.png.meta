@@ -1,19 +1,25 @@
 fileFormatVersion: 2
-guid: 88a8a5d0a7dd6a644830ccce12f3b87f
+guid: d0f7261b0fa19334b923380ae36c132e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1426412393770721646
-    second: Guardian-Sheet_0
+      213: 287197706594284169
+    second: Guardian_0
   - first:
-      213: -7466101948472415572
-    second: Guardian-Sheet_1
+      213: 1965262075516802947
+    second: Guardian_1
   - first:
-      213: -7271091509289182130
-    second: Guardian-Sheet_2
+      213: 3834634598268069031
+    second: Guardian_2
   - first:
-      213: -9176766444690080724
-    second: Guardian-Sheet_3
+      213: 7394956864244583171
+    second: Guardian_3
+  - first:
+      213: 1930087233240091084
+    second: Guardian_4
+  - first:
+      213: -2075409633761177686
+    second: Guardian_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -84,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -125,19 +131,23 @@ TextureImporter:
       name: Guardian-Sheet_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 31
-        width: 16
-        height: 24
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: 7, y: 6}
+        - {x: -7, y: 6}
+        - {x: -7, y: -16}
+        - {x: 7, y: -16}
+      tessellationDetail: 0
       bones: []
-      spriteID: e612be1c382abc310800000000000000
-      internalID: 1426412393770721646
+      spriteID: cb6268197ca13f14dbd6101b100a9e57
+      internalID: 743714123
       vertices: []
       indices: 
       edges: []
@@ -146,19 +156,23 @@ TextureImporter:
       name: Guardian-Sheet_1
       rect:
         serializedVersion: 2
-        x: 40
-        y: 31
-        width: 16
-        height: 23
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: 7, y: 6}
+        - {x: -7, y: 6}
+        - {x: -7, y: -16}
+        - {x: 7, y: -16}
+      tessellationDetail: 0
       bones: []
-      spriteID: caa2370c5d3136890800000000000000
-      internalID: -7466101948472415572
+      spriteID: f3df654d2fdbcba44a45284067d9b2c4
+      internalID: -1080947549
       vertices: []
       indices: 
       edges: []
@@ -167,19 +181,23 @@ TextureImporter:
       name: Guardian-Sheet_2
       rect:
         serializedVersion: 2
-        x: 8
-        y: 0
-        width: 16
-        height: 23
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: 7, y: 6}
+        - {x: -7, y: 6}
+        - {x: -7, y: -16}
+        - {x: 7, y: -16}
+      tessellationDetail: 0
       bones: []
-      spriteID: e4c9573dbc4e71b90800000000000000
-      internalID: -7271091509289182130
+      spriteID: cd33b3d95e51d224fa8ebe52d0f78921
+      internalID: 1569829727
       vertices: []
       indices: 
       edges: []
@@ -188,19 +206,73 @@ TextureImporter:
       name: Guardian-Sheet_3
       rect:
         serializedVersion: 2
-        x: 40
+        x: 0
         y: 0
-        width: 16
-        height: 22
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: 7, y: 6}
+        - {x: -7, y: 6}
+        - {x: -7, y: -16}
+        - {x: 7, y: -16}
+      tessellationDetail: 0
       bones: []
-      spriteID: c2cf5850a8395a080800000000000000
-      internalID: -9176766444690080724
+      spriteID: a55c1c13b30d8124a800a8d7bbd4c4c0
+      internalID: 1977732392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Guardian-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 7, y: 6}
+        - {x: -7, y: 6}
+        - {x: -7, y: -16}
+        - {x: 7, y: -16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a5eceba7059dc542b3f0d8955933f3d
+      internalID: 1851104494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Guardian-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 7, y: 6}
+        - {x: -7, y: 6}
+        - {x: -7, y: -16}
+        - {x: 7, y: -16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93fd9c94cc40c924a95a11c1d052c5b4
+      internalID: -1051747122
       vertices: []
       indices: 
       edges: []
@@ -208,7 +280,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3e999a8d0fe689641b25e2a986497c4c
     internalID: 0
     vertices: []
     indices: 
@@ -216,10 +288,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Guardian-Sheet_0: 1426412393770721646
-      Guardian-Sheet_1: -7466101948472415572
-      Guardian-Sheet_2: -7271091509289182130
-      Guardian-Sheet_3: -9176766444690080724
+      Guardian-Sheet_0: 743714123
+      Guardian-Sheet_1: -1080947549
+      Guardian-Sheet_2: 1569829727
+      Guardian-Sheet_3: 1977732392
+      Guardian-Sheet_4: 1851104494
+      Guardian-Sheet_5: -1051747122
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

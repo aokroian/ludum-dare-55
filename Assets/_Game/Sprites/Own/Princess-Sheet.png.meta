@@ -87,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -128,16 +128,20 @@ TextureImporter:
       name: Princess-Sheet_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 31
-        width: 23
-        height: 29
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: 10, y: 8}
+        - {x: -10, y: 8}
+        - {x: -10, y: -16}
+        - {x: 10, y: -16}
+      tessellationDetail: 0
       bones: []
       spriteID: a6f840d17d13cc030800000000000000
       internalID: 3516240209044082538
@@ -149,16 +153,20 @@ TextureImporter:
       name: Princess-Sheet_1
       rect:
         serializedVersion: 2
-        x: 36
-        y: 31
-        width: 23
-        height: 28
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: 10, y: 8}
+        - {x: -10, y: 8}
+        - {x: -10, y: -16}
+        - {x: 10, y: -16}
+      tessellationDetail: 0
       bones: []
       spriteID: 77a42662e8f82b1d0800000000000000
       internalID: -3336446533236012425
@@ -170,16 +178,20 @@ TextureImporter:
       name: Princess-Sheet_2
       rect:
         serializedVersion: 2
-        x: 63
-        y: 31
-        width: 30
-        height: 17
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: 12, y: -2}
+        - {x: -15, y: -2}
+        - {x: -15, y: -16}
+        - {x: 12, y: -16}
+      tessellationDetail: 0
       bones: []
       spriteID: 373fcc5d2c701ea40800000000000000
       internalID: 5395602361958593395
@@ -191,16 +203,20 @@ TextureImporter:
       name: Princess-Sheet_3
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 24
-        height: 28
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: 10, y: 8}
+        - {x: -10, y: 8}
+        - {x: -10, y: -16}
+        - {x: 10, y: -16}
+      tessellationDetail: 0
       bones: []
       spriteID: 4de0c0754c13381a0800000000000000
       internalID: -6808543492310298924
@@ -212,16 +228,20 @@ TextureImporter:
       name: Princess-Sheet_4
       rect:
         serializedVersion: 2
-        x: 36
+        x: 32
         y: 0
-        width: 24
-        height: 27
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: 10, y: 8}
+        - {x: -10, y: 8}
+        - {x: -10, y: -16}
+        - {x: 10, y: -16}
+      tessellationDetail: 0
       bones: []
       spriteID: 86800bd89557bd030800000000000000
       internalID: 3520536561209837672
@@ -232,7 +252,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7f9ffb4cae5fbfe48af39c31bbc8aaff
     internalID: 0
     vertices: []
     indices: 
