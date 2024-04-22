@@ -80,13 +80,19 @@ namespace _Game.Scripts.CharacterRelated._LD55
         public void SetDead()
         {
             _dead = true;
-            _animator.SetInteger(AnimPlayerMove, 7);
+            _animator?.SetInteger(AnimPlayerMove, 7);
         }
         
         public void SetStayStill()
         {
             _stayStill = true;
-            _animator.SetInteger(AnimPlayerMove, 6);
+            _animator?.SetInteger(AnimPlayerMove, 6);
+        }
+
+        public void ResetFlags()
+        {
+            _dead = false;
+            _stayStill = false;
         }
     }
 }

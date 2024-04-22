@@ -71,6 +71,7 @@ namespace _Game.Scripts.Summon.View
 
             if (_isTouchedPrincess)
             {
+                _objectsHolder.GetPrincess().Release();
                 var p = new TextGameplayEvent.TextEventParams()
                 {
                     disableInput = true,

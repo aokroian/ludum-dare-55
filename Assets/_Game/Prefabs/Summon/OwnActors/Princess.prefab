@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Id>k__BackingField: princess
+  animations: {fileID: 1386914456158721582}
 --- !u!114 &3110054894835689248
 MonoBehaviour:
   m_ObjectHideFlags: 0

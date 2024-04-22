@@ -13,7 +13,7 @@ namespace _Game.Scripts.Summon.Summoners
                 var room = _objectsHolder.Rooms[i];
                 var enemyPrefab = GetEnemyForRoom(i);
                 var enemy = _diContainer.InstantiatePrefabForComponent<SummonedEnemy>(enemyPrefab);
-                enemy.transform.position = room.transform.position + Vector3.up * 2.5f;
+                enemy.transform.position = room.PatrolArea.transform.position;
                 room.AddObject(enemy);
             }
         }

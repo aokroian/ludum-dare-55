@@ -15,6 +15,8 @@ namespace _Game.Scripts.Summon.View
 {
     public class SummonedPrincess : SummonedObject
     {
+        [SerializeField] private NpcAnimations _animations;
+        
         private PrincessWandering _princessWandering;
 
         [Inject]
@@ -25,7 +27,6 @@ namespace _Game.Scripts.Summon.View
         private bool _helpSaid;
         private ActorHealth _actorHealth;
         private bool _isDead;
-        private NpcAnimations _animations;
 
         protected override void Start()
         {
@@ -36,6 +37,11 @@ namespace _Game.Scripts.Summon.View
             _actorHealth.OnDeath += OnDeath;
 
             _roomIndex = ObjectsHolder.GetRoomIndexForObject(this);
+
+            if (CurrentRoom?.RoomType == RoomType.Prison)
+            {
+                _animations.SetStayStill();
+            }
         }
 
         private void OnDestroy()
@@ -106,8 +112,9 @@ namespace _Game.Scripts.Summon.View
             if (_roomIndex >= 2 &&
                 ObjectsHolder.Rooms[_roomIndex].Objects.FirstOrDefault(it => it is SummonedEnemy) == null &&
                 player != null &&
-                Vector3.Distance(transform.position, player.transform.position) < 1.5f)
+                Vector3.Distance(transform.position, player.transform.position) < 1.2f)
             {
+                Release();
                 var p = new TextGameplayEvent.TextEventParams()
                 {
                     disableInput = true,
@@ -127,7 +134,16 @@ namespace _Game.Scripts.Summon.View
             _princessWandering = GetComponent<PrincessWandering>();
             _princessWandering.Init(room.WalkArea);
             if (room.RoomType == RoomType.Prison)
+            {
+                // Start method still not invoked here
+                _animations?.SetStayStill();
                 _princessWandering.TogglePause(true);
+            }
+        }
+
+        public void Release()
+        {
+            _animations.ResetFlags();
         }
 
         private void OnEnding()
