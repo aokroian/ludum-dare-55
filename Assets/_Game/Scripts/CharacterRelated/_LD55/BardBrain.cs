@@ -17,6 +17,8 @@ namespace _Game.Scripts.CharacterRelated._LD55
         private SummonedPlayer _player;
         private Transform _princess;
 
+        private bool _isStopped;
+
         [Inject]
         private SummonedObjectsHolder _objectsHolder;
         
@@ -58,11 +60,16 @@ namespace _Game.Scripts.CharacterRelated._LD55
 
         private void Update()
         {
-            if (!_isInit)
+            if (!_isInit || _isStopped)
                 return;
             if (StateMachine.CurrentState != _movementState)
                 StateMachine.NextState = _movementState;
             StateMachine.ExecuteCurrentState();
+        }
+
+        public void CalmDown()
+        {
+            _isStopped = true;
         }
     }
 }

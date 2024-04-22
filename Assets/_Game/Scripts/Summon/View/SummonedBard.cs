@@ -47,6 +47,7 @@ namespace _Game.Scripts.Summon.View
             if (princess == null)
                 return;
             _isTouchedPrincess = true;
+            brain.CalmDown();
         }
 
         public override IGameplayEvent GetEventIfAny()
@@ -99,6 +100,12 @@ namespace _Game.Scripts.Summon.View
             var princessInRoom = CurrentRoom.Objects.FirstOrDefault(obj => obj is SummonedPrincess);
             if (princessInRoom == null)
                 return;
+
+            // If in last room, chase princess only after all enemies defeated
+            if (_objectsHolder.GetRoomIndexForObject(princessInRoom) >= 2 &&
+                CurrentRoom.Objects.FirstOrDefault(it => it is SummonedEnemy) != null)
+                return;
+            
             if (brain.IsChasingPrincess)
                 return;
             Say("I will protect you, my princess!");
