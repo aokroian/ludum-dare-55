@@ -8,7 +8,7 @@ using Zenject;
 
 namespace _Game.Scripts.Story.GameplayEvents
 {
-    public class SystemTextGameplayEvent
+    public class SystemTextGameplayEvent: IGameplayEvent
     {
         public string EventId => "system_text_event";
 

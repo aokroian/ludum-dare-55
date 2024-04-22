@@ -16,8 +16,8 @@ namespace _Game.Scripts.Map
 
         private void Start()
         {
-            _player = GetComponent<SummonedPlayer>();
-            _input = GetComponent<PlayerActorInput>();
+            _player = GetComponentInParent<SummonedPlayer>();
+            _input = GetComponentInParent<PlayerActorInput>();
             interactionText.text = "";
         }
 

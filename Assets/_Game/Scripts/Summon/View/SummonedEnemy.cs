@@ -6,6 +6,7 @@ using _Game.Scripts.Map;
 using _Game.Scripts.Story;
 using _Game.Scripts.Story.Events;
 using _Game.Scripts.Story.GameplayEvents;
+using _Game.Scripts.Summon.Data;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -19,6 +20,8 @@ namespace _Game.Scripts.Summon.View
         private PlayerInventoryService _playerInventoryService;
         [Inject]
         private SignalBus _signalBus;
+        [Inject]
+        private SummonedObjectsHolder _objectsHolder;
 
         private IGameplayEvent _currentEvent;
         private SummonedRoom _room;
@@ -68,7 +71,7 @@ namespace _Game.Scripts.Summon.View
         private void DropLoot()
         {
             var currentKeysCount = _playerInventoryService.GetItemCount(LootType.Key);
-            var lootIndex = 0;
+            var lootIndex = _objectsHolder.GetPlayerRoomIndex() == 1 ? 0 : -1;
             if (currentKeysCount > 0)
                 lootIndex = Random.Range(-4, lootOptions.Length);
             if (lootIndex <= -1)

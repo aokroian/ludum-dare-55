@@ -24,7 +24,7 @@ namespace _Game.Scripts.Summon.View
         {
             if (ObjectsHolder.RealRoomCount > 3)
             {
-                return new TextGameplayEvent(PrepareMessage("This is too many rooms"), "tooManyRooms");
+                return new SystemTextGameplayEvent("This is too many rooms", "tooManyRooms");
             }
 
             return null;

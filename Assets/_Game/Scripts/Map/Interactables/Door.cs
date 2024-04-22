@@ -1,4 +1,5 @@
 ﻿using _Game.Scripts.CharacterRelated._LD55;
+using _Game.Scripts.Common;
 using _Game.Scripts.Map.Events;
 using _Game.Scripts.Message;
 using _Game.Scripts.Summon.View;
@@ -28,7 +29,7 @@ namespace _Game.Scripts.Map.Interactables
             {
                 if (!_playerInventoryService.TryRemoveItem(LootType.Key))
                 {
-                    _messageService.Speak(player, "Looks like this door is closed.\nI'm gonna need a key.");
+                    _messageService.Speak(player, $"I'm gonna need a key.\n{"Guard".WrapInColor(Colors.KeywordMessageColor)} should have it");
                     return;
                 }
 

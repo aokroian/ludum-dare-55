@@ -33,7 +33,7 @@ namespace _Game.Scripts.Message
             _consoleView.DisplayNewOutputEntry(new ConsoleOutputData()
             {
                 messageText = message,
-                senderText = "game",
+                senderText = "[game]: ",
                 type = ConsoleOutputType.Info
             }, true);
             _soundManager.PlayNotificationSound();
