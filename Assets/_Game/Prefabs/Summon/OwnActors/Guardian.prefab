@@ -197,7 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Id>k__BackingField: enemy
   lootOptions:
-  - {fileID: 2276652278234549168, guid: ebdebb9c17717455b8c4241685eaad7c, type: 3}
+  - {fileID: 2276652278234549168, guid: 8b9111cb88e42d240801413736e69cc5, type: 3}
 --- !u!114 &2770490309515660477
 MonoBehaviour:
   m_ObjectHideFlags: 0
